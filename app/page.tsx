@@ -1,7 +1,7 @@
 import { modules } from "@/data/modules";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Globe } from "lucide-react";
+import { BookOpen, Globe, ClipboardList } from "lucide-react";
 
 const C = {
   charcoal: "#2D2926",
@@ -81,6 +81,24 @@ export default function Home() {
                     <Globe size={16} />
                     Comenzar en Español
                     <span className="ml-1 text-xs opacity-60">({es.slides.length} slides)</span>
+                  </Link>
+                )}
+              </div>
+
+              {/* Quiz links */}
+              <div className="px-6 pb-4 flex gap-3 flex-wrap border-t pt-3" style={{ borderColor: "#E0DDD9" }}>
+                {en && (
+                  <Link href={`/modules/${en.id}/quiz`}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                    style={{ background: C.yellow, color: C.charcoal }}>
+                    <ClipboardList size={15} /> Take Quiz (EN)
+                  </Link>
+                )}
+                {es && (
+                  <Link href={`/modules/${es.id}/quiz`}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity border-2"
+                    style={{ borderColor: C.yellow, color: C.textDark }}>
+                    <ClipboardList size={15} /> Tomar Examen (ES)
                   </Link>
                 )}
               </div>

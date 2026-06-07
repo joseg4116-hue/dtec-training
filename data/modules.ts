@@ -182,6 +182,7 @@ export const modules: Module[] = [
           "A diferencia de las aguas negras, el agua de lluvia generalmente NO se trata antes de descargarse",
           "Todo proyecto de construcción genera agua de lluvia. Nuestro trabajo es controlarla.",
         ],
+        image: "/images/slide3.png",
       },
       {
         type: "stat-callout",
@@ -255,6 +256,7 @@ export const modules: Module[] = [
           "Los sitios de construcción se consideran fuentes directas de contaminación — por eso necesitan permiso",
           "La Ley de Agua Limpia es la base legal sobre la que se apoyan todas las reglas de agua de lluvia.",
         ],
+        image: "/images/slide11.png",
       },
       {
         type: "numbered-list",

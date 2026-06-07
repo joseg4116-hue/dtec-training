@@ -1,7 +1,7 @@
 "use client";
 import { useParams, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, QrCode, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, QrCode, Home, ClipboardList } from "lucide-react";
 import { modules } from "@/data/modules";
 import SlideRenderer from "@/components/slides/SlideRenderer";
 import QrModal from "@/components/QrModal";
@@ -73,6 +73,20 @@ export default function LessonPage() {
           <SlideRenderer slide={slide} moduleNum={module.moduleNum} lang={module.lang} />
         </div>
       </div>
+
+      {/* Take quiz CTA — shown on last slide */}
+      {current === total - 1 && (
+        <div className="flex justify-center pb-2">
+          <Link
+            href={`/modules/${id}/quiz`}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium"
+            style={{ background: "#C9B10A", color: "#2D2926", fontFamily: "Calibri, sans-serif" }}
+          >
+            <ClipboardList size={16} />
+            {id.endsWith("-es") ? "Tomar el Examen" : "Take the Quiz"}
+          </Link>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="flex items-center justify-center gap-6 pb-6">
