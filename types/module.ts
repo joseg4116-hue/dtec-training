@@ -45,6 +45,49 @@ export type ClosingSlide = {
   type: "closing";
   message: string;
   sub?: string;
+  footer?: string;
+};
+
+export type NumberedListSlide = {
+  type: "numbered-list";
+  title: string;
+  items: { num: string; heading: string; body: string }[];
+};
+
+export type GlossarySlide = {
+  type: "glossary";
+  title: string;
+  terms: { term: string; definition: string }[];
+};
+
+export type StorySlide = {
+  type: "story";
+  title: string;
+  date?: string;
+  body: string;
+  callout?: string;
+  image?: string;
+};
+
+export type ProcessStepsSlide = {
+  type: "process-steps";
+  title: string;
+  steps: { when: string; action: string; detail: string }[];
+};
+
+export type TimelineSlide = {
+  type: "timeline";
+  title: string;
+  events: { year: string; label: string }[];
+  note?: string;
+};
+
+export type EnforcementSlide = {
+  type: "enforcement";
+  title: string;
+  columns: { level: string; detail: string }[];
+  note?: string;
+  footer?: string;
 };
 
 export type Slide =
@@ -54,7 +97,13 @@ export type Slide =
   | TwoColumnSlide
   | StatCalloutSlide
   | ImagePlaceholderSlide
-  | ClosingSlide;
+  | ClosingSlide
+  | NumberedListSlide
+  | GlossarySlide
+  | StorySlide
+  | ProcessStepsSlide
+  | TimelineSlide
+  | EnforcementSlide;
 
 export type Module = {
   id: string;
