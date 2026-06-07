@@ -1,5 +1,6 @@
 import { modules } from "@/data/modules";
 import Link from "next/link";
+import Image from "next/image";
 import { BookOpen, Globe } from "lucide-react";
 
 const C = {
@@ -19,15 +20,24 @@ export default function Home() {
   return (
     <main className="min-h-screen" style={{ background: C.lightGray, fontFamily: "Calibri, 'Trebuchet MS', Arial, sans-serif" }}>
       {/* Header */}
-      <header style={{ background: C.charcoal }} className="px-6 py-6">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-xs font-bold tracking-widest mb-1" style={{ color: C.yellow }}>DTEC</p>
-          <h1 className="text-2xl font-bold" style={{ color: C.textLight, fontFamily: "Georgia, 'Times New Roman', serif" }}>
-            Stormwater Training
-          </h1>
-          <p className="text-sm mt-1" style={{ color: C.textSubtle }}>
-            Colorado Erosion Control & Stormwater Management
-          </p>
+      <header style={{ background: C.charcoal }} className="px-6 py-5">
+        <div className="max-w-2xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold" style={{ color: C.textLight, fontFamily: "Georgia, 'Times New Roman', serif" }}>
+              Stormwater Training
+            </h1>
+            <p className="text-xs mt-0.5" style={{ color: C.textSubtle }}>
+              Colorado Erosion Control & Stormwater Management
+            </p>
+          </div>
+          <Image
+            src="/images/dtec_30_years.png"
+            alt="DTEC logo"
+            width={120}
+            height={50}
+            className="object-contain"
+            style={{ filter: "invert(1)" }}
+          />
         </div>
       </header>
 

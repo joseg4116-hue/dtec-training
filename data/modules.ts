@@ -29,6 +29,7 @@ export const modules: Module[] = [
           "Unlike sewage, stormwater is usually NOT treated before it is discharged",
           "Every construction site produces runoff. Our job is to control it.",
         ],
+        image: "/images/slide3.png",
       },
       {
         type: "stat-callout",
@@ -60,7 +61,7 @@ export const modules: Module[] = [
         date: "June 22, 1969",
         body: "The Cuyahoga River in Cleveland, Ohio caught fire — not for the first time, but this time it made the cover of Time magazine.\n\nDecades of industrial and municipal waste had turned the river into a toxic, oil-slicked waterway. The fire lasted only about 30 minutes, but the images shocked the country.\n\nThree years later, Congress passed the Clean Water Act.",
         callout: "This is why stormwater regulation exists. The rules weren't written in an office — they were written by disasters.",
-        image: "/images/riverfire.webp",
+        image: "/images/slide7.png",
       },
       {
         type: "glossary",
@@ -102,6 +103,7 @@ export const modules: Module[] = [
           "Construction sites are considered point sources of pollution — meaning they need a permit",
           "The Clean Water Act is the legal foundation that all stormwater rules are built on — federal, state, and local.",
         ],
+        image: "/images/slide11.png",
       },
       {
         type: "numbered-list",
@@ -211,7 +213,7 @@ export const modules: Module[] = [
         date: "22 de junio de 1969",
         body: "El río Cuyahoga en Cleveland, Ohio se incendió — no era la primera vez, pero esta vez salió en la portada de la revista Time.\n\nDécadas de residuos industriales y municipales habían convertido el río en un canal tóxico. El incendio duró solo 30 minutos, pero las imágenes sacudieron al país.\n\nTres años después, el Congreso aprobó la Ley de Agua Limpia.",
         callout: "Por eso existen las reglas del agua de lluvia. No las escribieron en una oficina — las escribieron los desastres.",
-        image: "/images/riverfire.webp",
+        image: "/images/slide7.png",
       },
       {
         type: "glossary",

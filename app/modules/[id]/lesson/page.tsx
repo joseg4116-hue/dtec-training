@@ -1,11 +1,12 @@
 "use client";
 import { useParams, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, X, QrCode, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, QrCode, Home } from "lucide-react";
 import { modules } from "@/data/modules";
 import SlideRenderer from "@/components/slides/SlideRenderer";
 import QrModal from "@/components/QrModal";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LessonPage() {
   const { id } = useParams<{ id: string }>();
@@ -49,10 +50,13 @@ export default function LessonPage() {
         <Link href="/" className="text-white/60 hover:text-white flex items-center gap-1 text-sm">
           <Home size={15} /> Home
         </Link>
-        <span className="text-white/60 text-xs">{current + 1} / {total}</span>
-        <button onClick={handleShare} className="flex items-center gap-1.5 text-sm text-white/70 hover:text-white">
-          <QrCode size={15} /> Share
-        </button>
+        <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1)", opacity: 0.7 }} />
+        <div className="flex items-center gap-3">
+          <span className="text-white/60 text-xs">{current + 1} / {total}</span>
+          <button onClick={handleShare} className="flex items-center gap-1.5 text-sm text-white/70 hover:text-white">
+            <QrCode size={15} /> Share
+          </button>
+        </div>
       </div>
 
       {/* Progress bar */}

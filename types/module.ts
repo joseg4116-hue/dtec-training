@@ -17,6 +17,7 @@ export type ContentSlide = {
   type: "content";
   title: string;
   bullets: string[];
+  image?: string;
 };
 
 export type TwoColumnSlide = {

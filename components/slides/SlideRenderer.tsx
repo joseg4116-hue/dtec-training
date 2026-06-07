@@ -81,10 +81,17 @@ function ContentSlideView({ slide }: { slide: Extract<Slide, { type: "content" }
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
-      <div className="flex-1 overflow-auto px-6 md:px-8 py-4">
-        <ul className="space-y-2.5 text-sm md:text-base">
-          {slide.bullets.map((b, i) => <Bullet key={i} text={b} />)}
-        </ul>
+      <div className="flex-1 overflow-hidden flex">
+        <div className="flex-1 overflow-auto px-6 md:px-8 py-4">
+          <ul className="space-y-2.5 text-sm md:text-base">
+            {slide.bullets.map((b, i) => <Bullet key={i} text={b} />)}
+          </ul>
+        </div>
+        {slide.image && (
+          <div className="w-2/5 shrink-0 relative m-3 rounded-xl overflow-hidden">
+            <Image src={slide.image} alt="" fill className="object-cover" />
+          </div>
+        )}
       </div>
       <div className="h-1" style={{ background: C.yellow }} />
     </div>
