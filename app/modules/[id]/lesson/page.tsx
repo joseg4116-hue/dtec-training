@@ -1,0 +1,104 @@
+"use client";
+import { useParams, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, X, QrCode, Home } from "lucide-react";
+import { modules } from "@/data/modules";
+import SlideRenderer from "@/components/slides/SlideRenderer";
+import QrModal from "@/components/QrModal";
+import Link from "next/link";
+
+export default function LessonPage() {
+  const { id } = useParams<{ id: string }>();
+  const searchParams = useSearchParams();
+  const module = modules.find((m) => m.id === id);
+
+  const [current, setCurrent] = useState(0);
+  const [qr, setQr] = useState<{ url: string; name: string } | null>(null);
+
+  useEffect(() => { setCurrent(0); }, [id]);
+
+  if (!module) return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F5F0E8" }}>
+      <p className="text-gray-500">Module not found.</p>
+    </div>
+  );
+
+  const slide = module.slides[current];
+  const total = module.slides.length;
+  const progress = ((current + 1) / total) * 100;
+
+  const prev = () => setCurrent((c) => Math.max(0, c - 1));
+  const next = () => setCurrent((c) => Math.min(total - 1, c + 1));
+
+  const handleShare = async () => {
+    const res = await fetch("/api/share/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ moduleId: module.id, moduleTitle: module.title }),
+    });
+    if (res.ok) {
+      const { shareUrl } = await res.json();
+      setQr({ url: shareUrl, name: module.title });
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col" style={{ background: "#1a1a1a" }}>
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 py-2 bg-black/40">
+        <Link href="/" className="text-white/60 hover:text-white flex items-center gap-1 text-sm">
+          <Home size={15} /> Home
+        </Link>
+        <span className="text-white/60 text-xs">{current + 1} / {total}</span>
+        <button onClick={handleShare} className="flex items-center gap-1.5 text-sm text-white/70 hover:text-white">
+          <QrCode size={15} /> Share
+        </button>
+      </div>
+
+      {/* Progress bar */}
+      <div className="h-1 bg-white/10">
+        <div className="h-full transition-all duration-300" style={{ width: `${progress}%`, background: "#C8A84B" }} />
+      </div>
+
+      {/* Slide */}
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div
+          className="relative w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl"
+          style={{ aspectRatio: "16/9" }}
+        >
+          <SlideRenderer slide={slide} moduleNum={module.moduleNum} lang={module.lang} />
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-6 pb-6">
+        <button
+          onClick={prev}
+          disabled={current === 0}
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-colors"
+        >
+          <ChevronLeft size={28} />
+        </button>
+        <div className="flex gap-1.5">
+          {module.slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className="w-2 h-2 rounded-full transition-all"
+              style={{ background: i === current ? "#C8A84B" : "rgba(255,255,255,0.3)" }}
+            />
+          ))}
+        </div>
+        <button
+          onClick={next}
+          disabled={current === total - 1}
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-colors"
+        >
+          <ChevronRight size={28} />
+        </button>
+      </div>
+
+      {qr && <QrModal url={qr.url} name={qr.name} onClose={() => setQr(null)} />}
+    </div>
+  );
+}
