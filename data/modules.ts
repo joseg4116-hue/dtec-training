@@ -86,7 +86,7 @@ export const modules: Module[] = [
           { year: "1992", label: "Colorado adopts\nCDPS program" },
           { year: "Today", label: "Ongoing\nenforcement" },
         ],
-        note: "1948 — The Federal Water Pollution Control Act was the first federal law to address water pollution in the U.S. It recognized the problem but gave the government almost no power to act on it. It took 24 more years — and a national environmental crisis — before Congress passed the Clean Water Act with real teeth.",
+        note: "1948 — The Federal Water Pollution Control Act was the first federal law to address water pollution in the U.S. It recognized the problem but gave the government almost no power to act on it. Rivers were still catching fire and cities were dumping freely into waterways. It took 24 more years — and a national environmental crisis — before Congress passed the Clean Water Act with real teeth.",
       },
       {
         type: "section-divider",
@@ -99,7 +99,7 @@ export const modules: Module[] = [
         bullets: [
           "Established the foundation for regulating pollutant discharges into U.S. waterways",
           "Set the goal: restore and maintain the chemical, biological, and physical integrity of the nation's waters",
-          "Gave the EPA authority to set standards and enforce compliance",
+          "Gave the EPA (Environmental Protection Agency) authority to set standards and enforce compliance",
           "Construction sites are considered point sources of pollution — meaning they need a permit",
           "The Clean Water Act is the legal foundation that all stormwater rules are built on — federal, state, and local.",
         ],
@@ -123,6 +123,7 @@ export const modules: Module[] = [
       {
         type: "process-steps",
         title: "Colorado's Permit System — CDPS",
+        subtitle: "Colorado runs its own version of the federal NPDES program, administered by CDPHE.",
         steps: [
           { when: "Before you dig", action: "Submit a Notice of Intent (NOI)", detail: "File with CDPHE to get coverage under permit COR400000. You cannot legally break ground until this is approved." },
           { when: "While on site", action: "Maintain your SWPPP & BMPs", detail: "The stormwater plan on the client's site must stay current. Inspect every 14 days and after rain. Fix issues within required timeframes." },
@@ -142,13 +143,13 @@ export const modules: Module[] = [
           { level: "State — CDPHE", detail: "Enforces the client's CDPS permit. Issues NOVs and fines up to $25,000/day." },
           { level: "Local — City/County", detail: "MS4 inspectors. Can issue stop-work orders on the spot. May have stricter requirements than the state." },
         ],
-        note: "Local MS4 permit holders in DTEC's work area: Denver • Aurora • Jefferson County • Adams County • CDOT",
+        note: "Local MS4 permit holders in DTEC's work area: Denver • Aurora • Jefferson County • Adams County • CDOT — Know which jurisdiction the client's project is in.",
         footer: "Local inspectors often show up before CDPHE does — and they can shut down the project immediately.",
       },
       {
         type: "closing",
-        message: "Our job is to get construction projects in compliance.",
-        sub: "Our clients hire us because compliance is complicated. We show up knowing the rules, installing the right controls, and keeping their projects clean — so they can focus on building.",
+        message: "Our commitment:\nProtecting Colorado's\nwater. Every project,\nevery time.",
+        sub: "Stormwater management is critical to protecting Colorado's water resources and ensuring compliance. Regular inspections, proactive communication, and proper BMPs are essential. Collaboration and communication are the keys to success.",
         footer: "DTEC — Down to Earth Compliance  |  Module 00 Complete",
       },
     ],

@@ -73,6 +73,7 @@ export type StorySlide = {
 export type ProcessStepsSlide = {
   type: "process-steps";
   title: string;
+  subtitle?: string;
   steps: { when: string; action: string; detail: string }[];
 };
 

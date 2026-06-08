@@ -254,6 +254,9 @@ function ProcessStepsView({ slide }: { slide: Extract<Slide, { type: "process-st
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
+      {slide.subtitle && (
+        <p className="px-6 md:px-8 py-2 text-xs md:text-sm" style={{ color: C.textMuted, fontFamily: F.body }}>{slide.subtitle}</p>
+      )}
       <div className="flex-1 flex items-stretch gap-0 divide-x px-6 md:px-8 py-5" style={{ borderColor: C.yellow + "40" }}>
         {slide.steps.map((step, i) => (
           <div key={i} className="flex-1 flex flex-col px-4 gap-2">
