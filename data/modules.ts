@@ -240,7 +240,7 @@ export const modules: Module[] = [
           { year: "1992", label: "Colorado adopta\nel programa CDPS" },
           { year: "Hoy", label: "Cumplimiento\nactivo" },
         ],
-        note: "1948 — La primera ley federal contra la contaminación del agua reconoció el problema pero no le dio poder real al gobierno para actuar. Pasaron 24 años — y una crisis ambiental nacional — antes de que el Congreso aprobara la Ley de Agua Limpia con dientes de verdad.",
+        note: "1948 — La primera ley federal contra la contaminación del agua reconoció el problema pero no le dio poder real al gobierno para actuar. Los ríos seguían prendiéndose fuego y las ciudades tiraban libremente sus desechos a las aguas. Pasaron 24 años — y una crisis ambiental nacional — antes de que el Congreso aprobara la Ley de Agua Limpia con dientes de verdad.",
       },
       {
         type: "section-divider",
@@ -253,7 +253,7 @@ export const modules: Module[] = [
         bullets: [
           "Estableció la base para regular las descargas de contaminantes en los ríos y lagos de EE.UU.",
           "Su objetivo: recuperar y mantener la calidad química, biológica y física del agua del país",
-          "Le dio poder a la EPA para establecer normas y hacer cumplir la ley",
+          "Le dio poder a la EPA (Agencia de Protección Ambiental) para establecer normas y hacer cumplir la ley",
           "Los sitios de construcción se consideran fuentes directas de contaminación — por eso necesitan permiso",
           "La Ley de Agua Limpia es la base legal sobre la que se apoyan todas las reglas de agua de lluvia.",
         ],
@@ -277,6 +277,7 @@ export const modules: Module[] = [
       {
         type: "process-steps",
         title: "El Sistema de Permisos de Colorado — CDPS",
+        subtitle: "Colorado tiene su propia versión del programa federal NPDES, administrada por CDPHE.",
         steps: [
           { when: "Antes de excavar", action: "Presenta un NOI (Aviso de Intención)", detail: "Se tramita con CDPHE para obtener cobertura bajo el permiso COR400000. No puedes empezar legalmente hasta que sea aprobado." },
           { when: "Mientras estás en obra", action: "Mantiene tu SWPPP y tus BMPs", detail: "El plan de agua de lluvia del cliente debe estar al día. Inspecciona cada 14 días y después de lluvia. Corrige los problemas a tiempo." },
@@ -296,13 +297,13 @@ export const modules: Module[] = [
           { level: "Estatal — CDPHE", detail: "Hace cumplir el permiso CDPS del cliente. Puede emitir avisos de violación y multas de hasta $25,000 por día." },
           { level: "Local — Ciudad/Condado", detail: "Inspectores MS4. Pueden parar la obra en el momento. Pueden tener reglas más estrictas que el estado." },
         ],
-        note: "Ciudades con permiso MS4 en el área de trabajo de DTEC: Denver • Aurora • Condado Jefferson • Condado Adams • CDOT",
+        note: "Ciudades con permiso MS4 en el área de trabajo de DTEC: Denver • Aurora • Condado Jefferson • Condado Adams • CDOT — Conoce en qué jurisdicción está el proyecto de tu cliente.",
         footer: "Los inspectores locales muchas veces llegan antes que CDPHE — y pueden parar la obra en el acto.",
       },
       {
         type: "closing",
-        message: "Nuestro trabajo es poner los proyectos de construcción en orden.",
-        sub: "Nuestros clientes nos contratan porque el cumplimiento es complicado. Llegamos sabiendo las reglas, instalando los controles correctos y manteniendo sus proyectos limpios — para que ellos se puedan enfocar en construir.",
+        message: "Nuestro compromiso:\nProteger el agua\nde Colorado. Cada proyecto,\ncada vez.",
+        sub: "El manejo del agua de lluvia es fundamental para proteger los recursos hídricos de Colorado y garantizar el cumplimiento. Las inspecciones regulares, la comunicación proactiva y los BMPs adecuados son esenciales. La colaboración y la comunicación son las claves del éxito.",
         footer: "DTEC — Down to Earth Compliance  |  Módulo 00 Completo",
       },
     ],
