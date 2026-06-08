@@ -1,20 +1,17 @@
 "use client";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, QrCode, Home, ClipboardList } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, ClipboardList } from "lucide-react";
 import { modules } from "@/data/modules";
 import SlideRenderer from "@/components/slides/SlideRenderer";
-import QrModal from "@/components/QrModal";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function LessonPage() {
   const { id } = useParams<{ id: string }>();
-  const searchParams = useSearchParams();
   const module = modules.find((m) => m.id === id);
 
   const [current, setCurrent] = useState(0);
-  const [qr, setQr] = useState<{ url: string; name: string } | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem(`dtec_lesson_${id}`);
@@ -39,18 +36,6 @@ export default function LessonPage() {
   const prev = () => setCurrent((c) => Math.max(0, c - 1));
   const next = () => setCurrent((c) => Math.min(total - 1, c + 1));
 
-  const handleShare = async () => {
-    const res = await fetch("/api/share/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ moduleId: module.id, moduleTitle: module.title }),
-    });
-    if (res.ok) {
-      const { shareUrl } = await res.json();
-      setQr({ url: shareUrl, name: module.title });
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#1a1a1a" }}>
       {/* Top bar */}
@@ -59,12 +44,7 @@ export default function LessonPage() {
           <Home size={15} /> Home
         </Link>
         <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1)", opacity: 0.7 }} />
-        <div className="flex items-center gap-3">
-          <span className="text-white/60 text-xs">{current + 1} / {total}</span>
-          <button onClick={handleShare} className="flex items-center gap-1.5 text-sm text-white/70 hover:text-white">
-            <QrCode size={15} /> Share
-          </button>
-        </div>
+        <span className="text-white/60 text-xs">{current + 1} / {total}</span>
       </div>
 
       {/* Progress bar */}
@@ -124,7 +104,6 @@ export default function LessonPage() {
         </button>
       </div>
 
-      {qr && <QrModal url={qr.url} name={qr.name} onClose={() => setQr(null)} />}
     </div>
   );
 }
