@@ -151,6 +151,7 @@ export default function QuizPage() {
           passed: finalPassed,
         }),
       }).catch(() => {}); // fire-and-forget; don't block UI
+      if (finalPassed) localStorage.setItem(`dtec_passed_${id}`, "1");
       setPhase("result");
     } else {
       setCurrent((c) => c + 1);

@@ -16,7 +16,15 @@ export default function LessonPage() {
   const [current, setCurrent] = useState(0);
   const [qr, setQr] = useState<{ url: string; name: string } | null>(null);
 
-  useEffect(() => { setCurrent(0); }, [id]);
+  useEffect(() => {
+    const saved = localStorage.getItem(`dtec_lesson_${id}`);
+    setCurrent(saved ? parseInt(saved, 10) : 0);
+  }, [id]);
+
+  useEffect(() => {
+    if (!module) return;
+    localStorage.setItem(`dtec_lesson_${id}`, String(current));
+  }, [id, current, module]);
 
   if (!module) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: "#F5F0E8" }}>

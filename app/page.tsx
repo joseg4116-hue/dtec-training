@@ -1,7 +1,9 @@
+"use client";
 import { modules } from "@/data/modules";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Globe, ClipboardList } from "lucide-react";
+import { BookOpen, Globe, ClipboardList, CheckCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const C = {
   charcoal: "#2D2926",
@@ -17,6 +19,16 @@ const C = {
 const visibleNums = [0];
 
 export default function Home() {
+  const [passed, setPassed] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const result: Record<string, boolean> = {};
+    modules.forEach((m) => {
+      result[m.id] = localStorage.getItem(`dtec_passed_${m.id}`) === "1";
+    });
+    setPassed(result);
+  }, []);
+
   return (
     <main className="min-h-screen" style={{ background: C.lightGray, fontFamily: "Calibri, 'Trebuchet MS', Arial, sans-serif" }}>
       {/* Header */}
@@ -48,6 +60,8 @@ export default function Home() {
           const versions = modules.filter((m) => m.moduleNum === num);
           const en = versions.find((m) => m.lang === "en");
           const es = versions.find((m) => m.lang === "es");
+          const enPassed = en ? passed[en.id] : false;
+          const esPassed = es ? passed[es.id] : false;
 
           return (
             <div key={num} className="rounded-2xl overflow-hidden shadow-sm" style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
@@ -57,12 +71,18 @@ export default function Home() {
                   style={{ background: C.charcoal, color: C.yellow, fontFamily: "Georgia, serif" }}>
                   {String(num).padStart(2, "0")}
                 </div>
-                <div>
+                <div className="flex-1">
                   <h2 className="font-bold" style={{ color: C.textDark, fontFamily: "Georgia, serif" }}>
                     {en?.title ?? es?.title}
                   </h2>
                   <p className="text-xs" style={{ color: C.textMuted }}>{en?.subtitle ?? es?.subtitle}</p>
                 </div>
+                {(enPassed || esPassed) && (
+                  <span className="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full"
+                    style={{ background: "#f0f7ee", color: "#2d6a2d" }}>
+                    <CheckCircle size={13} /> Passed
+                  </span>
+                )}
               </div>
 
               {/* Language options */}
@@ -72,7 +92,7 @@ export default function Home() {
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
                     style={{ background: C.charcoal, color: C.textLight }}>
                     <BookOpen size={16} />
-                    Start in English
+                    {enPassed ? "Review English" : "Start in English"}
                     <span className="ml-1 text-xs opacity-60">({en.slides.length} slides)</span>
                   </Link>
                 )}
@@ -81,7 +101,7 @@ export default function Home() {
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity border-2"
                     style={{ borderColor: C.charcoal, color: C.textDark }}>
                     <Globe size={16} />
-                    Comenzar en Español
+                    {esPassed ? "Repasar Español" : "Comenzar en Español"}
                     <span className="ml-1 text-xs opacity-60">({es.slides.length} slides)</span>
                   </Link>
                 )}
@@ -92,15 +112,17 @@ export default function Home() {
                 {en && (
                   <Link href={`/modules/${en.id}/quiz`}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-                    style={{ background: C.yellow, color: C.charcoal }}>
-                    <ClipboardList size={15} /> Take Quiz (EN)
+                    style={{ background: enPassed ? "#e8f5e9" : C.yellow, color: enPassed ? "#2d6a2d" : C.charcoal }}>
+                    {enPassed ? <CheckCircle size={15} /> : <ClipboardList size={15} />}
+                    {enPassed ? "Passed (EN)" : "Take Quiz (EN)"}
                   </Link>
                 )}
                 {es && (
                   <Link href={`/modules/${es.id}/quiz`}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity border-2"
-                    style={{ borderColor: C.yellow, color: C.textDark }}>
-                    <ClipboardList size={15} /> Tomar Examen (ES)
+                    style={{ borderColor: esPassed ? "#2d6a2d" : C.yellow, color: esPassed ? "#2d6a2d" : C.textDark }}>
+                    {esPassed ? <CheckCircle size={15} /> : <ClipboardList size={15} />}
+                    {esPassed ? "Aprobado (ES)" : "Tomar Examen (ES)"}
                   </Link>
                 )}
               </div>
