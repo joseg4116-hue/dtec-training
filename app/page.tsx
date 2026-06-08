@@ -30,14 +30,16 @@ export default function Home() {
               Colorado Erosion Control & Stormwater Management
             </p>
           </div>
-          <Image
-            src="/images/dtec_30_years.png"
-            alt="DTEC logo"
-            width={120}
-            height={50}
-            className="object-contain"
-            style={{ filter: "invert(1)" }}
-          />
+          <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/images/dtec_30_years.png"
+              alt="DTEC logo"
+              width={120}
+              height={50}
+              className="object-contain"
+              style={{ filter: "invert(1) opacity(0.65)" }}
+            />
+          </a>
         </div>
       </header>
 
