@@ -160,12 +160,12 @@ export const modules: Module[] = [
     id: "00-es",
     moduleNum: 0,
     lang: "es",
-    title: "Introduccion al Agua de Lluvia",
+    title: "Introduccion a Aguas Pluviales",
     subtitle: "Modulo de Capacitacion 00",
     slides: [
       {
         type: "title",
-        title: "Introduccion al\nAgua de Lluvia",
+        title: "Introduccion a\nAguas pluviales",
         subtitle: "Modulo de Capacitacion 00",
       },
       {
@@ -175,12 +175,12 @@ export const modules: Module[] = [
       },
       {
         type: "content",
-        title: "?Que Es el Agua de Lluvia?",
+        title: "Que son las Aguas Pluviales?",
         bullets: [
           "Es la lluvia y el deshielo que corre por el suelo en lugar de absorberse",
           "Recoge tierra, aceite, quimicos y basura mientras fluye",
           "Va a parar a desagues, zanjas y directamente a los rios",
-          "A diferencia de las aguas negras, el aguas pluviales generalmente NO se trata antes de descargarse",
+          "A diferencia de las aguas negras, el aguas pluviales generalmente NO es tratada antes de descargarse",
           "Todo proyecto de construccion genera aguas pluviales. Nuestro trabajo es controlarla.",
         ],
         image: "/images/slide3.png",
@@ -196,7 +196,7 @@ export const modules: Module[] = [
       },
       {
         type: "numbered-list",
-        title: "Que Pasa Cuando No Se Controla el Agua de Lluvia",
+        title: "Que Pasa Cuando No Se Controlan las Aguas Pluviales?",
         items: [
           { num: "01", heading: "Aviso de Violacion (NOV)", body: "Un aviso formal por escrito del estado o la ciudad — queda en el expediente del proyecto." },
           { num: "02", heading: "Orden de Paro de Obra", body: "Todo el trabajo en el sitio se detiene hasta que se corrija el problema. Puede costar miles de dolares por dia." },
@@ -224,7 +224,7 @@ export const modules: Module[] = [
           { term: "NPDES", definition: "National Pollutant Discharge Elimination System — el programa federal de permisos para descargas de aguas pluviales." },
           { term: "CDPS", definition: "Colorado Discharge Permit System — la version de Colorado del NPDES, administrada por el estado." },
           { term: "CDPHE", definition: "Colorado Dept. of Public Health & Environment — la agencia estatal que emite y hace cumplir los permisos CDPS." },
-          { term: "SWPPP", definition: "Stormwater Pollution Prevention Plan — el plan del sitio que muestra como se va a controlar el aguas pluviales." },
+          { term: "SWPPP", definition: "Stormwater Pollution Prevention Plan — el plan del sitio que muestra como se van a controlar las aguas pluviales." },
           { term: "NOI", definition: "Notice of Intent — la solicitud que se presenta para obtener cobertura del permiso antes de empezar a excavar." },
           { term: "NOT", definition: "Notice of Termination — se presenta cuando el sitio esta estabilizado y ya no se necesita el permiso." },
         ],
@@ -279,8 +279,8 @@ export const modules: Module[] = [
         subtitle: "Colorado tiene su propia version del programa federal NPDES, administrada por CDPHE.",
         steps: [
           { when: "Antes de excavar", action: "Presenta un NOI (Aviso de Intencion)", detail: "Se tramita con CDPHE para obtener cobertura bajo el permiso COR400000. No puedes empezar legalmente hasta que sea aprobado." },
-          { when: "Mientras estas en obra", action: "Mantiene tu SWPPP y tus BMPs", detail: "El plan de aguas pluviales del cliente debe estar al dia. Inspecciona cada 14 dias y despues de lluvia. Corrige los problemas a tiempo." },
-          { when: "Cuando terminas", action: "Presenta un NOT (Aviso de Terminacion)", detail: "Una vez que el sitio esta estabilizado y revegetado, se presenta el NOT para cerrar el permiso." },
+          { when: "Mientras estas en obra", action: "Mantiene tu SWPPP y tus BMPs", detail: "El plan de aguas pluviales del cliente debe estar al dia. Inspecciona cada 14 dias y despues de Lluvia o Nieve. Corrige los problemas a tiempo." },
+          { when: "Cuando terminas", action: "Presenta un NOT (Aviso de Terminacion)", detail: "Una vez que el sitio esta estabilizado y revegetado (70%) se presenta el NOT para cerrar el permiso." },
         ],
       },
       {
@@ -290,7 +290,7 @@ export const modules: Module[] = [
       },
       {
         type: "enforcement",
-        title: "Quien Puede Llegar al Sitio de Tu Cliente",
+        title: "Quien Puede Llegar al Sitio de el Cliente",
         columns: [
           { level: "Federal — EPA", detail: "Define las reglas. Raramente aparece directamente en obra." },
           { level: "Estatal — CDPHE", detail: "Hace cumplir el permiso CDPS del cliente. Puede emitir avisos de violacion y multas de hasta $25,000 por dia." },
