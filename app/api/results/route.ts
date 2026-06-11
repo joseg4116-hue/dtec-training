@@ -1,16 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabase, getSupabaseAdmin } from "@/lib/supabase";
+import { getSupabaseAdmin } from "@/lib/supabase";
+import { getAuthUser } from "@/lib/supabase-server";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { name, module_id, lang, score, total, passed } = body;
+  const user = await getAuthUser();
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-  if (!name || !module_id || !lang || score == null || total == null) {
+  const body = await req.json();
+  const { module_id, lang, score, total, passed } = body;
+
+  if (!module_id || !lang || score == null || total == null) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  const { error } = await getSupabase().from("quiz_results").insert([
-    { name, module_id, lang, score, total, passed },
+  const name = user.user_metadata?.full_name ?? user.email ?? "Unknown";
+
+  const { error } = await getSupabaseAdmin().from("quiz_results").insert([
+    { name, module_id, lang, score, total, passed, user_id: user.id },
   ]);
 
   if (error) {

@@ -2,8 +2,10 @@
 import { modules } from "@/data/modules";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Globe, ClipboardList, CheckCircle } from "lucide-react";
+import { BookOpen, Globe, ClipboardList, CheckCircle, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
+import { getBrowserSupabase } from "@/lib/supabase-browser";
+import type { User } from "@supabase/supabase-js";
 
 const C = {
   charcoal:   "#2D2926",
@@ -18,20 +20,40 @@ const C = {
 const visibleNums = [0];
 
 export default function Home() {
+  const [user, setUser]     = useState<User | null>(null);
   const [passed, setPassed] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const result: Record<string, boolean> = {};
-    modules.forEach((m) => {
-      result[m.id] = localStorage.getItem(`dtec_passed_${m.id}`) === "1";
-    });
-    setPassed(result);
+    const supabase = getBrowserSupabase();
+    const load = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (!user) return;
+
+      const { data } = await supabase
+        .from("quiz_results")
+        .select("module_id")
+        .eq("passed", true);
+
+      const passedIds = new Set(data?.map((r: { module_id: string }) => r.module_id) ?? []);
+      const result: Record<string, boolean> = {};
+      modules.forEach((m) => { result[m.id] = passedIds.has(m.id); });
+      setPassed(result);
+    };
+    load();
   }, []);
+
+  const handleLogout = async () => {
+    const supabase = getBrowserSupabase();
+    await supabase.auth.signOut();
+    window.location.href = "/login";
+  };
+
+  const displayName = user?.user_metadata?.full_name ?? user?.email ?? "";
 
   return (
     <main className="min-h-screen" style={{ background: C.lightGray, fontFamily: "Calibri, 'Trebuchet MS', Arial, sans-serif" }}>
 
-      {/* Header */}
       <header style={{ background: C.charcoal }} className="px-6 py-5">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div>
@@ -42,21 +64,34 @@ export default function Home() {
               Colorado Erosion Control & Stormwater Management
             </p>
           </div>
-          <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer"
-            style={{ mixBlendMode: "screen" }}>
-            <Image
-              src="/images/dtec_30_years.png"
-              alt="DTEC logo"
-              width={110}
-              height={46}
-              className="object-contain"
-              style={{ filter: "invert(1) opacity(0.85)" }}
-            />
-          </a>
+          <div className="flex items-center gap-4">
+            <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer"
+              style={{ mixBlendMode: "screen" }}>
+              <Image
+                src="/images/dtec_30_years.png"
+                alt="DTEC logo"
+                width={110}
+                height={46}
+                className="object-contain"
+                style={{ filter: "invert(1) opacity(0.85)" }}
+              />
+            </a>
+            {user && (
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-xs max-w-[120px] truncate" style={{ color: C.textSubtle }}>
+                  {displayName}
+                </span>
+                <button onClick={handleLogout}
+                  className="flex items-center gap-1 text-xs px-2 py-1 rounded-lg hover:opacity-80 transition-opacity"
+                  style={{ background: "#3a3530", color: C.textSubtle }}>
+                  <LogOut size={11} /> Sign out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* Module cards */}
       <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
         {visibleNums.map((num) => {
           const versions = modules.filter((m) => m.moduleNum === num);
@@ -70,7 +105,6 @@ export default function Home() {
             <div key={num} className="rounded-2xl overflow-hidden shadow-sm"
               style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
 
-              {/* Module header */}
               <div className="px-6 py-4 flex items-center gap-3"
                 style={{ borderBottom: `3px solid ${C.yellow}` }}>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
@@ -91,7 +125,6 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Lesson buttons — equal width grid */}
               <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
                 {en && (
                   <Link href={`/modules/${en.id}/lesson`}
@@ -111,7 +144,6 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Quiz buttons — equal width grid */}
               <div className="px-6 pb-5 grid grid-cols-2 gap-3 border-t pt-3"
                 style={{ borderColor: "#E8E5E2" }}>
                 {en && (
