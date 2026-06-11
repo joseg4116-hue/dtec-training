@@ -1,13 +1,13 @@
 "use client";
 import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getQuizBank, QuizQuestion } from "@/data/quiz";
 import { modules } from "@/data/modules";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle, XCircle, Home, RotateCcw, BookOpen, UserCircle } from "lucide-react";
-import { getBrowserSupabase } from "@/lib/supabase-browser";
-import type { User } from "@supabase/supabase-js";
+import { CheckCircle, XCircle, Home, RotateCcw, BookOpen, Mail } from "lucide-react";
+
+const EMAIL_KEY = "dtec_email";
 
 const C = {
   charcoal:    "#2D2926",
@@ -56,20 +56,24 @@ function buildSession(questions: QuizQuestion[], count: number): SessionQuestion
 
 export default function QuizPage() {
   const { id } = useParams<{ id: string }>();
-  const bank = getQuizBank(id);
+  const bank   = getQuizBank(id);
   const module = modules.find((m) => m.id === id);
 
-  const [user, setUser]     = useState<User | null>(null);
-  const [phase, setPhase]   = useState<"loading" | "ready" | "quiz" | "result">("loading");
-  const [session, setSession]   = useState<SessionQuestion[]>([]);
-  const [current, setCurrent]   = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [answers, setAnswers]   = useState<boolean[]>([]);
+  const [email, setEmail]         = useState("");
+  const [emailDraft, setEmailDraft] = useState("");
+  const [phase, setPhase]         = useState<"loading" | "ready" | "quiz" | "result">("loading");
+  const [session, setSession]     = useState<SessionQuestion[]>([]);
+  const [current, setCurrent]     = useState(0);
+  const [selected, setSelected]   = useState<number | null>(null);
+  const [answers, setAnswers]     = useState<boolean[]>([]);
+  const emailInputRef = useRef<HTMLInputElement>(null);
 
   const isES = id.endsWith("-es");
   const t = {
     title:      isES ? "Examen" : "Quiz",
     about:      isES ? "Este examen tiene 6 preguntas. Necesitas 80% para aprobar." : "This quiz has 6 questions. You need 80% to pass.",
+    emailLabel: isES ? "Tu correo electrónico" : "Your email",
+    emailHint:  isES ? "Para guardar tu progreso" : "To save your progress",
     startQuiz:  isES ? "Comenzar Examen" : "Start Quiz",
     question:   isES ? "Pregunta" : "Question",
     of:         isES ? "de" : "of",
@@ -85,19 +89,25 @@ export default function QuizPage() {
     noQuiz:     isES ? "No hay examen disponible." : "No quiz available for this module.",
     great:      isES ? "¡Buen trabajo," : "Great work,",
     tryAgain:   isES ? "Sigue practicando," : "Keep studying,",
-    readyTitle: isES ? "¿Listo para el examen?" : "Ready for the quiz?",
+    takenAs:    isES ? "Examen registrado para" : "Quiz recorded for",
   };
 
   useEffect(() => {
-    const supabase = getBrowserSupabase();
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-      setPhase("ready");
-    });
+    const saved = localStorage.getItem(EMAIL_KEY) ?? "";
+    setEmail(saved);
+    setEmailDraft(saved);
+    setPhase("ready");
   }, []);
 
   const startSession = () => {
     if (!bank) return;
+    const trimmed = emailDraft.trim().toLowerCase();
+    if (!trimmed) {
+      emailInputRef.current?.focus();
+      return;
+    }
+    localStorage.setItem(EMAIL_KEY, trimmed);
+    setEmail(trimmed);
     setSession(buildSession(bank.questions, bank.questionsPerSession));
     setCurrent(0);
     setSelected(null);
@@ -113,10 +123,9 @@ export default function QuizPage() {
     );
   }
 
-  const total    = bank.questionsPerSession;
-  const score    = answers.filter(Boolean).length;
-  const passed   = score / total >= bank.passingScore;
-  const takerName = user?.user_metadata?.full_name ?? user?.email ?? "";
+  const total  = bank.questionsPerSession;
+  const score  = answers.filter(Boolean).length;
+  const passed = score / total >= bank.passingScore;
 
   const handleSelect = (i: number) => {
     if (selected !== null) return;
@@ -126,8 +135,8 @@ export default function QuizPage() {
   const handleNext = () => {
     if (selected === null) return;
     const q = session[current];
-    const correct = selected === q.correctShuffledIndex;
-    const newAnswers = [...answers, correct];
+    const correct     = selected === q.correctShuffledIndex;
+    const newAnswers  = [...answers, correct];
     setAnswers(newAnswers);
 
     if (current + 1 >= total) {
@@ -137,6 +146,7 @@ export default function QuizPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          email,
           module_id: id,
           lang: isES ? "es" : "en",
           score: finalScore,
@@ -177,20 +187,29 @@ export default function QuizPage() {
         <div className="flex-1 flex flex-col items-center justify-center px-6">
           <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-xl" style={{ background: C.darkBox }}>
             <div className="px-8 py-6 text-center" style={{ borderBottom: `3px solid ${C.yellow}` }}>
-              <UserCircle className="mx-auto mb-3" size={48} style={{ color: C.yellow }} />
-              <p className="text-sm mb-1" style={{ color: C.textSubtle, fontFamily: F.body }}>
-                {isES ? "Tomando el examen como" : "Taking quiz as"}
+              <Mail className="mx-auto mb-3" size={40} style={{ color: C.yellow }} />
+              <p className="text-xs mb-2" style={{ color: C.textSubtle, fontFamily: F.body }}>
+                {t.emailHint}
               </p>
-              <p className="font-bold text-base" style={{ color: C.textLight, fontFamily: F.heading }}>
-                {takerName}
-              </p>
+              <input
+                ref={emailInputRef}
+                type="email"
+                value={emailDraft}
+                onChange={(e) => setEmailDraft(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && startSession()}
+                placeholder="your@email.com"
+                className="w-full px-4 py-2.5 rounded-xl text-sm text-center outline-none border-2 border-transparent focus:border-[#C9B10A] transition-colors"
+                style={{ background: C.darkOverlay, color: C.textLight, fontFamily: F.body }}
+              />
             </div>
             <div className="px-8 py-6 space-y-4">
               <p className="text-sm text-center" style={{ color: C.textSubtle, fontFamily: F.body }}>
                 {t.about}
               </p>
-              <button onClick={startSession}
-                className="w-full py-3 rounded-xl font-medium text-sm"
+              <button
+                onClick={startSession}
+                disabled={!emailDraft.trim()}
+                className="w-full py-3 rounded-xl font-medium text-sm disabled:opacity-40"
                 style={{ background: C.yellow, color: C.charcoal, fontFamily: F.body }}>
                 {t.startQuiz}
               </button>
@@ -221,10 +240,6 @@ export default function QuizPage() {
               {passed
                 ? <CheckCircle className="mx-auto mb-3" size={48} style={{ color: C.yellow }} />
                 : <XCircle className="mx-auto mb-3" size={48} color="#e05050" />}
-              <p className="text-sm mb-1" style={{ color: C.textSubtle, fontFamily: F.body }}>
-                {passed ? t.great : t.tryAgain}{" "}
-                <span style={{ color: C.textLight }}>{takerName}</span>
-              </p>
               <h2 className="text-2xl font-bold" style={{ color: C.textLight, fontFamily: F.heading }}>
                 {passed ? t.passed : t.failed}
               </h2>
@@ -233,6 +248,9 @@ export default function QuizPage() {
               </p>
               <p className="text-sm mt-1" style={{ color: C.textSubtle, fontFamily: F.body }}>
                 {t.score}: {Math.round((score / total) * 100)}% — {t.passingIs}
+              </p>
+              <p className="text-xs mt-2" style={{ color: C.textSubtle, fontFamily: F.body }}>
+                {t.takenAs} <span style={{ color: C.textLight }}>{email}</span>
               </p>
             </div>
 
@@ -309,9 +327,9 @@ export default function QuizPage() {
               const revealed   = selected !== null;
 
               let bg = C.darkBox, border = "transparent", textColor = C.textSubtle;
-              if (revealed && isCorrect)              { bg = "#1a3a1a"; border = C.yellow;   textColor = C.textLight; }
-              else if (revealed && isSelected && !isCorrect) { bg = "#3a1a1a"; border = "#e05050"; textColor = C.textLight; }
-              else if (isSelected)                    { border = C.yellow; textColor = C.textLight; }
+              if (revealed && isCorrect)                       { bg = "#1a3a1a"; border = C.yellow;   textColor = C.textLight; }
+              else if (revealed && isSelected && !isCorrect)  { bg = "#3a1a1a"; border = "#e05050"; textColor = C.textLight; }
+              else if (isSelected)                             { border = C.yellow; textColor = C.textLight; }
 
               return (
                 <button key={i} onClick={() => handleSelect(i)}

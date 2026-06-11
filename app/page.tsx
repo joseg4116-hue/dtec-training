@@ -2,10 +2,10 @@
 import { modules } from "@/data/modules";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Globe, ClipboardList, CheckCircle, LogOut } from "lucide-react";
-import { useState, useEffect } from "react";
-import { getBrowserSupabase } from "@/lib/supabase-browser";
-import type { User } from "@supabase/supabase-js";
+import { BookOpen, Globe, ClipboardList, CheckCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+
+const EMAIL_KEY = "dtec_email";
 
 const C = {
   charcoal:   "#2D2926",
@@ -20,36 +20,48 @@ const C = {
 const visibleNums = [0];
 
 export default function Home() {
-  const [user, setUser]     = useState<User | null>(null);
-  const [passed, setPassed] = useState<Record<string, boolean>>({});
+  const [email, setEmail]       = useState("");
+  const [draft, setDraft]       = useState("");
+  const [editing, setEditing]   = useState(false);
+  const [passed, setPassed]     = useState<Record<string, boolean>>({});
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const supabase = getBrowserSupabase();
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-      if (!user) return;
-
-      const { data } = await supabase
-        .from("quiz_results")
-        .select("module_id")
-        .eq("passed", true);
-
-      const passedIds = new Set(data?.map((r: { module_id: string }) => r.module_id) ?? []);
-      const result: Record<string, boolean> = {};
-      modules.forEach((m) => { result[m.id] = passedIds.has(m.id); });
-      setPassed(result);
-    };
-    load();
+    const saved = localStorage.getItem(EMAIL_KEY) ?? "";
+    setEmail(saved);
+    setDraft(saved);
+    if (saved) loadProgress(saved);
   }, []);
 
-  const handleLogout = async () => {
-    const supabase = getBrowserSupabase();
-    await supabase.auth.signOut();
-    window.location.href = "/login";
-  };
+  async function loadProgress(e: string) {
+    if (!e) { setPassed({}); return; }
+    try {
+      const res  = await fetch(`/api/results?email=${encodeURIComponent(e)}`);
+      const json = await res.json();
+      const ids  = new Set<string>(json.passed ?? []);
+      const result: Record<string, boolean> = {};
+      modules.forEach((m) => { result[m.id] = ids.has(m.id); });
+      setPassed(result);
+    } catch {
+      setPassed({});
+    }
+  }
 
-  const displayName = user?.user_metadata?.full_name ?? user?.email ?? "";
+  function saveEmail(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = draft.trim().toLowerCase();
+    if (!trimmed) return;
+    localStorage.setItem(EMAIL_KEY, trimmed);
+    setEmail(trimmed);
+    setEditing(false);
+    loadProgress(trimmed);
+  }
+
+  function startEdit() {
+    setDraft(email);
+    setEditing(true);
+    setTimeout(() => inputRef.current?.focus(), 50);
+  }
 
   return (
     <main className="min-h-screen" style={{ background: C.lightGray, fontFamily: "Calibri, 'Trebuchet MS', Arial, sans-serif" }}>
@@ -64,33 +76,64 @@ export default function Home() {
               Colorado Erosion Control & Stormwater Management
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer"
-              style={{ mixBlendMode: "screen" }}>
-              <Image
-                src="/images/dtec_30_years.png"
-                alt="DTEC logo"
-                width={110}
-                height={46}
-                className="object-contain"
-                style={{ filter: "invert(1) opacity(0.85)" }}
-              />
-            </a>
-            {user && (
-              <div className="flex flex-col items-end gap-1">
-                <span className="text-xs max-w-[120px] truncate" style={{ color: C.textSubtle }}>
-                  {displayName}
-                </span>
-                <button onClick={handleLogout}
-                  className="flex items-center gap-1 text-xs px-2 py-1 rounded-lg hover:opacity-80 transition-opacity"
-                  style={{ background: "#3a3530", color: C.textSubtle }}>
-                  <LogOut size={11} /> Sign out
-                </button>
-              </div>
-            )}
-          </div>
+          <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer"
+            style={{ mixBlendMode: "screen" }}>
+            <Image
+              src="/images/dtec_30_years.png"
+              alt="DTEC logo"
+              width={110}
+              height={46}
+              className="object-contain"
+              style={{ filter: "invert(1) opacity(0.85)" }}
+            />
+          </a>
         </div>
       </header>
+
+      {/* Email progress banner */}
+      <div style={{ background: "#3A3530" }} className="px-6 py-3">
+        <div className="max-w-2xl mx-auto">
+          {editing || !email ? (
+            <form onSubmit={saveEmail} className="flex items-center gap-2">
+              <input
+                ref={inputRef}
+                type="email"
+                value={draft}
+                onChange={(e) => setDraft(e.target.value)}
+                placeholder="your@email.com"
+                required
+                className="flex-1 px-3 py-1.5 rounded-lg text-sm outline-none border border-transparent focus:border-[#C9B10A]"
+                style={{ background: "#2D2926", color: C.textLight, fontFamily: "Calibri, sans-serif" }}
+              />
+              <button type="submit"
+                disabled={!draft.trim()}
+                className="px-4 py-1.5 rounded-lg text-sm font-medium disabled:opacity-40"
+                style={{ background: C.yellow, color: C.charcoal }}>
+                Save
+              </button>
+              {email && (
+                <button type="button" onClick={() => setEditing(false)}
+                  className="text-xs px-2 py-1.5 rounded-lg"
+                  style={{ color: C.textSubtle }}>
+                  Cancel
+                </button>
+              )}
+            </form>
+          ) : (
+            <div className="flex items-center justify-between">
+              <span className="text-xs" style={{ color: C.textSubtle }}>
+                Tracking progress for{" "}
+                <span style={{ color: C.textLight }}>{email}</span>
+              </span>
+              <button onClick={startEdit}
+                className="text-xs underline"
+                style={{ color: C.textSubtle }}>
+                Change
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
         {visibleNums.map((num) => {
