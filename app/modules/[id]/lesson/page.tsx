@@ -1,17 +1,20 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Home, ClipboardList } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, ClipboardList, Volume2, VolumeX } from "lucide-react";
 import { modules } from "@/data/modules";
 import SlideRenderer from "@/components/slides/SlideRenderer";
 import Link from "next/link";
 import Image from "next/image";
+import { useSpeech } from "@/hooks/useSpeech";
+import { getSlideText } from "@/lib/getSlideText";
 
 export default function LessonPage() {
   const { id } = useParams<{ id: string }>();
   const module = modules.find((m) => m.id === id);
 
   const [current, setCurrent] = useState(0);
+  const { speak, stop, isPlaying } = useSpeech();
 
   useEffect(() => {
     const saved = localStorage.getItem(`dtec_lesson_${id}`);
@@ -33,8 +36,16 @@ export default function LessonPage() {
   const total = module.slides.length;
   const progress = ((current + 1) / total) * 100;
 
-  const prev = () => setCurrent((c) => Math.max(0, c - 1));
-  const next = () => setCurrent((c) => Math.min(total - 1, c + 1));
+  const prev = () => { stop(); setCurrent((c) => Math.max(0, c - 1)); };
+  const next = () => { stop(); setCurrent((c) => Math.min(total - 1, c + 1)); };
+
+  function toggleSpeech() {
+    if (isPlaying) {
+      stop();
+    } else {
+      speak(getSlideText(slide), module.lang);
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#1a1a1a" }}>
@@ -101,6 +112,14 @@ export default function LessonPage() {
           className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-colors"
         >
           <ChevronRight size={28} />
+        </button>
+        <button
+          onClick={toggleSpeech}
+          title={isPlaying ? "Stop reading" : "Read slide aloud"}
+          className="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+          style={{ background: isPlaying ? "#C8A84B" : "rgba(255,255,255,0.1)", color: isPlaying ? "#1a1a1a" : "white" }}
+        >
+          {isPlaying ? <VolumeX size={22} /> : <Volume2 size={22} />}
         </button>
       </div>
 
