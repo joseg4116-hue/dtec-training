@@ -43,7 +43,7 @@ export default function LessonPage() {
     if (isPlaying) {
       stop();
     } else {
-      speak(getSlideText(slide), module.lang);
+      speak(getSlideText(slide), module!.lang);
     }
   }
 
