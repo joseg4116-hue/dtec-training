@@ -179,8 +179,9 @@ export default function QuizPage() {
           <Link href="/" className="flex items-center gap-1 text-sm" style={{ color: C.textSubtle }}>
             <Home size={15} /> {t.home}
           </Link>
-          <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32}
-            className="object-contain" style={{ filter: "invert(1)", opacity: 0.7 }} />
+          <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer" style={{ mixBlendMode: "screen" }}>
+            <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1) opacity(0.85)" }} />
+          </a>
           <div className="w-16" />
         </header>
 
@@ -228,8 +229,9 @@ export default function QuizPage() {
           <Link href="/" className="flex items-center gap-1 text-sm" style={{ color: C.textSubtle }}>
             <Home size={15} /> {t.home}
           </Link>
-          <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32}
-            className="object-contain" style={{ filter: "invert(1)", opacity: 0.7 }} />
+          <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer" style={{ mixBlendMode: "screen" }}>
+            <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1) opacity(0.85)" }} />
+          </a>
           <div className="w-16" />
         </header>
 
@@ -297,8 +299,9 @@ export default function QuizPage() {
         <Link href="/" className="flex items-center gap-1 text-sm" style={{ color: C.textSubtle }}>
           <Home size={15} /> {t.home}
         </Link>
-        <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32}
-          className="object-contain" style={{ filter: "invert(1)", opacity: 0.7 }} />
+        <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer" style={{ mixBlendMode: "screen" }}>
+          <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1) opacity(0.85)" }} />
+        </a>
         <span className="text-xs" style={{ color: C.textSubtle, fontFamily: F.body }}>
           {t.question} {current + 1} {t.of} {total}
         </span>

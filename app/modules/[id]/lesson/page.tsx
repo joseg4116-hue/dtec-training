@@ -54,7 +54,9 @@ export default function LessonPage() {
         <Link href="/" className="text-white/60 hover:text-white flex items-center gap-1 text-sm">
           <Home size={15} /> Home
         </Link>
-        <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1)", opacity: 0.7 }} />
+        <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer" style={{ mixBlendMode: "screen" }}>
+          <Image src="/images/dtec_30_years.png" alt="DTEC" width={80} height={32} className="object-contain" style={{ filter: "invert(1) opacity(0.85)" }} />
+        </a>
         <span className="text-white/60 text-xs">{current + 1} / {total}</span>
       </div>
 

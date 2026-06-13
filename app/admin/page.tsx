@@ -91,14 +91,16 @@ export default function AdminPage() {
               <p className="text-xs" style={{ color: C.textSubtle }}>DTEC Admin Dashboard</p>
             </div>
           </div>
-          <Image
-            src="/images/dtec_30_years.png"
-            alt="DTEC"
-            width={80}
-            height={32}
-            className="object-contain"
-            style={{ filter: "invert(1)", opacity: 0.7 }}
-          />
+          <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer" style={{ mixBlendMode: "screen" }}>
+            <Image
+              src="/images/dtec_30_years.png"
+              alt="DTEC"
+              width={80}
+              height={32}
+              className="object-contain"
+              style={{ filter: "invert(1) opacity(0.85)" }}
+            />
+          </a>
         </div>
       </header>
 
