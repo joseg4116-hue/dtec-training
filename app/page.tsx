@@ -18,6 +18,7 @@ const C = {
 };
 
 const visibleNums = [0];
+const comingSoonNums = [1];
 
 export default function Home() {
   const [email, setEmail]       = useState("");
@@ -213,6 +214,59 @@ export default function Home() {
                     {esPassed ? "Aprobado (ES)" : "Examen Español"}
                   </Link>
                 )}
+              </div>
+
+            </div>
+          );
+        })}
+        {comingSoonNums.map((num) => {
+          const versions = modules.filter((m) => m.moduleNum === num);
+          const en = versions.find((m) => m.lang === "en");
+          const es = versions.find((m) => m.lang === "es");
+
+          return (
+            <div key={`cs-${num}`} className="rounded-2xl overflow-hidden shadow-sm"
+              style={{ background: "#F7F6F5", border: `1px solid #D0CECA`, opacity: 0.75 }}>
+
+              <div className="px-6 py-4 flex items-center gap-3"
+                style={{ borderBottom: `3px solid #D0CECA` }}>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
+                  style={{ background: "#9A9590", color: "#FFFFFF", fontFamily: "Georgia, serif" }}>
+                  {String(num).padStart(2, "0")}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-bold truncate" style={{ color: C.textMuted, fontFamily: "Georgia, serif" }}>
+                    {en?.title ?? es?.title}
+                  </h2>
+                  <p className="text-xs" style={{ color: C.textSubtle }}>{en?.subtitle ?? es?.subtitle}</p>
+                </div>
+              </div>
+
+              <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
+                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                  <BookOpen size={15} />
+                  Start English
+                </div>
+                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                  <Globe size={15} />
+                  Iniciar Español
+                </div>
+              </div>
+
+              <div className="px-6 pb-5 grid grid-cols-2 gap-3 border-t pt-3"
+                style={{ borderColor: "#E8E5E2" }}>
+                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                  <ClipboardList size={15} />
+                  Quiz English
+                </div>
+                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                  <ClipboardList size={15} />
+                  Examen Español
+                </div>
               </div>
 
             </div>

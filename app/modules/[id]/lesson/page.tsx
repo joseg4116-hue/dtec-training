@@ -7,14 +7,14 @@ import SlideRenderer from "@/components/slides/SlideRenderer";
 import Link from "next/link";
 import Image from "next/image";
 import { useSpeech } from "@/hooks/useSpeech";
-import { getSlideText } from "@/lib/getSlideText";
+import { getSlideSegments } from "@/lib/getSlideSegments";
 
 export default function LessonPage() {
   const { id } = useParams<{ id: string }>();
   const module = modules.find((m) => m.id === id);
 
   const [current, setCurrent] = useState(0);
-  const { speak, stop, isPlaying } = useSpeech();
+  const { speak, stop, isPlaying, activeIndex } = useSpeech();
 
   useEffect(() => {
     const saved = localStorage.getItem(`dtec_lesson_${id}`);
@@ -43,7 +43,10 @@ export default function LessonPage() {
     if (isPlaying) {
       stop();
     } else {
-      speak(getSlideText(slide), module!.lang);
+      const { fullText, segments } = getSlideSegments(slide);
+      // On speech end: auto-advance to next slide, stop there and wait for user
+      const onEnd = current < total - 1 ? () => setCurrent((c) => c + 1) : undefined;
+      speak(fullText, module!.lang, segments, onEnd);
     }
   }
 
@@ -71,7 +74,7 @@ export default function LessonPage() {
           className="relative w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl"
           style={{ aspectRatio: "16/9" }}
         >
-          <SlideRenderer slide={slide} moduleNum={module.moduleNum} lang={module.lang} />
+          <SlideRenderer slide={slide} moduleNum={module.moduleNum} lang={module.lang} activeIndex={activeIndex} />
         </div>
       </div>
 
@@ -102,7 +105,7 @@ export default function LessonPage() {
           {module.slides.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrent(i)}
+              onClick={() => { stop(); setCurrent(i); }}
               className="w-2 h-2 rounded-full transition-all"
               style={{ background: i === current ? "#C8A84B" : "rgba(255,255,255,0.3)" }}
             />

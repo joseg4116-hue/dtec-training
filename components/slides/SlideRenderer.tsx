@@ -21,11 +21,17 @@ const F = {
   body:    "Calibri, 'Trebuchet MS', Arial, sans-serif",
 };
 
-function Bullet({ text }: { text: string }) {
+function Bullet({ text, highlighted }: { text: string; highlighted?: boolean }) {
   return (
     <li className="flex gap-2 leading-snug" style={{ fontFamily: F.body }}>
       <span className="mt-1.5 w-2 h-2 rounded-full shrink-0" style={{ background: C.yellow }} />
-      <span style={{ color: C.textDark }}>{text}</span>
+      <span style={{
+        color: C.textDark,
+        background: highlighted ? C.yellow + "40" : "transparent",
+        borderRadius: "4px",
+        padding: highlighted ? "1px 5px" : "1px 0",
+        transition: "background 0.3s ease, padding 0.3s ease",
+      }}>{text}</span>
     </li>
   );
 }
@@ -77,14 +83,14 @@ function SectionDividerView({ slide }: { slide: Extract<Slide, { type: "section-
 }
 
 // ── Content ───────────────────────────────────────────────────────────────────
-function ContentSlideView({ slide }: { slide: Extract<Slide, { type: "content" }> }) {
+function ContentSlideView({ slide, activeIndex }: { slide: Extract<Slide, { type: "content" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 overflow-hidden flex">
         <div className="flex-1 overflow-auto px-6 md:px-8 py-4">
           <ul className="space-y-2.5 text-sm md:text-base">
-            {slide.bullets.map((b, i) => <Bullet key={i} text={b} />)}
+            {slide.bullets.map((b, i) => <Bullet key={i} text={b} highlighted={activeIndex === i} />)}
           </ul>
         </div>
         {slide.image && (
@@ -99,16 +105,20 @@ function ContentSlideView({ slide }: { slide: Extract<Slide, { type: "content" }
 }
 
 // ── Two Column ────────────────────────────────────────────────────────────────
-function TwoColumnView({ slide }: { slide: Extract<Slide, { type: "two-column" }> }) {
+function TwoColumnView({ slide, activeIndex }: { slide: Extract<Slide, { type: "two-column" }>; activeIndex: number }) {
+  const cols = [
+    { title: slide.leftTitle, bullets: slide.leftBullets, offset: 0 },
+    { title: slide.rightTitle, bullets: slide.rightBullets, offset: slide.leftBullets.length },
+  ];
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 overflow-auto grid grid-cols-2 divide-x" style={{ borderColor: C.yellow + "40" }}>
-        {[{ title: slide.leftTitle, bullets: slide.leftBullets }, { title: slide.rightTitle, bullets: slide.rightBullets }].map((col, ci) => (
+        {cols.map((col, ci) => (
           <div key={ci} className="px-5 md:px-6 py-4">
             <p className="text-xs md:text-sm font-bold mb-3" style={{ color: C.charcoal, fontFamily: F.heading }}>{col.title}</p>
             <ul className="space-y-2 text-xs md:text-sm">
-              {col.bullets.map((b, i) => <Bullet key={i} text={b} />)}
+              {col.bullets.map((b, i) => <Bullet key={i} text={b} highlighted={activeIndex === col.offset + i} />)}
             </ul>
           </div>
         ))}
@@ -118,14 +128,19 @@ function TwoColumnView({ slide }: { slide: Extract<Slide, { type: "two-column" }
 }
 
 // ── Stat Callout ──────────────────────────────────────────────────────────────
-function StatCalloutView({ slide }: { slide: Extract<Slide, { type: "stat-callout" }> }) {
+function StatCalloutView({ slide, activeIndex }: { slide: Extract<Slide, { type: "stat-callout" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 flex items-center justify-center gap-4 md:gap-6 px-6 flex-wrap">
         {slide.stats.map((s, i) => (
           <div key={i} className="flex flex-col items-center justify-center rounded-xl p-5 md:p-6 flex-1 min-w-[130px] max-w-[210px] border-2"
-            style={{ background: C.charcoal, borderColor: C.yellow }}>
+            style={{
+              background: C.charcoal,
+              borderColor: C.yellow,
+              boxShadow: activeIndex === i ? `0 0 18px ${C.yellow}70` : "none",
+              transition: "box-shadow 0.3s ease",
+            }}>
             <span className="text-4xl md:text-5xl font-bold" style={{ color: C.yellow, fontFamily: F.heading }}>{s.value}</span>
             <span className="text-xs md:text-sm text-center mt-3 leading-snug" style={{ color: C.textLight, fontFamily: F.body }}>{s.label}</span>
           </div>
@@ -166,15 +181,21 @@ function ClosingSlideView({ slide }: { slide: Extract<Slide, { type: "closing" }
 }
 
 // ── Numbered List ─────────────────────────────────────────────────────────────
-function NumberedListView({ slide }: { slide: Extract<Slide, { type: "numbered-list" }> }) {
+function NumberedListView({ slide, activeIndex }: { slide: Extract<Slide, { type: "numbered-list" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 overflow-auto grid grid-cols-2 gap-3 p-5 md:p-6">
         {slide.items.map((item, i) => (
-          <div key={i} className="rounded-xl p-4 flex flex-col gap-1" style={{ background: C.charcoal, border: `1.5px solid ${C.yellow}` }}>
+          <div key={i} className="rounded-xl p-4 flex flex-col gap-1"
+            style={{
+              background: C.charcoal,
+              border: `1.5px solid ${C.yellow}`,
+              boxShadow: activeIndex === i ? `0 0 0 2px ${C.yellow}80` : "none",
+              transition: "box-shadow 0.3s ease",
+            }}>
             <span className="text-2xl font-bold" style={{ color: C.yellow, fontFamily: F.heading }}>{item.num}</span>
-            <span className="text-sm font-bold" style={{ color: C.textLight, fontFamily: F.heading }}>{item.heading}</span>
+            <span className="text-sm font-bold" style={{ color: activeIndex === i ? C.yellow : C.textLight, fontFamily: F.heading, transition: "color 0.3s ease" }}>{item.heading}</span>
             <span className="text-xs leading-snug" style={{ color: C.textSubtle, fontFamily: F.body }}>{item.body}</span>
           </div>
         ))}
@@ -184,13 +205,20 @@ function NumberedListView({ slide }: { slide: Extract<Slide, { type: "numbered-l
 }
 
 // ── Glossary ──────────────────────────────────────────────────────────────────
-function GlossaryView({ slide }: { slide: Extract<Slide, { type: "glossary" }> }) {
+function GlossaryView({ slide, activeIndex }: { slide: Extract<Slide, { type: "glossary" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 overflow-auto px-6 md:px-8 py-3 grid grid-cols-1 gap-2">
         {slide.terms.map((t, i) => (
-          <div key={i} className="flex gap-3 items-baseline border-b pb-1.5" style={{ borderColor: C.yellow + "30" }}>
+          <div key={i} className="flex gap-3 items-baseline border-b pb-1.5"
+            style={{
+              borderColor: C.yellow + "30",
+              background: activeIndex === i ? C.yellow + "25" : "transparent",
+              borderRadius: "4px",
+              padding: activeIndex === i ? "2px 6px" : "0 0",
+              transition: "background 0.3s ease, padding 0.3s ease",
+            }}>
             <span className="text-sm font-bold shrink-0 w-16" style={{ color: C.charcoal, fontFamily: F.heading }}>{t.term}</span>
             <span className="text-xs md:text-sm" style={{ color: C.textDark, fontFamily: F.body }}>{t.definition}</span>
           </div>
@@ -226,7 +254,7 @@ function StoryView({ slide }: { slide: Extract<Slide, { type: "story" }> }) {
 }
 
 // ── Timeline ──────────────────────────────────────────────────────────────────
-function TimelineView({ slide }: { slide: Extract<Slide, { type: "timeline" }> }) {
+function TimelineView({ slide, activeIndex }: { slide: Extract<Slide, { type: "timeline" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
@@ -235,9 +263,16 @@ function TimelineView({ slide }: { slide: Extract<Slide, { type: "timeline" }> }
           <div className="absolute top-3 left-0 right-0 h-0.5" style={{ background: C.yellow + "60" }} />
           {slide.events.map((ev, i) => (
             <div key={i} className="flex-1 flex flex-col items-center relative">
-              <div className="w-3 h-3 rounded-full z-10 mb-2" style={{ background: C.yellow }} />
-              <span className="text-xs font-bold text-center" style={{ color: C.charcoal, fontFamily: F.heading }}>{ev.year}</span>
-              <span className="text-xs text-center whitespace-pre-line mt-1" style={{ color: C.textMuted, fontFamily: F.body }}>{ev.label}</span>
+              <div className="w-3 h-3 rounded-full z-10 mb-2"
+                style={{
+                  background: C.yellow,
+                  transform: activeIndex === i ? "scale(1.6)" : "scale(1)",
+                  transition: "transform 0.3s ease",
+                }} />
+              <span className="text-xs font-bold text-center"
+                style={{ color: C.charcoal, fontFamily: F.heading, fontWeight: activeIndex === i ? 900 : 700, transition: "font-weight 0.3s ease" }}>{ev.year}</span>
+              <span className="text-xs text-center whitespace-pre-line mt-1"
+                style={{ color: activeIndex === i ? C.charcoal : C.textMuted, fontFamily: F.body, transition: "color 0.3s ease" }}>{ev.label}</span>
             </div>
           ))}
         </div>
@@ -250,7 +285,7 @@ function TimelineView({ slide }: { slide: Extract<Slide, { type: "timeline" }> }
 }
 
 // ── Process Steps ─────────────────────────────────────────────────────────────
-function ProcessStepsView({ slide }: { slide: Extract<Slide, { type: "process-steps" }> }) {
+function ProcessStepsView({ slide, activeIndex }: { slide: Extract<Slide, { type: "process-steps" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
@@ -259,7 +294,12 @@ function ProcessStepsView({ slide }: { slide: Extract<Slide, { type: "process-st
       )}
       <div className="flex-1 flex items-stretch gap-0 divide-x px-6 md:px-8 py-5" style={{ borderColor: C.yellow + "40" }}>
         {slide.steps.map((step, i) => (
-          <div key={i} className="flex-1 flex flex-col px-4 gap-2">
+          <div key={i} className="flex-1 flex flex-col px-4 gap-2"
+            style={{
+              background: activeIndex === i ? C.yellow + "18" : "transparent",
+              borderRadius: "8px",
+              transition: "background 0.3s ease",
+            }}>
             <span className="text-xs font-bold uppercase tracking-wide" style={{ color: C.yellow, fontFamily: F.body }}>{step.when}</span>
             <span className="text-sm font-bold" style={{ color: C.charcoal, fontFamily: F.heading }}>{step.action}</span>
             <span className="text-xs leading-snug" style={{ color: C.textDark, fontFamily: F.body }}>{step.detail}</span>
@@ -271,14 +311,19 @@ function ProcessStepsView({ slide }: { slide: Extract<Slide, { type: "process-st
 }
 
 // ── Enforcement ───────────────────────────────────────────────────────────────
-function EnforcementView({ slide }: { slide: Extract<Slide, { type: "enforcement" }> }) {
+function EnforcementView({ slide, activeIndex }: { slide: Extract<Slide, { type: "enforcement" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 flex flex-col px-6 md:px-8 py-4 gap-3">
         <div className="flex gap-3">
           {slide.columns.map((col, i) => (
-            <div key={i} className="flex-1 rounded-xl p-4" style={{ background: C.charcoal }}>
+            <div key={i} className="flex-1 rounded-xl p-4"
+              style={{
+                background: C.charcoal,
+                boxShadow: activeIndex === i ? `0 0 0 2px ${C.yellow}` : "none",
+                transition: "box-shadow 0.3s ease",
+              }}>
               <p className="text-sm font-bold mb-2" style={{ color: C.yellow, fontFamily: F.heading }}>{col.level}</p>
               <p className="text-xs leading-snug" style={{ color: C.textLight, fontFamily: F.body }}>{col.detail}</p>
             </div>
@@ -298,20 +343,30 @@ function EnforcementView({ slide }: { slide: Extract<Slide, { type: "enforcement
 }
 
 // ── Router ────────────────────────────────────────────────────────────────────
-export default function SlideRenderer({ slide, moduleNum, lang }: { slide: Slide; moduleNum: number; lang: string }) {
+export default function SlideRenderer({
+  slide,
+  moduleNum,
+  lang,
+  activeIndex = -1,
+}: {
+  slide: Slide;
+  moduleNum: number;
+  lang: string;
+  activeIndex?: number;
+}) {
   switch (slide.type) {
     case "title":             return <TitleSlideView slide={slide} moduleNum={moduleNum} lang={lang} />;
     case "section-divider":   return <SectionDividerView slide={slide} />;
-    case "content":           return <ContentSlideView slide={slide} />;
-    case "two-column":        return <TwoColumnView slide={slide} />;
-    case "stat-callout":      return <StatCalloutView slide={slide} />;
+    case "content":           return <ContentSlideView slide={slide} activeIndex={activeIndex} />;
+    case "two-column":        return <TwoColumnView slide={slide} activeIndex={activeIndex} />;
+    case "stat-callout":      return <StatCalloutView slide={slide} activeIndex={activeIndex} />;
     case "image-placeholder": return <ImagePlaceholderView slide={slide} />;
     case "closing":           return <ClosingSlideView slide={slide} />;
-    case "numbered-list":     return <NumberedListView slide={slide} />;
-    case "glossary":          return <GlossaryView slide={slide} />;
+    case "numbered-list":     return <NumberedListView slide={slide} activeIndex={activeIndex} />;
+    case "glossary":          return <GlossaryView slide={slide} activeIndex={activeIndex} />;
     case "story":             return <StoryView slide={slide} />;
-    case "timeline":          return <TimelineView slide={slide} />;
-    case "process-steps":     return <ProcessStepsView slide={slide} />;
-    case "enforcement":       return <EnforcementView slide={slide} />;
+    case "timeline":          return <TimelineView slide={slide} activeIndex={activeIndex} />;
+    case "process-steps":     return <ProcessStepsView slide={slide} activeIndex={activeIndex} />;
+    case "enforcement":       return <EnforcementView slide={slide} activeIndex={activeIndex} />;
   }
 }
