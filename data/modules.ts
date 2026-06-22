@@ -870,6 +870,248 @@ export const modules: Module[] = [
       },
     ],
   },
+
+  // ── MODULE 03 — EN ──────────────────────────────────────────────────────
+  {
+    id: "03-en",
+    moduleNum: 3,
+    lang: "en",
+    title: "Sediment vs. Erosion",
+    subtitle: "Two different problems, two different fixes",
+    slides: [
+      {
+        type: "title",
+        title: "Sediment vs. Erosion",
+        subtitle: "Two different problems, two different fixes",
+      },
+      {
+        type: "story",
+        title: "Why This Matters",
+        body: "Erosion and sediment are not the same thing.\n\nThey are two different problems, and we fix them with two different kinds of tools. Knowing the difference is the start of every job — and the answer when an inspector asks why a BMP is where it is.",
+        callout: "Get this one distinction right and the rest of the job makes sense.",
+        image: "/images/sed-vs-er-diagram.png",
+      },
+      {
+        type: "content",
+        title: "Erosion: The Process",
+        bullets: [
+          "Erosion is soil on the move — wind and water picking it up and carrying it away",
+          "On construction sites, bare ground has no grass or roots holding it down — it erodes fast",
+          "Rain hits bare dirt and washes it downhill",
+          "Wind picks up dry soil and blows it as dust",
+          "Runoff cuts small channels (rills) into slopes",
+          "EROSION = THE CAUSE",
+        ],
+        image: "/images/sed-vs-er-gully.png",
+      },
+      {
+        type: "content",
+        title: "Sediment: The Material",
+        bullets: [
+          "Sediment is the soil that already moved — dirt, sand, and mud that erosion picked up and dropped where it doesn't belong",
+          "It ends up in streets, storm inlets, and creeks — and it's the #1 pollutant leaving construction sites",
+          "Even small amounts cloud water and harm aquatic life downstream",
+          "SEDIMENT = THE RESULT",
+        ],
+        image: "/images/sed-vs-er-inlet.png",
+      },
+      {
+        type: "content",
+        title: "Not Just Soil: Other Pollutants",
+        bullets: [
+          "Sediment isn't the only pollutant — anything that rides off-site in runoff counts",
+          "Hydraulic oil, diesel, and gas from equipment can foul storm drains and streams",
+          "Even a small fuel leak can have major consequences — contain spills immediately",
+          "Report any fuel or chemical spill to your supervisor right away",
+        ],
+        image: "/images/sed-vs-er-fuel-spill.png",
+      },
+      {
+        type: "two-column",
+        title: "Erosion Is the Action. Sediment Is the Result.",
+        leftTitle: "Erosion — The Action",
+        leftBullets: [
+          "Soil getting carried away — you can watch it happen",
+          "Dust blowing off a dry stockpile",
+          "Water cutting into a slope and forming rills",
+          "The process that puts soil in motion",
+        ],
+        rightTitle: "Sediment — The Result",
+        rightBullets: [
+          "What's left behind after the move",
+          "The mud on the street",
+          "The dirt piled around a storm inlet",
+          "The cloudy brown water in the drainage ditch",
+        ],
+      },
+      {
+        type: "two-column",
+        title: "Two Different Kinds of BMPs",
+        leftTitle: "Erosion Control — Keep Soil from Moving",
+        leftBullets: [
+          "Erosion control blankets (ECBs)",
+          "Turf reinforcement mats (TRMs)",
+          "Hydraulic mulch (hydromulch)",
+          "Seeding & hydroseeding",
+          "Surface roughening",
+        ],
+        rightTitle: "Sediment Control — Catch Soil Already Moving",
+        rightBullets: [
+          "Silt fence",
+          "Straw wattles",
+          "Heavy-duty wattles",
+          "Rock socks",
+          "Inlet protection",
+        ],
+      },
+      {
+        type: "content",
+        title: "What It Looks Like On Site",
+        bullets: [
+          "Erosion: a slope failing and sliding — bare soil with nothing holding it in place",
+          "Sediment: mud washing across the site, around inlets, and into streets",
+          "BMPs doing their job: erosion control blanket protecting the slope, silt fence at the toe, riprap slowing concentrated flow at outlets",
+        ],
+        image: "/images/sed-vs-er-ecb-slope.png",
+      },
+      {
+        type: "numbered-list",
+        title: "If You Remember Three Things",
+        items: [
+          { num: "1", heading: "Erosion is the process. Sediment is the result.", body: "Soil getting carried away is erosion. The dirt out of place after the move is sediment." },
+          { num: "2", heading: "Two different problems, two different BMPs.", body: "Erosion control keeps soil from moving. Sediment control catches soil already moving." },
+          { num: "3", heading: "Stop erosion at the source.", body: "Stopping erosion before it starts beats chasing sediment downstream — so we always use both types of BMPs together." },
+        ],
+      },
+      {
+        type: "closing",
+        message: "Erosion Is the Cause.\nSediment Is the Result.\nWe Stop Both.",
+        sub: "Every BMP you install is a direct answer to one of these two problems. Know which one you're solving — and install it right.",
+        footer: "DTEC — Down to Earth Compliance  |  Module 03 Complete",
+      },
+    ],
+  },
+
+  // ── MODULE 03 — ES ──────────────────────────────────────────────────────
+  {
+    id: "03-es",
+    moduleNum: 3,
+    lang: "es",
+    title: "Sedimento vs. Erosion",
+    subtitle: "Dos problemas diferentes, dos soluciones diferentes",
+    slides: [
+      {
+        type: "title",
+        title: "Sedimento vs. Erosion",
+        subtitle: "Dos problemas diferentes, dos soluciones diferentes",
+      },
+      {
+        type: "story",
+        title: "Por Que Importa Esto",
+        body: "La erosion y el sedimento no son lo mismo.\n\nSon dos problemas diferentes, y los arreglamos con dos tipos de herramientas diferentes. Saber la diferencia es el inicio de cada trabajo — y la respuesta cuando un inspector pregunta por que un BMP esta donde esta.",
+        callout: "Si entiendes esta diferencia, el resto del trabajo tiene sentido.",
+        image: "/images/sed-vs-er-diagram.png",
+      },
+      {
+        type: "content",
+        title: "Erosion: El Proceso",
+        bullets: [
+          "La erosion es tierra en movimiento — el viento y el agua levantandola y llevandosela",
+          "En las obras, el suelo queda pelado sin pasto ni raices que lo sujeten — asi que se erosiona rapido",
+          "La lluvia pega en la tierra pelada y la arrastra cuesta abajo",
+          "El viento levanta tierra seca y la sopla como polvo",
+          "El escurrimiento abre canales chicos (canalillos) en las pendientes",
+          "EROSION = LA CAUSA",
+        ],
+        image: "/images/sed-vs-er-gully.png",
+      },
+      {
+        type: "content",
+        title: "Sedimento: El Material",
+        bullets: [
+          "El sedimento es la tierra que ya se movio — la tierra, arena y lodo que la erosion levanto y dejo donde no debe estar",
+          "Va a parar a las calles, alcantarillas y arroyos — y es el contaminante numero 1 que sale de las obras",
+          "Hasta cantidades pequenas enturbian el agua y danan la vida acuatica",
+          "SEDIMENTO = EL RESULTADO",
+        ],
+        image: "/images/sed-vs-er-inlet.png",
+      },
+      {
+        type: "content",
+        title: "No Solo Tierra: Otros Contaminantes",
+        bullets: [
+          "El sedimento no es el unico contaminante — todo lo que se va de la obra con el agua cuenta",
+          "El aceite hidraulico, diesel y gasolina de la maquinaria pueden ensuciar alcantarillas y arroyos",
+          "Hasta una fuga pequena puede tener grandes consecuencias — contiene los derrames de inmediato",
+          "Reporta cualquier derrame de combustible o quimico a tu supervisor de inmediato",
+        ],
+        image: "/images/sed-vs-er-fuel-spill.png",
+      },
+      {
+        type: "two-column",
+        title: "La Erosion es la Accion. El Sedimento es el Resultado.",
+        leftTitle: "Erosion — La Accion",
+        leftBullets: [
+          "La tierra que se esta llevando — lo puedes ver pasar",
+          "Polvo soplando de una pila de tierra seca",
+          "El agua abriendo la pendiente y formando canalillos",
+          "El proceso que pone la tierra en movimiento",
+        ],
+        rightTitle: "Sedimento — El Resultado",
+        rightBullets: [
+          "Lo que queda despues del movimiento",
+          "El lodo en la calle",
+          "La tierra apilada alrededor de una alcantarilla",
+          "El agua turbia y cafe en la cuneta",
+        ],
+      },
+      {
+        type: "two-column",
+        title: "Dos Tipos Diferentes de BMPs",
+        leftTitle: "Control de Erosion — Evitar que la Tierra se Mueva",
+        leftBullets: [
+          "Mantas de control de erosion (ECBs)",
+          "Tapetes de refuerzo de cesped (TRMs)",
+          "Mulch hidraulico (hydromulch)",
+          "Semilla e hidrosiembra",
+          "Aspereado de la superficie",
+        ],
+        rightTitle: "Control de Sedimento — Atrapar la Tierra que ya se Mueve",
+        rightBullets: [
+          "Cerca de limo (silt fence)",
+          "Rollos de paja (wattles)",
+          "Wattles de alta resistencia",
+          "Rock socks",
+          "Proteccion de alcantarillas",
+        ],
+      },
+      {
+        type: "content",
+        title: "Como Se Ve en la Obra",
+        bullets: [
+          "Erosion: una pendiente cediendo y deslizandose — suelo pelado sin nada que lo sujete",
+          "Sedimento: lodo lavandose por la obra, alrededor de alcantarillas y hacia las calles",
+          "BMPs haciendo su trabajo: manta de control de erosion protegiendo la pendiente, silt fence al pie, riprap frenando el flujo concentrado en las salidas",
+        ],
+        image: "/images/sed-vs-er-ecb-slope.png",
+      },
+      {
+        type: "numbered-list",
+        title: "Si Recuerdas Tres Cosas",
+        items: [
+          { num: "1", heading: "La erosion es el proceso. El sedimento es el resultado.", body: "La tierra que se esta llevando es erosion. La tierra fuera de lugar despues del movimiento es sedimento." },
+          { num: "2", heading: "Dos problemas diferentes, dos tipos de BMPs.", body: "El control de erosion evita que la tierra se mueva. El control de sedimento atrapa la tierra que ya se movio." },
+          { num: "3", heading: "Detener la erosion en el origen.", body: "Detener la erosion antes de que empiece es mejor que perseguir el sedimento despues — por eso siempre usamos los dos tipos de BMPs juntos." },
+        ],
+      },
+      {
+        type: "closing",
+        message: "La Erosion es la Causa.\nEl Sedimento es el Resultado.\nNosotros Detenemos Ambos.",
+        sub: "Cada BMP que instalas es la respuesta directa a uno de estos dos problemas. Sabe cual estas resolviendo — e instalalo bien.",
+        footer: "DTEC — Down to Earth Compliance  |  Modulo 03 Completo",
+      },
+    ],
+  },
 ];
 
 export function getModule(id: string): Module | undefined {
