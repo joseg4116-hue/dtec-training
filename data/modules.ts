@@ -601,7 +601,7 @@ export const modules: Module[] = [
           "Runoff cuts small channels (rills) into slopes",
           "EROSION = THE CAUSE",
         ],
-        image: "/images/sed-vs-er-gully.png",
+        image: "/images/sed-vs-er-gully.jpg",
       },
       {
         type: "content",
@@ -671,7 +671,7 @@ export const modules: Module[] = [
           "Sediment: mud washing across the site, around inlets, and into streets",
           "BMPs doing their job: erosion control blanket protecting the slope, silt fence at the toe, riprap slowing concentrated flow at outlets",
         ],
-        image: "/images/sed-vs-er-ecb-slope.png",
+        image: "/images/sed-vs-er-ecb-slope.jpg",
       },
       {
         type: "numbered-list",
@@ -722,7 +722,7 @@ export const modules: Module[] = [
           "El escurrimiento abre canales chicos (canalillos) en las pendientes",
           "EROSION = LA CAUSA",
         ],
-        image: "/images/sed-vs-er-gully.png",
+        image: "/images/sed-vs-er-gully.jpg",
       },
       {
         type: "content",
@@ -792,7 +792,7 @@ export const modules: Module[] = [
           "Sedimento: lodo lavandose por la obra, alrededor de alcantarillas y hacia las calles",
           "BMPs haciendo su trabajo: manta de control de erosion protegiendo la pendiente, silt fence al pie, riprap frenando el flujo concentrado en las salidas",
         ],
-        image: "/images/sed-vs-er-ecb-slope.png",
+        image: "/images/sed-vs-er-ecb-slope.jpg",
       },
       {
         type: "numbered-list",
