@@ -17,8 +17,8 @@ const C = {
   textSubtle: "#B8B0A8",
 };
 
-const visibleNums = [0, 3];
-const comingSoonNums = [1];
+const visibleNums = [0, 1];
+const comingSoonNums = [2];
 
 export default function Home() {
   const [email, setEmail]       = useState("");

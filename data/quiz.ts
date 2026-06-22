@@ -245,9 +245,9 @@ export const quizBanks: QuizBank[] = [
     ],
   },
 
-  // ── MODULE 03 — EN ────────────────────────────────────────────────────────
+  // ── MODULE 01 — EN ────────────────────────────────────────────────────────
   {
-    moduleId: "03-en",
+    moduleId: "01-en",
     passingScore: 0.8,
     questionsPerSession: 6,
     questions: [
@@ -342,9 +342,9 @@ export const quizBanks: QuizBank[] = [
     ],
   },
 
-  // ── MODULE 03 — ES ────────────────────────────────────────────────────────
+  // ── MODULE 01 — ES ────────────────────────────────────────────────────────
   {
-    moduleId: "03-es",
+    moduleId: "01-es",
     passingScore: 0.8,
     questionsPerSession: 6,
     questions: [
