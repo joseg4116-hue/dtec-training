@@ -588,7 +588,7 @@ export const modules: Module[] = [
         title: "Why This Matters",
         body: "Erosion and sediment are not the same thing.\n\nThey are two different problems, and we fix them with two different kinds of tools. Knowing the difference is the start of every job — and the answer when an inspector asks why a BMP is where it is.",
         callout: "Get this one distinction right and the rest of the job makes sense.",
-        image: "/images/sed-vs-er-diagram.png",
+        image: "/images/sed-vs-er-site-overview.jpg",
       },
       {
         type: "content",
@@ -642,6 +642,7 @@ export const modules: Module[] = [
           "The dirt piled around a storm inlet",
           "The cloudy brown water in the drainage ditch",
         ],
+        image: "/images/sed-vs-er-rill-closeup.jpg",
       },
       {
         type: "two-column",
@@ -662,6 +663,7 @@ export const modules: Module[] = [
           "Rock socks",
           "Inlet protection",
         ],
+        image: "/images/sed-vs-er-slope2.jpg",
       },
       {
         type: "content",
@@ -709,7 +711,7 @@ export const modules: Module[] = [
         title: "Por Que Importa Esto",
         body: "La erosion y el sedimento no son lo mismo.\n\nSon dos problemas diferentes, y los arreglamos con dos tipos de herramientas diferentes. Saber la diferencia es el inicio de cada trabajo — y la respuesta cuando un inspector pregunta por que un BMP esta donde esta.",
         callout: "Si entiendes esta diferencia, el resto del trabajo tiene sentido.",
-        image: "/images/sed-vs-er-diagram.png",
+        image: "/images/sed-vs-er-site-overview.jpg",
       },
       {
         type: "content",
@@ -763,6 +765,7 @@ export const modules: Module[] = [
           "La tierra apilada alrededor de una alcantarilla",
           "El agua turbia y cafe en la cuneta",
         ],
+        image: "/images/sed-vs-er-rill-closeup.jpg",
       },
       {
         type: "two-column",
@@ -783,6 +786,7 @@ export const modules: Module[] = [
           "Rock socks",
           "Proteccion de alcantarillas",
         ],
+        image: "/images/sed-vs-er-slope2.jpg",
       },
       {
         type: "content",

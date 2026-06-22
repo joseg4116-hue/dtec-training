@@ -113,15 +113,22 @@ function TwoColumnView({ slide, activeIndex }: { slide: Extract<Slide, { type: "
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
-      <div className="flex-1 overflow-auto grid grid-cols-2 divide-x" style={{ borderColor: C.yellow + "40" }}>
-        {cols.map((col, ci) => (
-          <div key={ci} className="px-5 md:px-6 py-4">
-            <p className="text-xs md:text-sm font-bold mb-3" style={{ color: C.charcoal, fontFamily: F.heading }}>{col.title}</p>
-            <ul className="space-y-2 text-xs md:text-sm">
-              {col.bullets.map((b, i) => <Bullet key={i} text={b} highlighted={activeIndex === col.offset + i} />)}
-            </ul>
+      <div className="flex-1 overflow-hidden flex">
+        <div className="flex-1 overflow-auto grid grid-cols-2 divide-x" style={{ borderColor: C.yellow + "40" }}>
+          {cols.map((col, ci) => (
+            <div key={ci} className="px-5 md:px-6 py-4">
+              <p className="text-xs md:text-sm font-bold mb-3" style={{ color: C.charcoal, fontFamily: F.heading }}>{col.title}</p>
+              <ul className="space-y-2 text-xs md:text-sm">
+                {col.bullets.map((b, i) => <Bullet key={i} text={b} highlighted={activeIndex === col.offset + i} />)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {slide.image && (
+          <div className="w-2/5 shrink-0 relative m-3 rounded-xl overflow-hidden">
+            <Image src={slide.image} alt="" fill className="object-cover" />
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

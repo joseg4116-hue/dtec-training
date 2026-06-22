@@ -27,6 +27,7 @@ export type TwoColumnSlide = {
   leftBullets: string[];
   rightTitle: string;
   rightBullets: string[];
+  image?: string;
 };
 
 export type StatCalloutSlide = {
