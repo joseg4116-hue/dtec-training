@@ -17,7 +17,7 @@ const C = {
   textSubtle: "#B8B0A8",
 };
 
-const visibleNums = [0];
+const visibleNums = [0, 3];
 const comingSoonNums = [1];
 
 export default function Home() {
