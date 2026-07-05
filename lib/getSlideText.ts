@@ -11,13 +11,13 @@ export function getSlideText(slide: Slide): string {
     case "two-column":
       return `${slide.title}. ${slide.leftTitle}: ${slide.leftBullets.join(". ")}. ${slide.rightTitle}: ${slide.rightBullets.join(". ")}`;
     case "stat-callout":
-      return `${slide.title}. ${slide.stats.map((s) => `${s.value} ${s.label}`).join(". ")}`;
+      return `${slide.title}. ${slide.stats.map((s) => `${s.value} ${s.label}${s.detail ? ". " + s.detail : ""}`).join(". ")}`;
     case "image-placeholder":
       return `${slide.title}. ${slide.caption}${slide.note ? ". " + slide.note : ""}`;
     case "closing":
       return `${slide.message}${slide.sub ? ". " + slide.sub : ""}${slide.footer ? ". " + slide.footer : ""}`;
     case "numbered-list":
-      return `${slide.title}. ${slide.items.map((i) => `${i.heading}. ${i.body}`).join(". ")}`;
+      return `${slide.title}${slide.subtitle ? ". " + slide.subtitle : ""}. ${slide.items.map((i) => `${i.heading}. ${i.body}`).join(". ")}`;
     case "glossary":
       return `${slide.title}. ${slide.terms.map((t) => `${t.term}: ${t.definition}`).join(". ")}`;
     case "story":

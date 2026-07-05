@@ -150,6 +150,9 @@ function StatCalloutView({ slide, activeIndex }: { slide: Extract<Slide, { type:
             }}>
             <span className="text-4xl md:text-5xl font-bold" style={{ color: C.yellow, fontFamily: F.heading }}>{s.value}</span>
             <span className="text-xs md:text-sm text-center mt-3 leading-snug" style={{ color: C.textLight, fontFamily: F.body }}>{s.label}</span>
+            {s.detail && (
+              <span className="text-[10px] md:text-xs text-center mt-2 leading-snug" style={{ color: C.textSubtle, fontFamily: F.body }}>{s.detail}</span>
+            )}
           </div>
         ))}
       </div>
@@ -192,6 +195,9 @@ function NumberedListView({ slide, activeIndex }: { slide: Extract<Slide, { type
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
+      {slide.subtitle && (
+        <p className="px-6 md:px-8 pt-3 text-xs md:text-sm" style={{ color: C.textMuted, fontFamily: F.body }}>{slide.subtitle}</p>
+      )}
       <div className="flex-1 overflow-auto grid grid-cols-2 gap-3 p-5 md:p-6">
         {slide.items.map((item, i) => (
           <div key={i} className="rounded-xl p-4 flex flex-col gap-1"
