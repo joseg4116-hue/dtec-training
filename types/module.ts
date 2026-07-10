@@ -33,7 +33,7 @@ export type TwoColumnSlide = {
 export type StatCalloutSlide = {
   type: "stat-callout";
   title: string;
-  stats: { value: string; label: string }[];
+  stats: { value: string; label: string; detail?: string }[];
 };
 
 export type ImagePlaceholderSlide = {
@@ -53,6 +53,7 @@ export type ClosingSlide = {
 export type NumberedListSlide = {
   type: "numbered-list";
   title: string;
+  subtitle?: string;
   items: { num: string; heading: string; body: string }[];
 };
 

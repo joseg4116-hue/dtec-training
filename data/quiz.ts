@@ -63,7 +63,7 @@ export const quizBanks: QuizBank[] = [
         question: "Which agency administers Colorado's CDPS stormwater permit program?",
         options: [
           "EPA Region 8",
-          "Colorado Dept. of Public Health & Environment (CDPHE)",
+          "CDPHE — Colorado's state health department",
           "Colorado Department of Transportation (CDOT)",
           "Colorado Division of Water Resources",
         ],
@@ -181,7 +181,7 @@ export const quizBanks: QuizBank[] = [
           "EPA Región 8",
           "Departamento de Transporte de Colorado (CDOT)",
           "División de Recursos Hídricos de Colorado",
-          "Depto. de Salud Pública y Medio Ambiente de Colorado (CDPHE)",
+          "CDPHE — el departamento de salud del estado",
         ],
         correctIndex: 3,
       },

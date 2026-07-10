@@ -39,7 +39,7 @@ export function getSlideSegments(slide: Slide): SlideSegments {
     case "stat-callout":
       return build([
         { text: slide.title, index: -1 },
-        ...slide.stats.map((s, i) => ({ text: `${s.value} ${s.label}`, index: i })),
+        ...slide.stats.map((s, i) => ({ text: `${s.value} ${s.label}${s.detail ? ". " + s.detail : ""}`, index: i })),
       ]);
     case "image-placeholder":
       return build([{ text: `${slide.title}. ${slide.caption}${slide.note ? ". " + slide.note : ""}`, index: -1 }]);
@@ -47,7 +47,7 @@ export function getSlideSegments(slide: Slide): SlideSegments {
       return build([{ text: `${slide.message}${slide.sub ? ". " + slide.sub : ""}${slide.footer ? ". " + slide.footer : ""}`, index: -1 }]);
     case "numbered-list":
       return build([
-        { text: slide.title, index: -1 },
+        { text: slide.title + (slide.subtitle ? ". " + slide.subtitle : ""), index: -1 },
         ...slide.items.map((item, i) => ({ text: `${item.heading}. ${item.body}`, index: i })),
       ]);
     case "glossary":
