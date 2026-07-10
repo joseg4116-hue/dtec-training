@@ -108,10 +108,13 @@ export type Slide =
   | TimelineSlide
   | EnforcementSlide;
 
+export type Category = "stormwater" | "field-ops" | "advanced";
+
 export type Module = {
   id: string;
   moduleNum: number;
   lang: Lang;
+  category: Category;
   title: string;
   subtitle: string;
   slides: Slide[];

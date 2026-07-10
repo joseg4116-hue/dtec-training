@@ -1,8 +1,9 @@
 "use client";
 import { modules } from "@/data/modules";
+import { Category } from "@/types/module";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Globe, ClipboardList, CheckCircle } from "lucide-react";
+import { BookOpen, Globe, ClipboardList, CheckCircle, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const EMAIL_KEY = "dtec_email";
@@ -17,15 +18,23 @@ const C = {
   textSubtle: "#B8B0A8",
 };
 
-const visibleNums = [0, 1];
-const comingSoonNums = [2];
+const CATEGORIES: { key: Category; label: string; visible: number[]; comingSoon: number[] }[] = [
+  { key: "stormwater", label: "Stormwater Training", visible: [0, 1], comingSoon: [2] },
+  { key: "field-ops", label: "Field Operations", visible: [], comingSoon: [] },
+  { key: "advanced", label: "Advanced & Specialty", visible: [], comingSoon: [] },
+];
 
 export default function Home() {
   const [email, setEmail]       = useState("");
   const [draft, setDraft]       = useState("");
   const [editing, setEditing]   = useState(false);
   const [passed, setPassed]     = useState<Record<string, boolean>>({});
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ stormwater: true });
   const inputRef = useRef<HTMLInputElement>(null);
+
+  function toggleCategory(key: string) {
+    setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  }
 
   useEffect(() => {
     const saved = localStorage.getItem(EMAIL_KEY) ?? "";
@@ -136,139 +145,170 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
-        {visibleNums.map((num) => {
-          const versions = modules.filter((m) => m.moduleNum === num);
-          const en = versions.find((m) => m.lang === "en");
-          const es = versions.find((m) => m.lang === "es");
-          const enPassed = en ? passed[en.id] : false;
-          const esPassed = es ? passed[es.id] : false;
-          const anyPassed = enPassed || esPassed;
+      <div className="max-w-2xl mx-auto px-6 py-8 space-y-4">
+        {CATEGORIES.map((cat) => {
+          const isOpen = !!expanded[cat.key];
+          const isEmpty = cat.visible.length === 0 && cat.comingSoon.length === 0;
 
           return (
-            <div key={num} className="rounded-2xl overflow-hidden shadow-sm"
+            <div key={cat.key} className="rounded-2xl overflow-hidden shadow-sm"
               style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
 
-              <div className="px-6 py-4 flex items-center gap-3"
-                style={{ borderBottom: `3px solid ${C.yellow}` }}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
-                  style={{ background: C.charcoal, color: C.yellow, fontFamily: "Georgia, serif" }}>
-                  {String(num).padStart(2, "0")}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h2 className="font-bold truncate" style={{ color: C.textDark, fontFamily: "Georgia, serif" }}>
-                    {en?.title ?? es?.title}
-                  </h2>
-                  <p className="text-xs" style={{ color: C.textMuted }}>{en?.subtitle ?? es?.subtitle}</p>
-                </div>
-                {anyPassed && (
-                  <span className="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full shrink-0"
-                    style={{ background: "#f0f7ee", color: "#2d6a2d" }}>
-                    <CheckCircle size={12} /> Passed
-                  </span>
-                )}
-              </div>
+              <button type="button" onClick={() => toggleCategory(cat.key)}
+                className="w-full flex items-center justify-between px-6 py-4"
+                style={{ background: C.charcoal }}>
+                <span className="font-bold" style={{ color: C.textLight, fontFamily: "Georgia, serif" }}>
+                  {cat.label}
+                </span>
+                <ChevronDown size={18}
+                  className="transition-transform duration-200"
+                  style={{ color: C.yellow, transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
+              </button>
 
-              <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
-                {en && (
-                  <Link href={`/modules/${en.id}/lesson`}
-                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-                    style={{ background: C.charcoal, color: C.textLight }}>
-                    <BookOpen size={15} />
-                    {enPassed ? "Review EN" : "Start English"}
-                  </Link>
-                )}
-                {es && (
-                  <Link href={`/modules/${es.id}/lesson`}
-                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-                    style={{ background: C.charcoal, color: C.yellow }}>
-                    <Globe size={15} />
-                    {esPassed ? "Repasar ES" : "Iniciar Español"}
-                  </Link>
-                )}
-              </div>
+              {isOpen && (
+                <div className="p-6 space-y-6" style={{ background: C.lightGray }}>
+                  {isEmpty && (
+                    <p className="text-sm text-center py-4" style={{ color: C.textMuted }}>
+                      New training modules coming soon.
+                    </p>
+                  )}
+                  {cat.visible.map((num) => {
+                    const versions = modules.filter((m) => m.moduleNum === num && m.category === cat.key);
+                    const en = versions.find((m) => m.lang === "en");
+                    const es = versions.find((m) => m.lang === "es");
+                    const enPassed = en ? passed[en.id] : false;
+                    const esPassed = es ? passed[es.id] : false;
+                    const anyPassed = enPassed || esPassed;
 
-              <div className="px-6 pb-5 grid grid-cols-2 gap-3 border-t pt-3"
-                style={{ borderColor: "#E8E5E2" }}>
-                {en && (
-                  <Link href={`/modules/${en.id}/quiz`}
-                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-                    style={{
-                      background: enPassed ? "#e8f5e9" : C.yellow,
-                      color: enPassed ? "#2d6a2d" : C.charcoal,
-                      border: enPassed ? "1.5px solid #a5d6a7" : "none",
-                    }}>
-                    {enPassed ? <CheckCircle size={15} /> : <ClipboardList size={15} />}
-                    {enPassed ? "Passed (EN)" : "Quiz English"}
-                  </Link>
-                )}
-                {es && (
-                  <Link href={`/modules/${es.id}/quiz`}
-                    className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-                    style={{
-                      background: esPassed ? "#e8f5e9" : C.yellow,
-                      color: esPassed ? "#2d6a2d" : C.charcoal,
-                      border: esPassed ? "1.5px solid #a5d6a7" : "none",
-                    }}>
-                    {esPassed ? <CheckCircle size={15} /> : <ClipboardList size={15} />}
-                    {esPassed ? "Aprobado (ES)" : "Examen Español"}
-                  </Link>
-                )}
-              </div>
+                    return (
+                      <div key={num} className="rounded-2xl overflow-hidden shadow-sm"
+                        style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
 
-            </div>
-          );
-        })}
-        {comingSoonNums.map((num) => {
-          const versions = modules.filter((m) => m.moduleNum === num);
-          const en = versions.find((m) => m.lang === "en");
-          const es = versions.find((m) => m.lang === "es");
+                        <div className="px-6 py-4 flex items-center gap-3"
+                          style={{ borderBottom: `3px solid ${C.yellow}` }}>
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
+                            style={{ background: C.charcoal, color: C.yellow, fontFamily: "Georgia, serif" }}>
+                            {String(num).padStart(2, "0")}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h2 className="font-bold truncate" style={{ color: C.textDark, fontFamily: "Georgia, serif" }}>
+                              {en?.title ?? es?.title}
+                            </h2>
+                            <p className="text-xs" style={{ color: C.textMuted }}>{en?.subtitle ?? es?.subtitle}</p>
+                          </div>
+                          {anyPassed && (
+                            <span className="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full shrink-0"
+                              style={{ background: "#f0f7ee", color: "#2d6a2d" }}>
+                              <CheckCircle size={12} /> Passed
+                            </span>
+                          )}
+                        </div>
 
-          return (
-            <div key={`cs-${num}`} className="rounded-2xl overflow-hidden shadow-sm"
-              style={{ background: "#F7F6F5", border: `1px solid #D0CECA`, opacity: 0.75 }}>
+                        <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
+                          {en && (
+                            <Link href={`/modules/${en.id}/lesson`}
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              style={{ background: C.charcoal, color: C.textLight }}>
+                              <BookOpen size={15} />
+                              {enPassed ? "Review EN" : "Start English"}
+                            </Link>
+                          )}
+                          {es && (
+                            <Link href={`/modules/${es.id}/lesson`}
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              style={{ background: C.charcoal, color: C.yellow }}>
+                              <Globe size={15} />
+                              {esPassed ? "Repasar ES" : "Iniciar Español"}
+                            </Link>
+                          )}
+                        </div>
 
-              <div className="px-6 py-4 flex items-center gap-3"
-                style={{ borderBottom: `3px solid #D0CECA` }}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
-                  style={{ background: "#9A9590", color: "#FFFFFF", fontFamily: "Georgia, serif" }}>
-                  {String(num).padStart(2, "0")}
+                        <div className="px-6 pb-5 grid grid-cols-2 gap-3 border-t pt-3"
+                          style={{ borderColor: "#E8E5E2" }}>
+                          {en && (
+                            <Link href={`/modules/${en.id}/quiz`}
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              style={{
+                                background: enPassed ? "#e8f5e9" : C.yellow,
+                                color: enPassed ? "#2d6a2d" : C.charcoal,
+                                border: enPassed ? "1.5px solid #a5d6a7" : "none",
+                              }}>
+                              {enPassed ? <CheckCircle size={15} /> : <ClipboardList size={15} />}
+                              {enPassed ? "Passed (EN)" : "Quiz English"}
+                            </Link>
+                          )}
+                          {es && (
+                            <Link href={`/modules/${es.id}/quiz`}
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              style={{
+                                background: esPassed ? "#e8f5e9" : C.yellow,
+                                color: esPassed ? "#2d6a2d" : C.charcoal,
+                                border: esPassed ? "1.5px solid #a5d6a7" : "none",
+                              }}>
+                              {esPassed ? <CheckCircle size={15} /> : <ClipboardList size={15} />}
+                              {esPassed ? "Aprobado (ES)" : "Examen Español"}
+                            </Link>
+                          )}
+                        </div>
+
+                      </div>
+                    );
+                  })}
+                  {cat.comingSoon.map((num) => {
+                    const versions = modules.filter((m) => m.moduleNum === num && m.category === cat.key);
+                    const en = versions.find((m) => m.lang === "en");
+                    const es = versions.find((m) => m.lang === "es");
+
+                    return (
+                      <div key={`cs-${num}`} className="rounded-2xl overflow-hidden shadow-sm"
+                        style={{ background: "#F7F6F5", border: `1px solid #D0CECA`, opacity: 0.75 }}>
+
+                        <div className="px-6 py-4 flex items-center gap-3"
+                          style={{ borderBottom: `3px solid #D0CECA` }}>
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
+                            style={{ background: "#9A9590", color: "#FFFFFF", fontFamily: "Georgia, serif" }}>
+                            {String(num).padStart(2, "0")}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h2 className="font-bold truncate" style={{ color: C.textMuted, fontFamily: "Georgia, serif" }}>
+                              {en?.title ?? es?.title}
+                            </h2>
+                            <p className="text-xs" style={{ color: C.textSubtle }}>{en?.subtitle ?? es?.subtitle}</p>
+                          </div>
+                        </div>
+
+                        <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
+                          <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                            style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                            <BookOpen size={15} />
+                            Start English
+                          </div>
+                          <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                            style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                            <Globe size={15} />
+                            Iniciar Español
+                          </div>
+                        </div>
+
+                        <div className="px-6 pb-5 grid grid-cols-2 gap-3 border-t pt-3"
+                          style={{ borderColor: "#E8E5E2" }}>
+                          <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                            style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                            <ClipboardList size={15} />
+                            Quiz English
+                          </div>
+                          <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
+                            style={{ background: "#DEDBD8", color: "#9A9590" }}>
+                            <ClipboardList size={15} />
+                            Examen Español
+                          </div>
+                        </div>
+
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h2 className="font-bold truncate" style={{ color: C.textMuted, fontFamily: "Georgia, serif" }}>
-                    {en?.title ?? es?.title}
-                  </h2>
-                  <p className="text-xs" style={{ color: C.textSubtle }}>{en?.subtitle ?? es?.subtitle}</p>
-                </div>
-              </div>
-
-              <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
-                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
-                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
-                  <BookOpen size={15} />
-                  Start English
-                </div>
-                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
-                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
-                  <Globe size={15} />
-                  Iniciar Español
-                </div>
-              </div>
-
-              <div className="px-6 pb-5 grid grid-cols-2 gap-3 border-t pt-3"
-                style={{ borderColor: "#E8E5E2" }}>
-                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
-                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
-                  <ClipboardList size={15} />
-                  Quiz English
-                </div>
-                <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed"
-                  style={{ background: "#DEDBD8", color: "#9A9590" }}>
-                  <ClipboardList size={15} />
-                  Examen Español
-                </div>
-              </div>
-
+              )}
             </div>
           );
         })}

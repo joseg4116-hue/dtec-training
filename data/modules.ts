@@ -6,6 +6,7 @@ export const modules: Module[] = [
     id: "00-en",
     moduleNum: 0,
     lang: "en",
+    category: "stormwater",
     title: "Introduction to Stormwater",
     subtitle: "Training Module 00",
     slides: [
@@ -160,6 +161,7 @@ export const modules: Module[] = [
     id: "00-es",
     moduleNum: 0,
     lang: "es",
+    category: "stormwater",
     title: "Introduccion a Aguas Pluviales",
     subtitle: "Modulo de Capacitacion 00",
     slides: [
@@ -313,6 +315,7 @@ export const modules: Module[] = [
     id: "02-en",
     moduleNum: 2,
     lang: "en",
+    category: "stormwater",
     title: "Silt Fence Installation: Trencher Method",
     subtitle: "Colorado specs, installation steps, inspection & maintenance",
     slides: [
@@ -471,6 +474,7 @@ export const modules: Module[] = [
     id: "02-es",
     moduleNum: 2,
     lang: "es",
+    category: "stormwater",
     title: "Instalación de Cerca de Sedimentos: Método de Trinchera",
     subtitle: "Especificaciones de Colorado, pasos de instalación, inspección y mantenimiento",
     slides: [
@@ -575,6 +579,7 @@ export const modules: Module[] = [
     id: "01-en",
     moduleNum: 1,
     lang: "en",
+    category: "stormwater",
     title: "Sediment vs. Erosion",
     subtitle: "Two different problems, two different fixes",
     slides: [
@@ -698,6 +703,7 @@ export const modules: Module[] = [
     id: "01-es",
     moduleNum: 1,
     lang: "es",
+    category: "stormwater",
     title: "Sedimento vs. Erosion",
     subtitle: "Dos problemas diferentes, dos soluciones diferentes",
     slides: [
