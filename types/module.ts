@@ -109,7 +109,7 @@ export type Slide =
   | TimelineSlide
   | EnforcementSlide;
 
-export type Category = "stormwater" | "field-ops" | "advanced";
+export type Category = "welcome" | "stormwater" | "field-ops" | "advanced";
 
 export type Module = {
   id: string;

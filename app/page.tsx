@@ -19,6 +19,7 @@ const C = {
 };
 
 const CATEGORIES: { key: Category; label: string; visible: number[]; comingSoon: number[] }[] = [
+  { key: "welcome", label: "Welcome to DTEC", visible: [], comingSoon: [] },
   { key: "stormwater", label: "Stormwater Training", visible: [0, 1], comingSoon: [2] },
   { key: "field-ops", label: "Field Operations", visible: [], comingSoon: [] },
   { key: "advanced", label: "Advanced & Specialty", visible: [], comingSoon: [] },
