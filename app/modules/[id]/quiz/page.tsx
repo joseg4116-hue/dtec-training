@@ -6,6 +6,7 @@ import { modules } from "@/data/modules";
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle, XCircle, Home, RotateCcw, BookOpen, Mail } from "lucide-react";
+import { useCountUp } from "@/hooks/useCountUp";
 
 const EMAIL_KEY = "dtec_email";
 
@@ -26,6 +27,10 @@ const F = {
   heading: "Georgia, 'Times New Roman', serif",
   body:    "Calibri, 'Trebuchet MS', Arial, sans-serif",
 };
+
+function ScoreCountUp({ score }: { score: number }) {
+  return <>{useCountUp(String(score))}</>;
+}
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -210,7 +215,7 @@ export default function QuizPage() {
               <button
                 onClick={startSession}
                 disabled={!emailDraft.trim()}
-                className="w-full py-3 rounded-xl font-medium text-sm disabled:opacity-40"
+                className="w-full py-3 rounded-xl font-medium text-sm disabled:opacity-40 transition-transform duration-150 active:scale-[0.98]"
                 style={{ background: C.yellow, color: C.charcoal, fontFamily: F.body }}>
                 {t.startQuiz}
               </button>
@@ -240,13 +245,13 @@ export default function QuizPage() {
             <div className="px-8 py-6 text-center"
               style={{ background: passed ? "#1a3a1a" : "#3a1a1a", borderBottom: `3px solid ${C.yellow}` }}>
               {passed
-                ? <CheckCircle className="mx-auto mb-3" size={48} style={{ color: C.yellow }} />
-                : <XCircle className="mx-auto mb-3" size={48} color="#e05050" />}
+                ? <CheckCircle className="pop-in-enter mx-auto mb-3" size={48} style={{ color: C.yellow }} />
+                : <XCircle className="pop-in-enter mx-auto mb-3" size={48} color="#e05050" />}
               <h2 className="text-2xl font-bold" style={{ color: C.textLight, fontFamily: F.heading }}>
                 {passed ? t.passed : t.failed}
               </h2>
-              <p className="text-4xl font-bold mt-2" style={{ color: C.yellow, fontFamily: F.heading }}>
-                {score} / {total}
+              <p className="text-4xl font-bold mt-2 tabular-nums" style={{ color: C.yellow, fontFamily: F.heading }}>
+                <ScoreCountUp score={score} /> / {total}
               </p>
               <p className="text-sm mt-1" style={{ color: C.textSubtle, fontFamily: F.body }}>
                 {t.score}: {Math.round((score / total) * 100)}% — {t.passingIs}
@@ -258,7 +263,7 @@ export default function QuizPage() {
 
             <div className="px-6 py-5 space-y-2">
               {session.map((sq, i) => (
-                <div key={i} className="flex items-center gap-3">
+                <div key={i} className="fade-up-enter flex items-center gap-3" style={{ animationDelay: `${i * 60}ms` }}>
                   {answers[i]
                     ? <CheckCircle size={16} style={{ color: C.yellow }} className="shrink-0" />
                     : <XCircle size={16} color="#e05050" className="shrink-0" />}
@@ -271,12 +276,12 @@ export default function QuizPage() {
 
             <div className="px-6 pb-6 flex flex-col gap-3">
               <button onClick={() => setPhase("ready")}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-transform duration-150 active:scale-[0.98]"
                 style={{ background: C.yellow, color: C.charcoal, fontFamily: F.body }}>
                 <RotateCcw size={16} /> {t.retake}
               </button>
               <Link href={`/modules/${id}/lesson`}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm border"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm border transition-transform duration-150 active:scale-[0.98]"
                 style={{ borderColor: C.textSubtle, color: C.textLight, fontFamily: F.body }}>
                 <BookOpen size={16} /> {t.backLesson}
               </Link>
@@ -308,7 +313,7 @@ export default function QuizPage() {
       </header>
 
       <div className="h-1" style={{ background: C.darkBox }}>
-        <div className="h-full transition-all duration-300" style={{ width: `${progress}%`, background: C.yellow }} />
+        <div className="h-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]" style={{ width: `${progress}%`, background: C.yellow }} />
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center px-5 py-8">
@@ -335,8 +340,8 @@ export default function QuizPage() {
               else if (isSelected)                             { border = C.yellow; textColor = C.textLight; }
 
               return (
-                <button key={i} onClick={() => handleSelect(i)}
-                  className="w-full text-left px-5 py-3.5 rounded-xl border-2 transition-all text-sm"
+                <button key={i} onClick={() => handleSelect(i)} disabled={revealed}
+                  className="w-full text-left px-5 py-3.5 rounded-xl border-2 transition-all duration-150 text-sm active:scale-[0.98] disabled:active:scale-100"
                   style={{ background: bg, borderColor: border, color: textColor, fontFamily: F.body }}>
                   <span className="font-bold mr-3" style={{ color: C.yellow }}>
                     {String.fromCharCode(65 + i)}.
@@ -348,7 +353,7 @@ export default function QuizPage() {
           </div>
 
           <button onClick={handleNext} disabled={selected === null}
-            className="w-full mt-6 py-3 rounded-xl font-medium text-sm transition-opacity disabled:opacity-30"
+            className="w-full mt-6 py-3 rounded-xl font-medium text-sm transition-all duration-150 disabled:opacity-30 active:scale-[0.98] disabled:active:scale-100"
             style={{ background: C.yellow, color: C.charcoal, fontFamily: F.body }}>
             {current + 1 === total ? t.finish : t.next}
           </button>

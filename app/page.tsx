@@ -118,7 +118,7 @@ export default function Home() {
               />
               <button type="submit"
                 disabled={!draft.trim()}
-                className="px-4 py-1.5 rounded-lg text-sm font-medium disabled:opacity-40"
+                className="px-4 py-1.5 rounded-lg text-sm font-medium disabled:opacity-40 transition-transform duration-150 active:scale-95"
                 style={{ background: C.yellow, color: C.charcoal }}>
                 Save
               </button>
@@ -156,7 +156,7 @@ export default function Home() {
               style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
 
               <button type="button" onClick={() => toggleCategory(cat.key)}
-                className="w-full flex items-center justify-between px-6 py-4"
+                className="w-full flex items-center justify-between px-6 py-4 transition-transform duration-150 active:scale-[0.99]"
                 style={{ background: C.charcoal }}>
                 <span className="font-bold" style={{ color: C.textLight, fontFamily: "Georgia, serif" }}>
                   {cat.label}
@@ -166,7 +166,7 @@ export default function Home() {
                   style={{ color: C.yellow, transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
               </button>
 
-              {isOpen && (
+              <div className={`accordion ${isOpen ? "accordion-open" : ""}`}>
                 <div className="p-6 space-y-6" style={{ background: C.lightGray }}>
                   {isEmpty && (
                     <p className="text-sm text-center py-4" style={{ color: C.textMuted }}>
@@ -198,7 +198,7 @@ export default function Home() {
                             <p className="text-xs" style={{ color: C.textMuted }}>{en?.subtitle ?? es?.subtitle}</p>
                           </div>
                           {anyPassed && (
-                            <span className="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full shrink-0"
+                            <span className="pop-in-enter flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full shrink-0"
                               style={{ background: "#f0f7ee", color: "#2d6a2d" }}>
                               <CheckCircle size={12} /> Passed
                             </span>
@@ -208,7 +208,7 @@ export default function Home() {
                         <div className="px-6 pt-4 pb-3 grid grid-cols-2 gap-3">
                           {en && (
                             <Link href={`/modules/${en.id}/lesson`}
-                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-150 active:scale-[0.97]"
                               style={{ background: C.charcoal, color: C.textLight }}>
                               <BookOpen size={15} />
                               {enPassed ? "Review EN" : "Start English"}
@@ -216,7 +216,7 @@ export default function Home() {
                           )}
                           {es && (
                             <Link href={`/modules/${es.id}/lesson`}
-                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-150 active:scale-[0.97]"
                               style={{ background: C.charcoal, color: C.yellow }}>
                               <Globe size={15} />
                               {esPassed ? "Repasar ES" : "Iniciar Español"}
@@ -228,7 +228,7 @@ export default function Home() {
                           style={{ borderColor: "#E8E5E2" }}>
                           {en && (
                             <Link href={`/modules/${en.id}/quiz`}
-                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-150 active:scale-[0.97]"
                               style={{
                                 background: enPassed ? "#e8f5e9" : C.yellow,
                                 color: enPassed ? "#2d6a2d" : C.charcoal,
@@ -240,7 +240,7 @@ export default function Home() {
                           )}
                           {es && (
                             <Link href={`/modules/${es.id}/quiz`}
-                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-150 active:scale-[0.97]"
                               style={{
                                 background: esPassed ? "#e8f5e9" : C.yellow,
                                 color: esPassed ? "#2d6a2d" : C.charcoal,
@@ -309,7 +309,7 @@ export default function Home() {
                     );
                   })}
                 </div>
-              )}
+              </div>
             </div>
           );
         })}

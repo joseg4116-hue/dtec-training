@@ -1,5 +1,7 @@
+"use client";
 import { Slide } from "@/types/module";
 import Image from "next/image";
+import { useCountUp } from "@/hooks/useCountUp";
 
 const C = {
   charcoal:    "#2D2926",
@@ -135,25 +137,33 @@ function TwoColumnView({ slide, activeIndex }: { slide: Extract<Slide, { type: "
 }
 
 // ── Stat Callout ──────────────────────────────────────────────────────────────
+function StatCard({ s, i, active }: { s: { value: string; label: string; detail?: string }; i: number; active: boolean }) {
+  const value = useCountUp(s.value);
+  return (
+    <div className="fade-up-enter flex flex-col items-center justify-center rounded-xl p-5 md:p-6 flex-1 min-w-[130px] max-w-[210px] border-2"
+      style={{
+        background: C.charcoal,
+        borderColor: C.yellow,
+        boxShadow: active ? `0 0 18px ${C.yellow}70` : "none",
+        transition: "box-shadow 0.3s ease",
+        animationDelay: `${i * 90}ms`,
+      }}>
+      <span className="text-4xl md:text-5xl font-bold tabular-nums" style={{ color: C.yellow, fontFamily: F.heading }}>{value}</span>
+      <span className="text-xs md:text-sm text-center mt-3 leading-snug" style={{ color: C.textLight, fontFamily: F.body }}>{s.label}</span>
+      {s.detail && (
+        <span className="text-[10px] md:text-xs text-center mt-2 leading-snug" style={{ color: C.textSubtle, fontFamily: F.body }}>{s.detail}</span>
+      )}
+    </div>
+  );
+}
+
 function StatCalloutView({ slide, activeIndex }: { slide: Extract<Slide, { type: "stat-callout" }>; activeIndex: number }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
       <Header title={slide.title} />
       <div className="flex-1 flex items-center justify-center gap-4 md:gap-6 px-6 flex-wrap">
         {slide.stats.map((s, i) => (
-          <div key={i} className="flex flex-col items-center justify-center rounded-xl p-5 md:p-6 flex-1 min-w-[130px] max-w-[210px] border-2"
-            style={{
-              background: C.charcoal,
-              borderColor: C.yellow,
-              boxShadow: activeIndex === i ? `0 0 18px ${C.yellow}70` : "none",
-              transition: "box-shadow 0.3s ease",
-            }}>
-            <span className="text-4xl md:text-5xl font-bold" style={{ color: C.yellow, fontFamily: F.heading }}>{s.value}</span>
-            <span className="text-xs md:text-sm text-center mt-3 leading-snug" style={{ color: C.textLight, fontFamily: F.body }}>{s.label}</span>
-            {s.detail && (
-              <span className="text-[10px] md:text-xs text-center mt-2 leading-snug" style={{ color: C.textSubtle, fontFamily: F.body }}>{s.detail}</span>
-            )}
-          </div>
+          <StatCard key={i} s={s} i={i} active={activeIndex === i} />
         ))}
       </div>
     </div>

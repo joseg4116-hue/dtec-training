@@ -99,7 +99,10 @@ export default function LessonPage() {
 
       {/* Progress bar */}
       <div className="h-1 bg-white/10">
-        <div className="h-full transition-all duration-500" style={{ width: `${progress}%`, background: "#C8A84B" }} />
+        <div
+          className={`h-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${current === total - 1 ? "progress-complete" : ""}`}
+          style={{ width: `${progress}%`, background: "#C8A84B" }}
+        />
       </div>
 
       {/* Slide — key forces remount → CSS animation fires */}
@@ -115,10 +118,10 @@ export default function LessonPage() {
 
       {/* Take quiz CTA — last slide */}
       {current === total - 1 && (
-        <div className="flex justify-center pb-2">
+        <div className="fade-up-enter flex justify-center pb-2">
           <Link
             href={`/modules/${id}/quiz`}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-transform duration-150 active:scale-95"
             style={{ background: "#C9B10A", color: "#2D2926", fontFamily: "Calibri, sans-serif" }}
           >
             <ClipboardList size={16} />
@@ -130,7 +133,7 @@ export default function LessonPage() {
       {/* Navigation */}
       <div className="flex items-center justify-center gap-4 pb-6">
         <button onClick={prev} disabled={current === 0}
-          className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-colors">
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-all duration-150 active:scale-90">
           <ChevronLeft size={28} />
         </button>
 
@@ -138,34 +141,34 @@ export default function LessonPage() {
         <div className="flex gap-1.5">
           {module.slides.map((_, i) => (
             <button key={i} onClick={() => goTo(i, i > current ? "forward" : "back")}
-              className="w-2 h-2 rounded-full transition-all duration-300"
+              className="w-2 h-2 rounded-full transition-all duration-200 ease-out"
               style={{ background: i === current ? "#C8A84B" : "rgba(255,255,255,0.3)", transform: i === current ? "scale(1.4)" : "scale(1)" }}
             />
           ))}
         </div>
 
         <button onClick={next} disabled={current === total - 1}
-          className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-colors">
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white disabled:opacity-30 hover:bg-white/10 transition-all duration-150 active:scale-90">
           <ChevronRight size={28} />
         </button>
 
         {/* Read aloud */}
         <button onClick={toggleSpeech} title={isPlaying ? "Stop" : "Read slide aloud"}
-          className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200"
+          className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-150 active:scale-90"
           style={{ background: isPlaying && !autoPlay ? "#C8A84B" : "rgba(255,255,255,0.1)", color: isPlaying && !autoPlay ? "#1a1a1a" : "white" }}>
           {isPlaying && !autoPlay ? <VolumeX size={22} /> : <Volume2 size={22} />}
         </button>
 
         {/* Auto-play */}
         <button onClick={toggleAutoPlay} title={autoPlay ? "Stop auto-play" : "Auto-play all slides"}
-          className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200"
+          className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-150 active:scale-90"
           style={{ background: autoPlay ? "#C8A84B" : "rgba(255,255,255,0.1)", color: autoPlay ? "#1a1a1a" : "white" }}>
           <Repeat size={20} />
         </button>
 
         {/* Speed */}
         <button onClick={cycleRate} title="Playback speed"
-          className="px-3 h-9 rounded-full text-xs font-bold transition-all duration-200 hover:bg-white/10"
+          className="px-3 h-9 rounded-full text-xs font-bold transition-all duration-150 hover:bg-white/10 active:scale-90"
           style={{ background: "rgba(255,255,255,0.1)", color: "white", minWidth: "44px" }}>
           {rate}×
         </button>
