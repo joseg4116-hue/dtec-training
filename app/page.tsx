@@ -19,7 +19,7 @@ const C = {
 };
 
 const CATEGORIES: { key: Category; label: string; visible: number[]; comingSoon: number[] }[] = [
-  { key: "welcome", label: "Welcome to DTEC", visible: [], comingSoon: [] },
+  { key: "welcome", label: "Welcome", visible: [], comingSoon: [] },
   { key: "stormwater", label: "Stormwater Training", visible: [0, 1], comingSoon: [2] },
   { key: "field-ops", label: "Field Operations", visible: [], comingSoon: [] },
   { key: "advanced", label: "Advanced & Specialty", visible: [], comingSoon: [] },
@@ -81,7 +81,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold" style={{ color: C.textLight, fontFamily: "Georgia, 'Times New Roman', serif" }}>
-              Stormwater Training
+              Down to Earth Compliance
             </h1>
             <p className="text-xs mt-0.5" style={{ color: C.textSubtle }}>
               Colorado Erosion Control & Stormwater Management
