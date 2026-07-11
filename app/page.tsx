@@ -167,6 +167,7 @@ export default function Home() {
               </button>
 
               <div className={`accordion ${isOpen ? "accordion-open" : ""}`}>
+                <div>
                 <div className="p-6 space-y-6" style={{ background: C.lightGray }}>
                   {isEmpty && (
                     <p className="text-sm text-center py-4" style={{ color: C.textMuted }}>
@@ -308,6 +309,7 @@ export default function Home() {
                       </div>
                     );
                   })}
+                </div>
                 </div>
               </div>
             </div>
