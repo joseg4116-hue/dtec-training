@@ -13,6 +13,126 @@ export type QuizBank = {
 };
 
 export const quizBanks: QuizBank[] = [
+  // ── CORE VALUES — EN ──────────────────────────────────────────────────────
+  {
+    moduleId: "core-values-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "cv-01",
+        question: "What are DTEC's five core values?",
+        options: [
+          "Speed, Cost, Quality, Trust, Teamwork",
+          "Trust, Teamwork, Quality, Safety, Respect",
+          "Safety, Speed, Profit, Respect, Trust",
+          "Teamwork, Trust, Compliance, Speed, Quality",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-02",
+        question: "True or False: If you make a mistake on the job, the safest move is to stay quiet about it so you don't get in trouble.",
+        options: ["True", "False"],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-03",
+        question: "Which of these best reflects DTEC's definition of Quality?",
+        options: [
+          "Quality only matters for the erosion and sediment control devices we install",
+          "Quality applies to our installs, but also to how we drive, communicate with clients, and keep our workspace",
+          "Quality is mostly the supervisor's job to check",
+          "Quality means doing things fast above all else",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-04",
+        question: "True or False: If you see a coworker taking a safety shortcut, it's not your place to say anything since it's their job, not yours.",
+        options: ["True", "False"],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-05",
+        question: "True or False: Having a past that includes incarceration, gang affiliation, or a struggle with drugs or alcohol automatically disqualifies someone from working at DTEC.",
+        options: ["True", "False"],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-06",
+        question: "What is an IDP, and who can help you create one?",
+        options: [
+          "An Individual Development Plan you build with your supervisor or DTEC's trainer",
+          "An Incident Documentation Packet filed by your supervisor after a safety event",
+          "An Internal Discipline Policy managed solely by HR",
+          "An Inspection and Damage Photo log kept by the field crew",
+        ],
+        correctIndex: 0,
+      },
+    ],
+  },
+
+  // ── CORE VALUES — ES ──────────────────────────────────────────────────────
+  {
+    moduleId: "core-values-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "cv-es-01",
+        question: "¿Cuáles son los cinco valores fundamentales de DTEC?",
+        options: [
+          "Velocidad, Costo, Calidad, Confianza, Trabajo en Equipo",
+          "Confianza, Trabajo en Equipo, Calidad, Seguridad, Respeto",
+          "Seguridad, Velocidad, Ganancia, Respeto, Confianza",
+          "Trabajo en Equipo, Confianza, Cumplimiento, Velocidad, Calidad",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-es-02",
+        question: "Verdadero o Falso: Si cometes un error en el trabajo, lo más seguro es quedarte callado para no meterte en problemas.",
+        options: ["Verdadero", "Falso"],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-es-03",
+        question: "¿Cuál de estas opciones refleja mejor la definición de Calidad de DTEC?",
+        options: [
+          "La calidad solo importa en los dispositivos de control de erosión y sedimento que instalamos",
+          "La calidad aplica a nuestras instalaciones, pero también a cómo manejamos, nos comunicamos con los clientes y mantenemos nuestro espacio de trabajo",
+          "La calidad es principalmente responsabilidad del supervisor",
+          "La calidad significa hacer las cosas rápido por encima de todo",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-es-04",
+        question: "Verdadero o Falso: Si ves a un compañero tomando un atajo de seguridad, no es tu lugar decir nada porque es su trabajo, no el tuyo.",
+        options: ["Verdadero", "Falso"],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-es-05",
+        question: "Verdadero o Falso: Tener un pasado que incluye encarcelamiento, afiliación a pandillas o lucha con drogas o alcohol automáticamente descalifica a alguien para trabajar en DTEC.",
+        options: ["Verdadero", "Falso"],
+        correctIndex: 1,
+      },
+      {
+        id: "cv-es-06",
+        question: "¿Qué es un IDP, y quién puede ayudarte a crear uno?",
+        options: [
+          "Un Plan de Desarrollo Individual que construyes con tu supervisor o el capacitador de DTEC",
+          "Un Paquete de Documentación de Incidentes que llena tu supervisor después de un evento de seguridad",
+          "Una Política de Disciplina Interna manejada únicamente por Recursos Humanos",
+          "Un registro de Inspección y Fotos de Daños que mantiene el equipo de campo",
+        ],
+        correctIndex: 0,
+      },
+    ],
+  },
+
   // ── MODULE 00 — EN ────────────────────────────────────────────────────────
   {
     moduleId: "00-en",
