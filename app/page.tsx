@@ -153,7 +153,7 @@ export default function Home() {
 
           return (
             <div key={cat.key} className="fade-up-enter rounded-2xl overflow-hidden shadow-sm"
-              style={{ background: C.textLight, border: `1px solid #D0CECA`, animationDelay: `${ci * 90}ms` }}>
+              style={{ background: C.textLight, border: `1px solid #D0CECA`, animationDuration: "0.6s", animationDelay: `${ci * 160}ms` }}>
 
               <button type="button" onClick={() => toggleCategory(cat.key)}
                 className="w-full flex items-center justify-between px-6 py-4 transition-transform duration-150 active:scale-[0.99]"
