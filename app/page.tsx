@@ -30,7 +30,7 @@ export default function Home() {
   const [draft, setDraft]       = useState("");
   const [editing, setEditing]   = useState(false);
   const [passed, setPassed]     = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ stormwater: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const inputRef = useRef<HTMLInputElement>(null);
 
   function toggleCategory(key: string) {
@@ -147,13 +147,13 @@ export default function Home() {
       </div>
 
       <div className="max-w-2xl mx-auto px-6 py-8 space-y-4">
-        {CATEGORIES.map((cat) => {
+        {CATEGORIES.map((cat, ci) => {
           const isOpen = !!expanded[cat.key];
           const isEmpty = cat.visible.length === 0 && cat.comingSoon.length === 0;
 
           return (
-            <div key={cat.key} className="rounded-2xl overflow-hidden shadow-sm"
-              style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
+            <div key={cat.key} className="fade-up-enter rounded-2xl overflow-hidden shadow-sm"
+              style={{ background: C.textLight, border: `1px solid #D0CECA`, animationDelay: `${ci * 90}ms` }}>
 
               <button type="button" onClick={() => toggleCategory(cat.key)}
                 className="w-full flex items-center justify-between px-6 py-4 transition-transform duration-150 active:scale-[0.99]"
