@@ -25,7 +25,7 @@ export default function IntroSplash() {
       aria-hidden="true"
       className={`intro-splash ${phase === "fading" ? "intro-splash-fade" : ""}`}
     >
-      <span className="intro-shine" />
+      <span className="intro-glow" />
       <Image
         src="/images/dtec_30_years.png"
         alt=""
