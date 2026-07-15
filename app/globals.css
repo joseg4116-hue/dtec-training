@@ -93,12 +93,37 @@ body {
   opacity: 0;
   pointer-events: none;
 }
-.intro-splash-logo {
-  animation: introLogoIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+.intro-logo-wrap {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: 10px;
 }
-@keyframes introLogoIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1);    }
+.intro-splash-logo {
+  display: block;
+  animation: introLogoBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes introLogoBounce {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  80%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+.intro-shine {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+  transform: skewX(-20deg);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: introShineSweep 0.9s ease-in-out 0.75s 1 both;
+}
+@keyframes introShineSweep {
+  from { left: -150%; }
+  to   { left: 150%;  }
 }
 
 @media (prefers-reduced-motion: reduce) {
