@@ -25,18 +25,16 @@ export default function IntroSplash() {
       aria-hidden="true"
       className={`intro-splash ${phase === "fading" ? "intro-splash-fade" : ""}`}
     >
-      <div className="intro-logo-wrap">
-        <Image
-          src="/images/dtec_30_years.png"
-          alt=""
-          width={220}
-          height={92}
-          priority
-          className="intro-splash-logo"
-          style={{ filter: "invert(1) opacity(0.85)", mixBlendMode: "screen" }}
-        />
-        <span className="intro-shine" />
-      </div>
+      <span className="intro-shine" />
+      <Image
+        src="/images/dtec_30_years.png"
+        alt=""
+        width={220}
+        height={92}
+        priority
+        className="intro-splash-logo"
+        style={{ filter: "invert(1) opacity(0.85)", mixBlendMode: "screen" }}
+      />
     </div>
   );
 }
