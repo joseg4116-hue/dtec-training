@@ -1134,6 +1134,288 @@ export const modules: Module[] = [
       },
     ],
   },
+
+  // ── FIELD OPS — READING BMP DRAWINGS — EN ────────────────────────────────
+  {
+    id: "field-bmp-en",
+    moduleNum: 0,
+    lang: "en",
+    category: "field-ops",
+    title: "Reading BMP Plans & Drawings",
+    subtitle: "Field Operations Training",
+    slides: [
+      {
+        type: "title",
+        title: "Reading BMP\nPlans & Drawings",
+        subtitle: "How to find your BMPs on a construction plan set — the cover sheet, the legend, the scale, and the site itself.",
+      },
+      {
+        type: "content",
+        title: "The Cover Page — Anatomy of a Plan Set",
+        bullets: [
+          "Every plan set starts with a cover sheet. Before you read anything else, find these six things:",
+          "1. Project name & address — who, and where",
+          "2. Vicinity map — cross streets nearby",
+          "3. Sheet list table — way to each section",
+          "4. Project team — who to call with questions",
+          "5. Title block — sheet title, dates, revisions",
+          "6. Sheet number — bottom-right, every page",
+        ],
+        image: "/images/bmp-cover-sheet.png",
+      },
+      {
+        type: "numbered-list",
+        title: "Step 1 · Get Yourself Oriented",
+        items: [
+          { num: "1", heading: "Align with true North", body: "Stand on site and match your position to the plan's North arrow — usually near the legend or title block." },
+          { num: "2", heading: "Pick a fixed landmark", body: "A building corner, utility pole, or access road that appears on both the plan and the site." },
+          { num: "3", heading: "Match your orientation", body: "Face the same direction the landmark shows on the plan before you start reading anything else." },
+        ],
+      },
+      {
+        type: "content",
+        title: "Step 2 · Find Your Location",
+        bullets: [
+          "The vicinity map shows the project location and nearby cross streets. It helps you visualize where the site sits before you ever get there.",
+          "TIP: Most projects don't have a set address yet. This map is often your only way to find the location and cross streets.",
+        ],
+      },
+      {
+        type: "content",
+        title: "Step 3 · Use the Sheet Index",
+        bullets: [
+          "The sheet index lists every sheet in the set with its number and title. This is your way to find the section you need — fast.",
+          "TIP: Not every plan set says \"Stormwater.\" Also look for \"BMP\" or \"Erosion Control\" in the sheet titles.",
+          "In this example, the stormwater sheets run from C-9 through C-20.",
+        ],
+      },
+      {
+        type: "content",
+        title: "Step 4 · Find the Sheet Number",
+        bullets: [
+          "Every page has a sheet number in the title block, bottom-right corner. It tells you exactly where you are in the set — and lets you cross-reference other sheets.",
+          "Bottom-right corner of every page, no exceptions.",
+        ],
+        image: "/images/bmp-sheet-number.png",
+      },
+      {
+        type: "content",
+        title: "Step 5 · Read the BMP Legend",
+        bullets: [
+          "The legend translates each symbol into a real BMP. Familiarize yourself with the symbols before you walk the site — every install on the plan is drawn with one of these.",
+          "Exact symbols can vary by engineer — always check the legend on your specific plan set, not just your memory of a past one.",
+        ],
+        image: "/images/bmp-legend.png",
+      },
+      {
+        type: "enforcement",
+        title: "Step 6 · Boundaries — LOC vs. LOD",
+        columns: [
+          { level: "LOC — Limits of Construction", detail: "Defines where all construction work and operations must stay to maintain control and stay compliant with the site plan." },
+          { level: "LOD — Limits of Disturbance", detail: "Outlines where any potential disturbance — clearing, grading, or temporary access — might occur." },
+        ],
+        note: "Active work must stay inside the LOC. LOD marks the outer edge of any possible disturbance.",
+      },
+      {
+        type: "content",
+        title: "Step 7 · Read the Scale",
+        bullets: [
+          "The scale shows the ratio between measurements on the plan and real-world distance. It's usually near the title block or legend.",
+          "WORKED EXAMPLE — Scale: 1\" = 40'. Measured on plan: 2 inches. Real distance: 2\" × 40' = 80 feet.",
+          "Measure the desired distance on the plan with a scale ruler, then multiply by the scale factor to get the actual distance.",
+        ],
+      },
+      {
+        type: "content",
+        title: "Putting It Together · Example 1 — Perimeter Controls",
+        bullets: [
+          "Construction Fence and Silt Fence run together along the Limits of Construction on the north and west sides.",
+          "Two Inlet Protections sit near the existing water main and fire hydrant marked for removal.",
+          "The legend on this sheet is your key — confirm each symbol before you install.",
+        ],
+        image: "/images/bmp-example-perimeter.png",
+      },
+      {
+        type: "content",
+        title: "Putting It Together · Example 2 — Access & Washout Controls",
+        bullets: [
+          "Rock Socks line the east perimeter, along the site road.",
+          "Vehicle Tracking Control pads sit at two access points on the east side.",
+          "A Concrete Washout Area sits north of each VTC pad.",
+          "Silt Fence continues along the west perimeter, following the Limits of Construction.",
+        ],
+        image: "/images/bmp-example-access-washout.png",
+      },
+      {
+        type: "content",
+        title: "Putting It Together · Example 3 — Erosion Control Blanket",
+        bullets: [
+          "ECB covers the graded slope face to hold soil in place until vegetation establishes.",
+          "The LOC boundary follows the top and toe of the slope, tying into the grading limits.",
+          "ECB goes down before seeding — it protects the seed bed as much as the soil underneath.",
+        ],
+        image: "/images/bmp-example-ecb.png",
+      },
+      {
+        type: "numbered-list",
+        title: "Quick Reference · Before You Walk the Site",
+        items: [
+          { num: "1", heading: "Orient yourself", body: "Match the plan's North arrow to true North." },
+          { num: "2", heading: "Find your sheets", body: "Use the sheet index — check \"BMP\" and \"Erosion Control\" too." },
+          { num: "3", heading: "Check the legend", body: "Know your symbols before you're standing on site." },
+          { num: "4", heading: "Read the scale", body: "Measure real distances off the plan." },
+          { num: "5", heading: "Locate your BMPs", body: "Confirm what's on site matches what's on the plan." },
+        ],
+      },
+      {
+        type: "closing",
+        message: "Reading the Plan Right\nthe First Time Means\nFewer Surprises",
+        sub: "Orient yourself, find your sheets, check the legend, read the scale, and locate your BMPs before you start work.",
+        footer: "DTEC — Colorado Erosion Control & Stormwater Management  |  Module Complete",
+      },
+    ],
+  },
+
+  // ── FIELD OPS — READING BMP DRAWINGS — ES ────────────────────────────────
+  {
+    id: "field-bmp-es",
+    moduleNum: 0,
+    lang: "es",
+    category: "field-ops",
+    title: "Como Leer Planos y Dibujos de BMPs",
+    subtitle: "Capacitacion de Operaciones de Campo",
+    slides: [
+      {
+        type: "title",
+        title: "Como Leer Planos\ny Dibujos de BMPs",
+        subtitle: "Como encontrar tus BMPs en un juego de planos de construccion: la portada, la leyenda, la escala y el sitio mismo.",
+      },
+      {
+        type: "content",
+        title: "La Hoja de Portada — Partes de un Juego de Planos",
+        bullets: [
+          "Todo juego de planos empieza con una hoja de portada. Antes de leer cualquier otra cosa, busca estas seis cosas:",
+          "1. Nombre y direccion del proyecto — quien y donde",
+          "2. Mapa de ubicacion — calles cercanas",
+          "3. Tabla de hojas — tu guia para cada seccion",
+          "4. Equipo del proyecto — a quien llamar con preguntas",
+          "5. Bloque de titulo — titulo de hoja, fechas, revisiones",
+          "6. Numero de hoja — abajo a la derecha, cada pagina",
+        ],
+        image: "/images/bmp-cover-sheet.png",
+      },
+      {
+        type: "numbered-list",
+        title: "Paso 1 · Orientate en el Sitio",
+        items: [
+          { num: "1", heading: "Alineate con el norte real", body: "Parate en el sitio y ajusta tu posicion con la flecha del norte del plano. Casi siempre esta cerca de la leyenda o del bloque de titulo." },
+          { num: "2", heading: "Escoge un punto fijo", body: "Una esquina de edificio, un poste de luz o un camino de acceso que salga tanto en el plano como en el sitio." },
+          { num: "3", heading: "Acomoda tu orientacion", body: "Mira hacia la misma direccion que muestra ese punto en el plano antes de empezar a leer otra cosa." },
+        ],
+      },
+      {
+        type: "content",
+        title: "Paso 2 · Encuentra tu Ubicacion",
+        bullets: [
+          "El mapa de ubicacion muestra donde esta el proyecto y las calles cercanas. Te ayuda a ubicar el sitio antes de llegar.",
+          "TIP: Muchos proyectos todavia no tienen direccion. Este mapa suele ser la unica forma de encontrar la ubicacion y las calles cercanas.",
+        ],
+      },
+      {
+        type: "content",
+        title: "Paso 3 · Usa la Tabla de Hojas",
+        bullets: [
+          "La tabla de hojas enlista cada hoja del juego con su numero y su titulo. Es la forma mas rapida de encontrar la seccion que necesitas.",
+          "TIP: No todos los planos dicen \"Stormwater\" (aguas pluviales). Tambien busca \"BMP\" o \"Erosion Control\" en los titulos de las hojas.",
+          "En este ejemplo, las hojas de aguas pluviales van de la C-9 a la C-20.",
+        ],
+      },
+      {
+        type: "content",
+        title: "Paso 4 · Encuentra el Numero de Hoja",
+        bullets: [
+          "Cada pagina trae un numero de hoja en el bloque de titulo, abajo a la derecha. Te dice en que parte del juego estas y te deja cruzar informacion con otras hojas.",
+          "Abajo a la derecha en cada pagina, sin excepcion.",
+        ],
+        image: "/images/bmp-sheet-number.png",
+      },
+      {
+        type: "content",
+        title: "Paso 5 · Lee la Leyenda de BMP",
+        bullets: [
+          "La leyenda traduce cada simbolo a un BMP real. Familiarizate con los simbolos antes de caminar el sitio: cada instalacion del plano se dibuja con uno de estos.",
+          "Los simbolos cambian segun el ingeniero. Siempre revisa la leyenda de tu juego de planos, no te confies de lo que recuerdas de otro trabajo.",
+        ],
+        image: "/images/bmp-legend.png",
+      },
+      {
+        type: "enforcement",
+        title: "Paso 6 · Limites — LOC vs. LOD",
+        columns: [
+          { level: "LOC — Limits of Construction (Limites de Construccion)", detail: "Marca donde se debe quedar todo el trabajo y las operaciones de construccion, para mantener el control y cumplir con el plano del sitio." },
+          { level: "LOD — Limits of Disturbance (Limites de Alteracion)", detail: "Marca donde puede haber alteracion: despalme, nivelacion o acceso temporal." },
+        ],
+        note: "El trabajo activo se queda dentro del LOC. El LOD marca el borde exterior de cualquier alteracion posible.",
+      },
+      {
+        type: "content",
+        title: "Paso 7 · Lee la Escala",
+        bullets: [
+          "La escala muestra la relacion entre las medidas del plano y la distancia real. Casi siempre esta cerca del bloque de titulo o de la leyenda.",
+          "EJEMPLO RESUELTO — Escala: 1\" = 40'. Medido en el plano: 2 pulgadas. Distancia real: 2\" × 40' = 80 pies.",
+          "Mide en el plano la distancia que quieres con una regla de escala y luego multiplicala por el factor de escala para sacar la distancia real.",
+        ],
+      },
+      {
+        type: "content",
+        title: "Juntando Todo · Ejemplo 1 — Controles de Perimetro",
+        bullets: [
+          "La CF (Construction Fence, cerca de construccion) y la SF (Silt Fence, cerca de limo) van juntas por los Limits of Construction en los lados norte y oeste.",
+          "Dos IP (Inlet Protection, proteccion de entrada de alcantarilla) quedan cerca de la linea de agua y del hidrante marcados para retirar.",
+          "La leyenda de esta hoja es tu clave: confirma cada simbolo antes de instalar.",
+        ],
+        image: "/images/bmp-example-perimeter.png",
+      },
+      {
+        type: "content",
+        title: "Juntando Todo · Ejemplo 2 — Controles de Acceso y Lavado",
+        bullets: [
+          "Los RS (Rock Sock, salchicha de roca) van por el perimetro este, junto al camino del sitio.",
+          "Los VTC (Vehicle Tracking Control, control de arrastre de llantas) van en dos accesos del lado este.",
+          "Un CWA (Concrete Washout Area, area de lavado de concreto) queda al norte de cada VTC.",
+          "La SF sigue por el perimetro oeste, siguiendo los Limits of Construction.",
+        ],
+        image: "/images/bmp-example-access-washout.png",
+      },
+      {
+        type: "content",
+        title: "Juntando Todo · Ejemplo 3 — Erosion Control Blanket (Manta)",
+        bullets: [
+          "El ECB (Erosion Control Blanket, manta de control de erosion) cubre la cara del talud nivelado para detener el suelo hasta que crezca la vegetacion.",
+          "El limite LOC sigue la corona y el pie del talud, ligandose con los limites de nivelacion.",
+          "El ECB se coloca antes de la siembra: protege la cama de semilla igual que al suelo de abajo.",
+        ],
+        image: "/images/bmp-example-ecb.png",
+      },
+      {
+        type: "numbered-list",
+        title: "Referencia Rapida · Antes de Caminar el Sitio",
+        items: [
+          { num: "1", heading: "Orientate", body: "Alinea la flecha del norte del plano con el norte real." },
+          { num: "2", heading: "Encuentra tus hojas", body: "Usa la tabla de hojas. Tambien busca \"BMP\" y \"Erosion Control\"." },
+          { num: "3", heading: "Revisa la leyenda", body: "Conoce tus simbolos antes de estar parado en el sitio." },
+          { num: "4", heading: "Lee la escala", body: "Mide distancias reales en el plano." },
+          { num: "5", heading: "Ubica tus BMP", body: "Confirma que lo del sitio coincida con lo del plano." },
+        ],
+      },
+      {
+        type: "closing",
+        message: "Leer Bien el Plano\nla Primera Vez\nSignifica Menos Sorpresas",
+        sub: "Orientate, encuentra tus hojas, revisa la leyenda, lee la escala y ubica tus BMP antes de empezar el trabajo.",
+        footer: "DTEC — Down to Earth Compliance  |  Modulo Completo",
+      },
+    ],
+  },
 ];
 
 export function getModule(id: string): Module | undefined {

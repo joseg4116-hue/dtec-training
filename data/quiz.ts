@@ -558,6 +558,187 @@ export const quizBanks: QuizBank[] = [
       },
     ],
   },
+  // ── FIELD OPS — READING BMP DRAWINGS — EN ────────────────────────────────
+  {
+    moduleId: "field-bmp-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "bmp-en-01",
+        question: "Which of these is NOT one of the six things to find on a cover sheet?",
+        options: ["Project name & address", "Vicinity map", "Sheet list table", "Weather forecast for the site"],
+        correctIndex: 3,
+      },
+      {
+        id: "bmp-en-02",
+        question: "Where is the sheet number located on every page?",
+        options: ["Top-left corner", "Bottom-right corner of the title block", "Center of the page", "It varies by engineer"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-en-03",
+        question: "What should you do first when orienting yourself on a plan?",
+        options: ["Read the legend", "Match your position to the plan's North arrow", "Find the scale", "Call the project manager"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-en-04",
+        question: "Why is the vicinity map often your only way to find a project location?",
+        options: [
+          "Most projects don't have a set address yet",
+          "GPS doesn't work on construction sites",
+          "The cover sheet doesn't include an address",
+          "Vicinity maps replace the need for a sheet index",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-en-05",
+        question: "Besides \"Stormwater,\" what other words should you look for in sheet titles when finding your section?",
+        options: ["\"BMP\" or \"Erosion Control\"", "\"Grading\" or \"Utility\"", "\"Landscape\" or \"Irrigation\"", "\"Survey\" or \"Topo\""],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-en-06",
+        question: "True or False: Symbols in a BMP legend are standardized and identical across every engineer's plan set.",
+        options: ["True", "False"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-en-07",
+        question: "What does LOC stand for?",
+        options: ["Limits of Construction", "Location of Contractor", "Line of Control", "Limits of Compliance"],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-en-08",
+        question: "What does LOD mark?",
+        options: ["The exact center of the project", "The outer edge of any possible disturbance", "The location of the dumpster", "The distance to the nearest fire hydrant"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-en-09",
+        question: "If the scale is 1\" = 40' and you measure 2 inches on the plan, what is the real-world distance?",
+        options: ["40 feet", "80 feet", "120 feet", "20 feet"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-en-10",
+        question: "In the Perimeter Controls example, what runs together along the Limits of Construction?",
+        options: ["Construction Fence and Silt Fence", "Rock Socks and VTC pads", "Concrete Washout Area and Stockpile", "ECB and Silt Fence"],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-en-11",
+        question: "In the Access & Washout Controls example, where does the Concrete Washout Area sit?",
+        options: ["South of each VTC pad", "North of each VTC pad", "Inside the LOD only", "Along the west perimeter"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-en-12",
+        question: "Why does ECB go down before seeding?",
+        options: [
+          "It protects the seed bed as much as the soil underneath",
+          "It's required only on slopes steeper than 3:1",
+          "It replaces the need for silt fence",
+          "It's applied after vegetation is established",
+        ],
+        correctIndex: 0,
+      },
+    ],
+  },
+
+  // ── FIELD OPS — READING BMP DRAWINGS — ES ────────────────────────────────
+  {
+    moduleId: "field-bmp-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "bmp-es-01",
+        question: "¿Cuál de estas NO es una de las seis cosas que buscar en la hoja de portada?",
+        options: ["Nombre y dirección del proyecto", "Mapa de ubicación", "Tabla de hojas", "Pronóstico del clima del sitio"],
+        correctIndex: 3,
+      },
+      {
+        id: "bmp-es-02",
+        question: "¿Dónde está el número de hoja en cada página?",
+        options: ["Arriba a la izquierda", "Abajo a la derecha del bloque de título", "En el centro de la página", "Varía según el ingeniero"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-es-03",
+        question: "¿Qué debes hacer primero para orientarte en un plano?",
+        options: ["Leer la leyenda", "Ajustar tu posición con la flecha del norte del plano", "Buscar la escala", "Llamar al gerente del proyecto"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-es-04",
+        question: "¿Por qué el mapa de ubicación suele ser tu única forma de encontrar un proyecto?",
+        options: [
+          "Muchos proyectos todavía no tienen dirección",
+          "El GPS no funciona en sitios de construcción",
+          "La hoja de portada no incluye dirección",
+          "El mapa de ubicación reemplaza la tabla de hojas",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-es-05",
+        question: "Además de \"Stormwater,\" ¿qué otras palabras debes buscar en los títulos de las hojas?",
+        options: ["\"BMP\" o \"Erosion Control\"", "\"Grading\" o \"Utility\"", "\"Landscape\" o \"Irrigation\"", "\"Survey\" o \"Topo\""],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-es-06",
+        question: "Verdadero o falso: los símbolos de una leyenda de BMP son estándar e idénticos en el plano de cualquier ingeniero.",
+        options: ["Verdadero", "Falso"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-es-07",
+        question: "¿Qué significa LOC?",
+        options: ["Limits of Construction (Límites de Construcción)", "Ubicación del Contratista", "Línea de Control", "Límites de Cumplimiento"],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-es-08",
+        question: "¿Qué marca el LOD?",
+        options: ["El centro exacto del proyecto", "El borde exterior de cualquier alteración posible", "La ubicación del contenedor de basura", "La distancia al hidrante más cercano"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-es-09",
+        question: "Si la escala es 1\" = 40' y mides 2 pulgadas en el plano, ¿cuál es la distancia real?",
+        options: ["40 pies", "80 pies", "120 pies", "20 pies"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-es-10",
+        question: "En el ejemplo de Controles de Perímetro, ¿qué va junto por los Limits of Construction?",
+        options: ["La CF y la SF", "Los RS y los VTC", "El CWA y el Stock Pile", "El ECB y la SF"],
+        correctIndex: 0,
+      },
+      {
+        id: "bmp-es-11",
+        question: "En el ejemplo de Controles de Acceso y Lavado, ¿dónde queda el CWA?",
+        options: ["Al sur de cada VTC", "Al norte de cada VTC", "Solo dentro del LOD", "Por el perímetro oeste"],
+        correctIndex: 1,
+      },
+      {
+        id: "bmp-es-12",
+        question: "¿Por qué se coloca el ECB antes de la siembra?",
+        options: [
+          "Protege la cama de semilla igual que al suelo de abajo",
+          "Solo se requiere en taludes más pronunciados que 3:1",
+          "Reemplaza la necesidad de silt fence",
+          "Se aplica después de que la vegetación esté establecida",
+        ],
+        correctIndex: 0,
+      },
+    ],
+  },
 ];
 
 export function getQuizBank(moduleId: string): QuizBank | undefined {
