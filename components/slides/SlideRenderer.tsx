@@ -365,135 +365,11 @@ function EnforcementView({ slide, activeIndex }: { slide: Extract<Slide, { type:
   );
 }
 
-// ── Site Map ──────────────────────────────────────────────────────────────────
-function SiteMapView({ slide }: { slide: Extract<Slide, { type: "site-map" }> }) {
-  const isGrid = slide.roads.length >= 4;
+// ── Slide Image ───────────────────────────────────────────────────────────────
+function SlideImageView({ slide }: { slide: Extract<Slide, { type: "slide-image" }> }) {
   return (
-    <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
-      <Header title={slide.title} />
-      <div className="flex-1 overflow-hidden flex">
-        <div className="flex-1 overflow-auto px-6 md:px-8 py-4 flex flex-col justify-center gap-3">
-          <p className="text-sm md:text-base leading-relaxed" style={{ color: C.textDark, fontFamily: F.body }}>{slide.body}</p>
-          {slide.tip && (
-            <div className="border-l-4 pl-3 py-1" style={{ borderColor: C.yellow }}>
-              <p className="text-xs md:text-sm font-medium leading-snug" style={{ color: C.textMuted, fontFamily: F.body }}>
-                <span className="font-bold" style={{ color: C.charcoal }}>TIP: </span>{slide.tip}
-              </p>
-            </div>
-          )}
-        </div>
-        <div className="w-2/5 shrink-0 relative m-3 rounded-xl overflow-hidden border-2" style={{ borderColor: C.yellow, background: C.white }}>
-          <svg viewBox="0 0 300 220" className="w-full h-full">
-            <rect x="0" y="0" width="300" height="220" fill={C.white} />
-            {isGrid ? (
-              <>
-                <line x1="95" y1="10" x2="95" y2="205" stroke={C.textMuted} strokeWidth="3" />
-                <line x1="195" y1="10" x2="195" y2="205" stroke={C.textMuted} strokeWidth="3" />
-                <line x1="10" y1="65" x2="290" y2="65" stroke={C.textMuted} strokeWidth="3" />
-                <line x1="10" y1="150" x2="290" y2="150" stroke={C.textMuted} strokeWidth="3" />
-                <rect x="130" y="90" width="32" height="26" fill={C.yellow} stroke={C.charcoal} strokeWidth="1.5" />
-                <text x="146" y="107" textAnchor="middle" fontSize="7" fontWeight="bold" fill={C.charcoal}>SITE</text>
-                {slide.landmark && (
-                  <>
-                    <ellipse cx="45" cy="180" rx="30" ry="15" fill={C.lightGray} stroke={C.textMuted} strokeWidth="1.5" />
-                    <text x="45" y="176" textAnchor="middle" fontSize="6" fill={C.textMuted}>{slide.landmark.split(" ")[0]}</text>
-                    <text x="45" y="185" textAnchor="middle" fontSize="6" fill={C.textMuted}>{slide.landmark.split(" ").slice(1).join(" ")}</text>
-                  </>
-                )}
-                {slide.roads[0] && <text x="95" y="20" textAnchor="middle" fontSize="6.5" fill={C.textMuted}>{slide.roads[0]}</text>}
-                {slide.roads[1] && <text x="150" y="60" textAnchor="middle" fontSize="6.5" fill={C.textMuted}>{slide.roads[1]}</text>}
-                {slide.roads[2] && <text x="195" y="200" textAnchor="middle" fontSize="6.5" fill={C.textMuted}>{slide.roads[2]}</text>}
-                {slide.roads[3] && <text x="230" y="145" textAnchor="middle" fontSize="6.5" fill={C.textMuted}>{slide.roads[3]}</text>}
-              </>
-            ) : (
-              <>
-                <line x1="10" y1="150" x2="290" y2="150" stroke={C.textMuted} strokeWidth="3" />
-                <text x="150" y="168" textAnchor="middle" fontSize="8" fill={C.textMuted}>{slide.roads[1]}</text>
-                <line x1="20" y1="210" x2="260" y2="20" stroke={C.textMuted} strokeWidth="3" />
-                <text x="175" y="55" textAnchor="middle" fontSize="8" fill={C.textMuted} transform="rotate(-40 175 55)">{slide.roads[0]}</text>
-                <rect x="185" y="95" width="36" height="28" fill={C.yellow} stroke={C.charcoal} strokeWidth="1.5" />
-                <text x="203" y="113" textAnchor="middle" fontSize="7" fontWeight="bold" fill={C.charcoal}>SITE</text>
-              </>
-            )}
-          </svg>
-          <div className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center" style={{ background: C.charcoal }}>
-            <span className="text-[10px] font-bold" style={{ color: C.yellow, fontFamily: F.heading }}>N</span>
-          </div>
-          <div className="absolute bottom-1.5 left-0 right-0 text-center">
-            <span className="text-[9px] font-bold tracking-wide" style={{ color: C.textMuted, fontFamily: F.body }}>{slide.mapLabel}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Boundary Diagram ──────────────────────────────────────────────────────────
-function BoundaryDiagramView({ slide }: { slide: Extract<Slide, { type: "boundary-diagram" }> }) {
-  return (
-    <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
-      <Header title={slide.title} />
-      <div className="flex-1 flex px-6 md:px-8 py-4 gap-4 items-center">
-        <div className="flex-1 flex flex-col gap-3">
-          {[slide.outer, slide.inner].map((b, i) => (
-            <div key={i} className="rounded-xl p-4" style={{ background: C.charcoal }}>
-              <p className="text-sm font-bold mb-1" style={{ color: C.yellow, fontFamily: F.heading }}>{b.code} — {b.name}</p>
-              <p className="text-xs leading-snug" style={{ color: C.textLight, fontFamily: F.body }}>{b.detail}</p>
-            </div>
-          ))}
-        </div>
-        <div className="w-2/5 shrink-0 relative rounded-xl overflow-hidden border-2 flex items-center justify-center"
-          style={{ borderColor: C.yellow, background: C.white, aspectRatio: "4 / 3" }}>
-          <svg viewBox="0 0 260 200" className="w-full h-full">
-            <rect x="20" y="26" width="220" height="154" fill="none" stroke={C.textMuted} strokeWidth="2.5" strokeDasharray="8 5" />
-            <text x="130" y="16" textAnchor="middle" fontSize="10" fontWeight="bold" fill={C.textMuted}>{slide.outer.code}</text>
-            <rect x="55" y="55" width="150" height="95" fill={C.yellow + "30"} stroke={C.charcoal} strokeWidth="2.5" strokeDasharray="6 4" />
-            <text x="130" y="48" textAnchor="middle" fontSize="10" fontWeight="bold" fill={C.charcoal}>{slide.inner.code}</text>
-            <text x="130" y="106" textAnchor="middle" fontSize="8" fill={C.charcoal}>ACTIVE WORK</text>
-          </svg>
-        </div>
-      </div>
-      <div className="px-6 md:px-8 pb-4">
-        <div className="rounded-lg px-4 py-2.5" style={{ background: C.yellow + "20", border: `1px solid ${C.yellow}40` }}>
-          <p className="text-xs font-medium" style={{ color: C.textDark, fontFamily: F.body }}>{slide.note}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Scale Ruler ───────────────────────────────────────────────────────────────
-function ScaleRulerView({ slide }: { slide: Extract<Slide, { type: "scale-ruler" }> }) {
-  const ticks = [0, 10, 20, 30, 40, 50, 60];
-  return (
-    <div className="w-full h-full flex flex-col" style={{ background: C.lightGray }}>
-      <Header title={slide.title} />
-      <div className="flex-1 overflow-auto flex flex-col justify-center px-6 md:px-8 py-4 gap-4">
-        <p className="text-sm md:text-base leading-relaxed" style={{ color: C.textDark, fontFamily: F.body }}>{slide.body}</p>
-        <div className="rounded-xl p-4 md:p-5" style={{ background: C.white, border: "1px solid #D0CECA" }}>
-          <svg viewBox="0 0 420 70" className="w-full" style={{ maxHeight: 70 }}>
-            <line x1="20" y1="35" x2="400" y2="35" stroke={C.charcoal} strokeWidth="2" />
-            {ticks.map((t, i) => {
-              const x = 20 + (i * 380) / (ticks.length - 1);
-              return (
-                <g key={t}>
-                  <line x1={x} y1="25" x2={x} y2="45" stroke={C.charcoal} strokeWidth="2" />
-                  <text x={x} y="60" textAnchor="middle" fontSize="10" fill={C.textMuted}>{t}&apos;</text>
-                </g>
-              );
-            })}
-          </svg>
-          <p className="text-center text-xs font-bold mt-1" style={{ color: C.charcoal, fontFamily: F.heading }}>{slide.scaleLabel}</p>
-        </div>
-        <div className="rounded-xl p-4" style={{ background: C.charcoal }}>
-          <p className="text-xs font-bold mb-2 tracking-wide" style={{ color: C.yellow, fontFamily: F.body }}>WORKED EXAMPLE</p>
-          <p className="text-sm" style={{ color: C.textLight, fontFamily: F.body }}>
-            {slide.example.measured} &nbsp;·&nbsp; {slide.example.multiplier} &nbsp;=&nbsp;{" "}
-            <b style={{ color: C.yellow }}>{slide.example.result}</b>
-          </p>
-        </div>
-        <p className="text-xs italic" style={{ color: C.textMuted, fontFamily: F.body }}>{slide.instruction}</p>
-      </div>
+    <div className="w-full h-full relative" style={{ background: C.charcoal }}>
+      <Image src={slide.image} alt={slide.alt} fill className="object-contain" />
     </div>
   );
 }
@@ -524,8 +400,6 @@ export default function SlideRenderer({
     case "timeline":          return <TimelineView slide={slide} activeIndex={activeIndex} />;
     case "process-steps":     return <ProcessStepsView slide={slide} activeIndex={activeIndex} />;
     case "enforcement":       return <EnforcementView slide={slide} activeIndex={activeIndex} />;
-    case "site-map":          return <SiteMapView slide={slide} />;
-    case "boundary-diagram":  return <BoundaryDiagramView slide={slide} />;
-    case "scale-ruler":       return <ScaleRulerView slide={slide} />;
+    case "slide-image":       return <SlideImageView slide={slide} />;
   }
 }

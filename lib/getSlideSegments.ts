@@ -75,23 +75,7 @@ export function getSlideSegments(slide: Slide): SlideSegments {
         ...(slide.note ? [{ text: slide.note, index: -1 }] : []),
         ...(slide.footer ? [{ text: slide.footer, index: -1 }] : []),
       ]);
-    case "site-map":
-      return build([
-        { text: `${slide.title}. ${slide.body}`, index: -1 },
-        ...(slide.tip ? [{ text: `Tip: ${slide.tip}`, index: -1 }] : []),
-      ]);
-    case "boundary-diagram":
-      return build([
-        { text: slide.title, index: -1 },
-        { text: `${slide.outer.code}, ${slide.outer.name}: ${slide.outer.detail}`, index: 0 },
-        { text: `${slide.inner.code}, ${slide.inner.name}: ${slide.inner.detail}`, index: 1 },
-        { text: slide.note, index: -1 },
-      ]);
-    case "scale-ruler":
-      return build([
-        { text: `${slide.title}. ${slide.body}`, index: -1 },
-        { text: `${slide.example.measured}. ${slide.example.multiplier} ${slide.example.result}`, index: -1 },
-        { text: slide.instruction, index: -1 },
-      ]);
+    case "slide-image":
+      return build([{ text: slide.alt, index: -1 }]);
   }
 }

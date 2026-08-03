@@ -28,11 +28,7 @@ export function getSlideText(slide: Slide): string {
       return `${slide.title}. ${slide.events.map((e) => `${e.year}: ${e.label}`).join(". ")}${slide.note ? ". " + slide.note : ""}`;
     case "enforcement":
       return `${slide.title}. ${slide.columns.map((c) => `${c.level}: ${c.detail}`).join(". ")}${slide.note ? ". " + slide.note : ""}${slide.footer ? ". " + slide.footer : ""}`;
-    case "site-map":
-      return `${slide.title}. ${slide.body}${slide.tip ? ". Tip: " + slide.tip : ""}`;
-    case "boundary-diagram":
-      return `${slide.title}. ${slide.outer.code}, ${slide.outer.name}: ${slide.outer.detail}. ${slide.inner.code}, ${slide.inner.name}: ${slide.inner.detail}. ${slide.note}`;
-    case "scale-ruler":
-      return `${slide.title}. ${slide.body}. ${slide.example.measured}. ${slide.example.multiplier} ${slide.example.result}. ${slide.instruction}`;
+    case "slide-image":
+      return slide.alt;
   }
 }
