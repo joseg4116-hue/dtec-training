@@ -1173,12 +1173,20 @@ export const modules: Module[] = [
         ],
       },
       {
-        type: "content",
+        type: "site-map",
+        title: "Key Map",
+        mapLabel: "KEY MAP",
+        roads: ["PRAXIS ST", "PRAIRIE HAWK DR"],
+        body: "The plan's North arrow — usually near the legend or title block. Point it at true North, then read the map.",
+      },
+      {
+        type: "site-map",
         title: "Step 2 · Find Your Location",
-        bullets: [
-          "The vicinity map shows the project location and nearby cross streets. It helps you visualize where the site sits before you ever get there.",
-          "TIP: Most projects don't have a set address yet. This map is often your only way to find the location and cross streets.",
-        ],
+        mapLabel: "VICINITY MAP · SOUTHPARK TERRACE, LITTLETON CO",
+        roads: ["S. WINDERMERE ST", "W. MINERAL AVE", "SOUTHPARK TERRACE", "S. BROADWAY"],
+        landmark: "McLellen Reservoir",
+        body: "The vicinity map shows the project location and nearby cross streets. It helps you visualize where the site sits before you ever get there.",
+        tip: "Most projects don't have a set address yet. This map is often your only way to find the location and cross streets.",
       },
       {
         type: "content",
@@ -1208,22 +1216,19 @@ export const modules: Module[] = [
         image: "/images/bmp-legend.png",
       },
       {
-        type: "enforcement",
+        type: "boundary-diagram",
         title: "Step 6 · Boundaries — LOC vs. LOD",
-        columns: [
-          { level: "LOC — Limits of Construction", detail: "Defines where all construction work and operations must stay to maintain control and stay compliant with the site plan." },
-          { level: "LOD — Limits of Disturbance", detail: "Outlines where any potential disturbance — clearing, grading, or temporary access — might occur." },
-        ],
+        outer: { code: "LOD", name: "Limits of Disturbance", detail: "Outlines where any potential disturbance — clearing, grading, or temporary access — might occur." },
+        inner: { code: "LOC", name: "Limits of Construction", detail: "Defines where all construction work and operations must stay to maintain control and stay compliant with the site plan." },
         note: "Active work must stay inside the LOC. LOD marks the outer edge of any possible disturbance.",
       },
       {
-        type: "content",
+        type: "scale-ruler",
         title: "Step 7 · Read the Scale",
-        bullets: [
-          "The scale shows the ratio between measurements on the plan and real-world distance. It's usually near the title block or legend.",
-          "WORKED EXAMPLE — Scale: 1\" = 40'. Measured on plan: 2 inches. Real distance: 2\" × 40' = 80 feet.",
-          "Measure the desired distance on the plan with a scale ruler, then multiply by the scale factor to get the actual distance.",
-        ],
+        body: "The scale shows the ratio between measurements on the plan and real-world distance. It's usually near the title block or legend.",
+        scaleLabel: "SCALE: 1\" = 40'",
+        example: { measured: "Measured on plan: 2 inches", multiplier: "2\" × 40'", result: "= 80 feet" },
+        instruction: "Measure the desired distance on the plan with a scale ruler, then multiply by the scale factor to get the actual distance.",
       },
       {
         type: "content",
@@ -1314,12 +1319,20 @@ export const modules: Module[] = [
         ],
       },
       {
-        type: "content",
+        type: "site-map",
+        title: "Mapa Clave",
+        mapLabel: "MAPA CLAVE",
+        roads: ["PRAXIS ST", "PRAIRIE HAWK DR"],
+        body: "La flecha del norte del plano. Casi siempre esta cerca de la leyenda o del bloque de titulo. Apuntala al norte real y luego lee el mapa.",
+      },
+      {
+        type: "site-map",
         title: "Paso 2 · Encuentra tu Ubicacion",
-        bullets: [
-          "El mapa de ubicacion muestra donde esta el proyecto y las calles cercanas. Te ayuda a ubicar el sitio antes de llegar.",
-          "TIP: Muchos proyectos todavia no tienen direccion. Este mapa suele ser la unica forma de encontrar la ubicacion y las calles cercanas.",
-        ],
+        mapLabel: "MAPA DE UBICACION · SOUTHPARK TERRACE, LITTLETON CO",
+        roads: ["S. WINDERMERE ST", "W. MINERAL AVE", "SOUTHPARK TERRACE", "S. BROADWAY"],
+        landmark: "Embalse McLellen",
+        body: "El mapa de ubicacion muestra donde esta el proyecto y las calles cercanas. Te ayuda a ubicar el sitio antes de llegar.",
+        tip: "Muchos proyectos todavia no tienen direccion. Este mapa suele ser la unica forma de encontrar la ubicacion y las calles cercanas.",
       },
       {
         type: "content",
@@ -1349,22 +1362,19 @@ export const modules: Module[] = [
         image: "/images/bmp-legend.png",
       },
       {
-        type: "enforcement",
+        type: "boundary-diagram",
         title: "Paso 6 · Limites — LOC vs. LOD",
-        columns: [
-          { level: "LOC — Limits of Construction (Limites de Construccion)", detail: "Marca donde se debe quedar todo el trabajo y las operaciones de construccion, para mantener el control y cumplir con el plano del sitio." },
-          { level: "LOD — Limits of Disturbance (Limites de Alteracion)", detail: "Marca donde puede haber alteracion: despalme, nivelacion o acceso temporal." },
-        ],
+        outer: { code: "LOD", name: "Limits of Disturbance (Limites de Alteracion)", detail: "Marca donde puede haber alteracion: despalme, nivelacion o acceso temporal." },
+        inner: { code: "LOC", name: "Limits of Construction (Limites de Construccion)", detail: "Marca donde se debe quedar todo el trabajo y las operaciones de construccion, para mantener el control y cumplir con el plano del sitio." },
         note: "El trabajo activo se queda dentro del LOC. El LOD marca el borde exterior de cualquier alteracion posible.",
       },
       {
-        type: "content",
+        type: "scale-ruler",
         title: "Paso 7 · Lee la Escala",
-        bullets: [
-          "La escala muestra la relacion entre las medidas del plano y la distancia real. Casi siempre esta cerca del bloque de titulo o de la leyenda.",
-          "EJEMPLO RESUELTO — Escala: 1\" = 40'. Medido en el plano: 2 pulgadas. Distancia real: 2\" × 40' = 80 pies.",
-          "Mide en el plano la distancia que quieres con una regla de escala y luego multiplicala por el factor de escala para sacar la distancia real.",
-        ],
+        body: "La escala muestra la relacion entre las medidas del plano y la distancia real. Casi siempre esta cerca del bloque de titulo o de la leyenda.",
+        scaleLabel: "ESCALA: 1\" = 40'",
+        example: { measured: "Medido en el plano: 2 pulgadas", multiplier: "2\" × 40'", result: "= 80 pies" },
+        instruction: "Mide en el plano la distancia que quieres con una regla de escala y luego multiplicala por el factor de escala para sacar la distancia real.",
       },
       {
         type: "content",

@@ -94,6 +94,33 @@ export type EnforcementSlide = {
   footer?: string;
 };
 
+export type SiteMapSlide = {
+  type: "site-map";
+  title: string;
+  mapLabel: string;
+  roads: string[];
+  landmark?: string;
+  body: string;
+  tip?: string;
+};
+
+export type BoundaryDiagramSlide = {
+  type: "boundary-diagram";
+  title: string;
+  outer: { code: string; name: string; detail: string };
+  inner: { code: string; name: string; detail: string };
+  note: string;
+};
+
+export type ScaleRulerSlide = {
+  type: "scale-ruler";
+  title: string;
+  body: string;
+  scaleLabel: string;
+  example: { measured: string; multiplier: string; result: string };
+  instruction: string;
+};
+
 export type Slide =
   | TitleSlide
   | SectionDividerSlide
@@ -107,7 +134,10 @@ export type Slide =
   | StorySlide
   | ProcessStepsSlide
   | TimelineSlide
-  | EnforcementSlide;
+  | EnforcementSlide
+  | SiteMapSlide
+  | BoundaryDiagramSlide
+  | ScaleRulerSlide;
 
 export type Category = "welcome" | "stormwater" | "field-ops" | "advanced";
 
