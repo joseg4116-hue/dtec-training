@@ -1,68 +1,39 @@
 "use client";
-import { handbookDocs } from "@/data/handbook";
+import { handbookDocs, HandbookSection } from "@/data/handbook";
+import { handbookCategories } from "@/data/handbookCategories";
 import { Lang } from "@/types/module";
 import Link from "next/link";
-import { Home, Search, X, ChevronDown, Globe, BookOpen } from "lucide-react";
-import { useMemo, useState, useEffect, Fragment } from "react";
-
-const C = {
-  charcoal:   "#2D2926",
-  yellow:     "#C9B10A",
-  lightGray:  "#EBEBEB",
-  textDark:   "#1E1B18",
-  textMuted:  "#5A5550",
-  textLight:  "#FFFFFF",
-  textSubtle: "#B8B0A8",
-};
+import { Home, Search, X, Globe, BookOpen } from "lucide-react";
+import { useMemo, useState, useEffect } from "react";
+import { DisclaimerNotice } from "@/components/handbook/DisclaimerNotice";
+import { CategorySection } from "@/components/handbook/CategorySection";
+import { C, serif, body } from "@/components/handbook/theme";
 
 const LABELS = {
   en: {
     heading: "Employee Handbook",
     subtitle: "Down to Earth Compliance",
-    searchPlaceholder: "Search the handbook…",
-    revised: "Revised",
+    searchPlaceholder: "Search policies (e.g. PTO, overtime)…",
     noResults: (q: string) => `No results for "${q}". Try different terms.`,
-    resultsCount: (n: number) => `${n} section${n === 1 ? "" : "s"} match`,
+    resultsCount: (n: number) => `${n} polic${n === 1 ? "y" : "ies"} match`,
     home: "Home",
   },
   es: {
     heading: "Manual del Empleado",
     subtitle: "Down to Earth Compliance",
-    searchPlaceholder: "Buscar en el manual…",
-    revised: "Revisado el",
+    searchPlaceholder: "Buscar políticas (ej. PTO, horas extra)…",
     noResults: (q: string) => `Sin resultados para "${q}". Prueba con otros términos.`,
-    resultsCount: (n: number) => `${n} secci${n === 1 ? "ón" : "ones"} coincide${n === 1 ? "" : "n"}`,
+    resultsCount: (n: number) => `${n} polític${n === 1 ? "a" : "as"} coincide${n === 1 ? "" : "n"}`,
     home: "Inicio",
   },
 };
 
-function escapeRegExp(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function Highlighted({ text, query }: { text: string; query: string }) {
-  const q = query.trim();
-  if (!q) return <>{text}</>;
-  const parts = text.split(new RegExp(`(${escapeRegExp(q)})`, "ig"));
-  return (
-    <>
-      {parts.map((part, i) =>
-        part.toLowerCase() === q.toLowerCase() ? (
-          <mark key={i} style={{ background: C.yellow, color: C.charcoal, borderRadius: 2 }}>
-            {part}
-          </mark>
-        ) : (
-          <Fragment key={i}>{part}</Fragment>
-        )
-      )}
-    </>
-  );
-}
-
 export default function HandbookPage() {
   const [lang, setLang] = useState<Lang>("en");
   const [query, setQuery] = useState("");
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [categoryOpen, setCategoryOpen] = useState<Record<string, boolean>>({});
+  const [policyOpen, setPolicyOpen] = useState<Record<string, boolean>>({});
+  const [disclaimerOpen, setDisclaimerOpen] = useState(false);
 
   useEffect(() => {
     if (window.location.hash === "#es") setLang("es");
@@ -70,32 +41,61 @@ export default function HandbookPage() {
 
   const t = LABELS[lang];
   const doc = handbookDocs[lang];
+  const categories = handbookCategories[lang];
   const q = query.trim().toLowerCase();
+  const searching = q.length > 0;
 
-  const results = useMemo(() => {
-    if (!q) return doc.sections;
-    return doc.sections.filter(
-      (s) =>
-        s.title.toLowerCase().includes(q) ||
-        s.paragraphs.some((p) => p.toLowerCase().includes(q))
+  const introSections = useMemo(
+    () => doc.sections.filter((s) => s.num === null),
+    [doc]
+  );
+
+  const sectionsByNum = useMemo(() => {
+    const map = new Map<string, HandbookSection>();
+    for (const s of doc.sections) if (s.num) map.set(s.num, s);
+    return map;
+  }, [doc]);
+
+  function matches(s: HandbookSection) {
+    return (
+      s.title.toLowerCase().includes(q) ||
+      s.paragraphs.some((p) => p.toLowerCase().includes(q))
     );
-  }, [doc, q]);
-
-  function toggle(id: string) {
-    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
-  function isOpen(id: string) {
-    return q ? true : !!expanded[id];
+  const groupedCategories = useMemo(() => {
+    return categories
+      .map((cat) => {
+        const allSections = cat.nums
+          .map((n) => sectionsByNum.get(n))
+          .filter((s): s is HandbookSection => !!s);
+        const sections = searching ? allSections.filter(matches) : allSections;
+        return { ...cat, sections };
+      })
+      .filter((cat) => !searching || cat.sections.length > 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories, sectionsByNum, searching, q]);
+
+  const totalMatches = useMemo(
+    () => groupedCategories.reduce((n, c) => n + c.sections.length, 0),
+    [groupedCategories]
+  );
+
+  function toggleCategory(id: string) {
+    setCategoryOpen((prev) => ({ ...prev, [id]: !prev[id] }));
+  }
+
+  function togglePolicy(id: string) {
+    setPolicyOpen((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
   return (
-    <main className="min-h-screen" style={{ background: C.lightGray, fontFamily: "Calibri, 'Trebuchet MS', Arial, sans-serif" }}>
+    <main className="min-h-screen" style={{ background: C.lightGray, fontFamily: body }}>
 
-      <header style={{ background: C.charcoal }} className="px-6 py-5">
-        <div className="max-w-2xl mx-auto flex items-center justify-between gap-4">
+      <header style={{ background: C.charcoal }} className="px-4 py-4">
+        <div className="max-w-2xl mx-auto flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="text-2xl font-bold truncate" style={{ color: C.textLight, fontFamily: "Georgia, 'Times New Roman', serif" }}>
+            <h1 className="text-xl font-bold truncate" style={{ color: C.textLight, fontFamily: serif }}>
               {t.heading}
             </h1>
             <p className="text-xs mt-0.5" style={{ color: C.textSubtle }}>
@@ -104,38 +104,26 @@ export default function HandbookPage() {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <button type="button" onClick={() => setLang("en")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all duration-150"
               style={{ background: lang === "en" ? C.yellow : "#3A3530", color: lang === "en" ? C.charcoal : C.textSubtle }}>
-              <BookOpen size={13} /> EN
+              <BookOpen size={14} /> EN
             </button>
             <button type="button" onClick={() => setLang("es")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all duration-150"
               style={{ background: lang === "es" ? C.yellow : "#3A3530", color: lang === "es" ? C.charcoal : C.textSubtle }}>
-              <Globe size={13} /> ES
+              <Globe size={14} /> ES
             </button>
             <Link href="/"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium"
+              className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-medium"
               style={{ background: "#3A3530", color: C.textSubtle }}>
-              <Home size={13} /> {t.home}
+              <Home size={14} /> {t.home}
             </Link>
           </div>
         </div>
       </header>
 
-      {/* Legal notice banner */}
-      <div style={{ background: "#3A3530" }} className="px-6 py-3">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-[11px] leading-snug" style={{ color: C.textSubtle }}>
-            {doc.disclaimer}
-          </p>
-          <p className="text-[11px] mt-1" style={{ color: C.textSubtle }}>
-            {t.revised} {doc.revised}
-          </p>
-        </div>
-      </div>
-
       {/* Search */}
-      <div className="sticky top-0 z-10 px-6 py-3 shadow-sm" style={{ background: C.lightGray, borderBottom: "1px solid #D0CECA" }}>
+      <div className="sticky top-0 z-10 px-4 py-3 shadow-sm" style={{ background: C.lightGray, borderBottom: "1px solid #D0CECA" }}>
         <div className="max-w-2xl mx-auto">
           <div className="relative">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: C.textMuted }} />
@@ -144,7 +132,7 @@ export default function HandbookPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t.searchPlaceholder}
-              className="w-full pl-9 pr-9 py-2.5 rounded-xl text-sm outline-none border focus:border-[#C9B10A]"
+              className="w-full pl-9 pr-9 py-3 rounded-xl text-[15px] outline-none border focus:border-[#C9B10A]"
               style={{ background: C.textLight, borderColor: "#D0CECA", color: C.textDark }}
             />
             {query && (
@@ -155,51 +143,39 @@ export default function HandbookPage() {
               </button>
             )}
           </div>
-          {q && (
+          {searching && (
             <p className="text-xs mt-2" style={{ color: C.textMuted }}>
-              {results.length > 0 ? t.resultsCount(results.length) : t.noResults(query.trim())}
+              {totalMatches > 0 ? t.resultsCount(totalMatches) : t.noResults(query.trim())}
             </p>
           )}
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-6 py-6 space-y-3">
-        {results.map((s) => {
-          const open = isOpen(s.id);
-          return (
-            <div key={s.id} className="rounded-2xl overflow-hidden shadow-sm"
-              style={{ background: C.textLight, border: "1px solid #D0CECA" }}>
+      <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
+        {!searching && (
+          <DisclaimerNotice
+            lang={lang}
+            disclaimer={doc.disclaimer}
+            revised={doc.revised}
+            introSections={introSections}
+            open={disclaimerOpen}
+            onToggle={() => setDisclaimerOpen((v) => !v)}
+          />
+        )}
 
-              <button type="button" onClick={() => toggle(s.id)}
-                className="w-full flex items-center justify-between gap-3 px-5 py-3.5 text-left transition-transform duration-150 active:scale-[0.99]"
-                style={{ background: C.charcoal }}>
-                <div className="flex items-center gap-3 min-w-0">
-                  {s.num && (
-                    <span className="shrink-0 text-xs font-bold px-2 py-1 rounded-lg"
-                      style={{ background: C.yellow, color: C.charcoal, fontFamily: "Georgia, serif" }}>
-                      {s.num}
-                    </span>
-                  )}
-                  <span className="font-bold truncate" style={{ color: C.textLight, fontFamily: "Georgia, serif" }}>
-                    <Highlighted text={s.title} query={query} />
-                  </span>
-                </div>
-                <ChevronDown size={16} className="shrink-0 transition-transform duration-200"
-                  style={{ color: C.yellow, transform: open ? "rotate(180deg)" : "rotate(0deg)" }} />
-              </button>
-
-              {open && (
-                <div className="px-5 py-4 space-y-3">
-                  {s.paragraphs.map((p, i) => (
-                    <p key={i} className="text-sm leading-relaxed" style={{ color: C.textDark }}>
-                      <Highlighted text={p} query={query} />
-                    </p>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {groupedCategories.map((cat) => (
+          <CategorySection
+            key={cat.id}
+            label={cat.label}
+            sections={cat.sections}
+            query={query}
+            open={searching || !!categoryOpen[cat.id]}
+            onToggleCategory={() => toggleCategory(cat.id)}
+            openPolicies={policyOpen}
+            onTogglePolicy={togglePolicy}
+            forceOpenPolicies={searching}
+          />
+        ))}
       </div>
 
       <footer className="text-center py-8 text-xs" style={{ color: C.textMuted }}>

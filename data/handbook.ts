@@ -21,14 +21,6 @@ export const handbookDocs: Record<Lang, HandbookDoc> = {
     disclaimer: "THIS EMPLOYEE HANDBOOK IS NOT A CONTRACT OF EMPLOYMENT AND IS NOT INTENDED TO CREATE ANY EXPRESS OR IMPLIED PROMISES TO EMPLOYEES OR TO GUARANTEE ANY FIXED TERMS. EMPLOYMENT WITH THE COMPANY IS \"AT-WILL\" AND THIS HANDBOOK DOES NOT MODIFY THE AT-WILL EMPLOYMENT STATUS OF ANY EMPLOYEE. THIS HANDBOOK AND THE POLICIES AND BENEFITS DESCRIBED HEREIN MAY BE MODIFIED OR CHANGED AT ANY TIME.",
     sections: [
       {
-        id: "en-intro-0",
-        num: null,
-        title: "DTEC Values",
-        paragraphs: [
-          "Trust Safety Quality Respect Team",
-        ],
-      },
-      {
         id: "en-intro-1",
         num: null,
         title: "Important Notice About the Employee Handbook",
@@ -729,15 +721,6 @@ export const handbookDocs: Record<Lang, HandbookDoc> = {
     revised: "03/27/2025",
     disclaimer: "ESTE MANUAL DEL EMPLEADO NO CONSTITUYE UN CONTRATO DE EMPLEO Y NO PRETENDE HACER NINGUNA PROMESA EXPRESA O IMPLÍCITA A LOS EMPLEADOS NI GARANTIZAR TÉRMINOS FIJOS. EL EMPLEO CON LA EMPRESA ES \"A VOLUNTAD\" Y ESTE MANUAL NO MODIFICA LA CONDICIÓN DE EMPLEO A VOLUNTAD DE NINGÚN EMPLEADO. ESTE MANUAL Y LAS POLÍTICAS Y LOS BENEFICIOS DESCRITOS EN EL PRESENTE PUEDEN MODIFICARSE O CAMBIARSE EN CUALQUIER MOMENTO.",
     sections: [
-      {
-        id: "es-intro-0",
-        num: null,
-        title: "Valores de DTEC",
-        paragraphs: [
-          "Confianza Seguridad Calidad Respeto",
-          "Equipo",
-        ],
-      },
       {
         id: "es-intro-1",
         num: null,
