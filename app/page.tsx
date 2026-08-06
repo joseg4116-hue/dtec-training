@@ -21,7 +21,7 @@ const C = {
 const CATEGORIES: { key: Category; label: string; visible: number[]; comingSoon: number[] }[] = [
   { key: "welcome", label: "Welcome", visible: [0], comingSoon: [] },
   { key: "stormwater", label: "Stormwater Training", visible: [0, 1], comingSoon: [2] },
-  { key: "field-ops", label: "Field Operations", visible: [], comingSoon: [] },
+  { key: "field-ops", label: "Field Operations", visible: [0], comingSoon: [] },
   { key: "advanced", label: "Advanced & Specialty", visible: [], comingSoon: [] },
 ];
 
