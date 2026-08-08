@@ -696,7 +696,6 @@ export const modules: Module[] = [
           "Mark the location of any required outlet structures or overflow areas",
           "Review the site SWPPP map to confirm fence alignment matches approved plan",
         ],
-        image: "/images/silt-fence-trench-prep.jpg",
       },
       {
         type: "content",
@@ -709,7 +708,6 @@ export const modules: Module[] = [
           "Stop and hand-dig around any obstacles — do not force machine through roots or rocks",
           "Inspect trench depth at start, middle, and end of each run — minimum 6\" throughout",
         ],
-        image: "/images/silt-fence-trencher-fabric.jpg",
       },
       {
         type: "content",
@@ -724,7 +722,12 @@ export const modules: Module[] = [
           "Attach fabric to posts using wire staples or zip ties — minimum 3 attachment points per post",
           "Height above ground: 18 inches minimum — trim or fold excess fabric",
         ],
-        image: "/images/silt-fence-installation.jpg",
+      },
+      {
+        type: "image-placeholder",
+        title: "Trencher Installation — Step-by-Step Photos",
+        caption: "[Insert photos: trencher in operation, fabric key-in, post driving, finished installation]",
+        note: "Show correct trench depth measurement and fabric attachment method",
       },
       {
         type: "section-divider",
@@ -745,7 +748,6 @@ export const modules: Module[] = [
           "□  No overtopping — if overflow occurred, identify cause and add upstream BMPs if needed",
           "□  Document inspection in SWPPP log with date, inspector name, and findings",
         ],
-        image: "/images/silt-fence-finished.jpg",
       },
       {
         type: "content",
@@ -831,7 +833,6 @@ export const modules: Module[] = [
           "Marcar la ubicación de cualquier estructura de salida requerida",
           "Revisar el mapa del SWPPP para confirmar que la alineación coincide con el plan aprobado",
         ],
-        image: "/images/silt-fence-trench-prep.jpg",
       },
       {
         type: "content",
@@ -845,7 +846,6 @@ export const modules: Module[] = [
           "Los postes deben clavarse mínimo 18 pulgadas en el suelo",
           "Fijar la tela a los postes con grapas de alambre o amarres — mínimo 3 puntos de fijación por poste",
         ],
-        image: "/images/silt-fence-trencher-fabric.jpg",
       },
       {
         type: "section-divider",
@@ -865,7 +865,6 @@ export const modules: Module[] = [
           "□  Sin desbordamiento — si ocurrió, identificar la causa y agregar BMPs aguas arriba",
           "□  Documentar la inspección en el registro del SWPPP con fecha, nombre del inspector y hallazgos",
         ],
-        image: "/images/silt-fence-finished.jpg",
       },
       {
         type: "content",
