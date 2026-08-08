@@ -558,6 +558,176 @@ export const quizBanks: QuizBank[] = [
       },
     ],
   },
+  // ── MODULE 02 — EN ────────────────────────────────────────────────────────
+  {
+    moduleId: "02-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "sf-en-01",
+        question: "What is the minimum tensile strength required for silt fence fabric under Colorado standards?",
+        options: [
+          "50 lb/in",
+          "100 lb/in",
+          "150 lb/in",
+          "No minimum — any woven fabric is acceptable",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-02",
+        question: "What is the maximum post spacing for silt fence, and when must it be reduced?",
+        options: [
+          "6 ft maximum, reduced to 4 ft on slopes steeper than 3:1",
+          "10 ft maximum, reduced to 6 ft on any slope",
+          "4 ft maximum at all times, no exceptions",
+          "Post spacing is not specified — space evenly along the run",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sf-en-03",
+        question: "What is the minimum trench depth for keying silt fence fabric into the ground?",
+        options: [
+          "2 inches",
+          "4 inches",
+          "6 inches",
+          "12 inches",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "sf-en-04",
+        question: "When is wire backing required behind silt fence fabric?",
+        options: [
+          "Only when requested by the site inspector",
+          "Never — wire backing is not part of the Colorado standard",
+          "On slopes steeper than 2:1 or flow velocities over 1 ft/s",
+          "Only on the last 10 feet of any fence run",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "sf-en-05",
+        question: "Which condition is silt fence NOT appropriate for?",
+        options: [
+          "Perimeter control on sheet flow along a down-slope edge",
+          "Concentrated flow / drainage channels",
+          "Linear disturbed areas like road cuts and lot grading",
+          "Around stockpiles on flat to moderate slopes",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-06",
+        question: "How often must silt fence be inspected under the maintenance schedule in this training?",
+        options: [
+          "Once per month",
+          "Every 14 days and after any 0.5\" rain event",
+          "Only after the site receives a Notice of Termination",
+          "Once at installation and once before removal",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-07",
+        question: "When must sediment be removed from behind a silt fence?",
+        options: [
+          "When accumulation reaches 1/3 of the fence height",
+          "Only when the fence fully overtops",
+          "Sediment removal is not required if the fence is still standing",
+          "When accumulation reaches the top of the posts",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sf-en-08",
+        question: "Before trenching for silt fence, what must be done regarding underground utilities?",
+        options: [
+          "Nothing — silt fence trenches are too shallow to matter",
+          "Call 811 at least 3 business days before trenching",
+          "Only check utilities if trenching near a building",
+          "Utility checks are the property owner's responsibility, not the crew's",
+        ],
+        correctIndex: 1,
+      },
+    ],
+  },
+  // ── MODULE 02 — ES ────────────────────────────────────────────────────────
+  {
+    moduleId: "02-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "sf-es-01",
+        question: "¿Cuál es la resistencia mínima a la tracción requerida para la tela de silt fence bajo el estándar de Colorado?",
+        options: [
+          "50 lb/pulg",
+          "100 lb/pulg",
+          "150 lb/pulg",
+          "No hay mínimo — cualquier tela tejida es aceptable",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-02",
+        question: "¿Cuál es el espaciado máximo de postes para silt fence, y cuándo debe reducirse?",
+        options: [
+          "10 pies máximo, reducido a 6 pies en cualquier pendiente",
+          "6 pies máximo, reducido a 4 pies en pendientes más pronunciadas que 3:1",
+          "4 pies máximo en todo momento, sin excepciones",
+          "El espaciado no está especificado — espaciar uniformemente a lo largo del tramo",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-03",
+        question: "¿Cuál es la profundidad mínima de zanja para anclar la tela de silt fence en el suelo?",
+        options: [
+          "2 pulgadas",
+          "4 pulgadas",
+          "6 pulgadas",
+          "12 pulgadas",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "sf-es-04",
+        question: "Antes de trinchear para instalar silt fence, ¿qué se debe hacer respecto a los servicios subterráneos?",
+        options: [
+          "Nada — las zanjas de silt fence son demasiado poco profundas para importar",
+          "Llamar al 811 al menos 3 días hábiles antes de trinchear",
+          "Solo verificar servicios si se trinchea cerca de un edificio",
+          "Verificar servicios es responsabilidad del dueño del sitio, no de la cuadrilla",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-05",
+        question: "¿Con qué frecuencia se debe inspeccionar el silt fence según el programa de mantenimiento de esta capacitación?",
+        options: [
+          "Una vez al mes",
+          "Solo después de que el sitio reciba una Notificación de Terminación",
+          "Cada 14 días y después de cualquier lluvia de 0.5 pulgadas",
+          "Una vez en la instalación y una vez antes de la remoción",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "sf-es-06",
+        question: "¿Cuándo se debe remover el sedimento acumulado detrás de un silt fence?",
+        options: [
+          "Cuando la acumulación alcanza 1/3 de la altura de la cerca",
+          "Solo cuando la cerca se desborda completamente",
+          "No es necesario remover sedimento si la cerca sigue en pie",
+          "Cuando la acumulación alcanza la parte superior de los postes",
+        ],
+        correctIndex: 0,
+      },
+    ],
+  },
   // ── FIELD OPS — READING BMP DRAWINGS — EN ────────────────────────────────
   {
     moduleId: "field-bmp-en",
