@@ -558,6 +558,289 @@ export const quizBanks: QuizBank[] = [
       },
     ],
   },
+
+  // ── MODULE 02 — SILT FENCE — EN ──────────────────────────────────────────
+  {
+    moduleId: "02-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "sf-en-01",
+        question: "What does silt fence actually do?",
+        options: [
+          "Stops soil from moving in the first place",
+          "Catches soil that's already moving and lets water pond so sediment drops out",
+          "Treats polluted water chemically before it leaves the site",
+          "Replaces the need for a SWPPP",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-02",
+        question: "Under the standard spec (most municipalities), what is the minimum trench size for silt fence?",
+        options: [
+          "6 inches deep x 4 inches wide",
+          "10 inches deep x 4 inches wide",
+          "4 inches deep x 6 inches wide",
+          "12 inches deep x 6 inches wide",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sf-en-03",
+        question: "On a Parker Spec job, how deep must the trench be, and what extra material is required?",
+        options: [
+          "6 inches deep, no extra material",
+          "10 inches deep, with lath stapled to the uphill side of the fabric",
+          "8 inches deep, with wire mesh backing",
+          "10 inches deep, with a second layer of fabric",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-04",
+        question: "What is DTEC's stake spacing standard, and how does it compare to most specs?",
+        options: [
+          "10 feet — the same as most specs",
+          "8 feet — tighter than the 10 feet most specs allow",
+          "12 feet — looser than most specs",
+          "6 feet — DTEC doesn't follow a fixed spacing",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-05",
+        question: "What are the three methods DTEC uses to install silt fence?",
+        options: [
+          "Hand trench, Trencher (skid / walk-behind), Tommy attachment",
+          "Hand trench, Excavator, Silt sock",
+          "Trencher, Hydroseeder, Rock check dam",
+          "Tommy attachment, Wattle roller, Hand trench",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sf-en-06",
+        question: "What is the DTEC staple pattern, and why does it matter?",
+        options: [
+          "2 staples straight across — it's the fastest method",
+          "4–5 staples on a diagonal across the fabric threads — if the top stays attached, all of it stays attached",
+          "1 staple per stake — enough to hold posts, not fabric",
+          "Staples aren't used; zip ties are the DTEC standard",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-07",
+        question: "On the Tommy attachment method, what should you do if the ground is too hard, compacted, or rocky?",
+        options: [
+          "Switch immediately to a hand trench",
+          "Run the Tommy through without fabric first to loosen the line, then make the install pass",
+          "Add extra stakes to compensate",
+          "Skip that section and note it in the SWPPP",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-08",
+        question: "What does the red seam on Talon TSF-GA-C fabric tell you?",
+        options: [
+          "It marks where the fabric was manufactured",
+          "It's a factory seam at 12\" and 24\" from the bottom that shows burial depth — near the ground means buried right, riding high means the trench is too shallow",
+          "It shows where to place staples",
+          "It indicates the fabric has a manufacturing defect",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-09",
+        question: "Which side does the fabric go on, and which side do the stakes go on?",
+        options: [
+          "Fabric downhill, stakes uphill",
+          "Fabric uphill, stakes downhill — the stake takes the load",
+          "It doesn't matter as long as they're touching",
+          "Both go on the downhill side",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-10",
+        question: "What's the purpose of a J-hook at the end of a silt fence run?",
+        options: [
+          "It marks the end of the run for inspectors",
+          "It turns the last 10–20 ft upslope so runoff can't sneak around the open end",
+          "It anchors the roll of extra fabric",
+          "It connects two rolls of fabric together",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-11",
+        question: "How should silt fence joints be finished?",
+        options: [
+          "Overlapped loosely so they can be adjusted later",
+          "Both end stakes wrapped together, rotated, and driven so the fabric overlaps with zero gaps",
+          "Taped together with waterproof tape",
+          "Left with a small gap for drainage",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-en-12",
+        question: "According to \"The Final Walk\" checklist, what should happen before you load up and leave the site?",
+        options: [
+          "Just confirm the stakes are still standing",
+          "Photos on the work order, plus a full check of trench, fabric tension, joints, J-hooks, and the red seam line",
+          "Nothing — the crew lead checks it the next morning",
+          "Only check for rips or holes",
+        ],
+        correctIndex: 1,
+      },
+    ],
+  },
+
+  // ── MODULE 02 — SILT FENCE — ES ──────────────────────────────────────────
+  {
+    moduleId: "02-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "sf-es-01",
+        question: "¿Qué hace realmente el silt fence (cerca de sedimento)?",
+        options: [
+          "Evita que la tierra se mueva desde el principio",
+          "Atrapa la tierra que ya se está moviendo y deja que el agua se encharque para que el sedimento se asiente",
+          "Trata químicamente el agua contaminada antes de que salga del sitio",
+          "Reemplaza la necesidad de un SWPPP",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-02",
+        question: "Bajo la especificación estándar (la mayoría de los municipios), ¿cuál es el tamaño mínimo de la zanja para silt fence?",
+        options: [
+          "6 pulgadas de profundidad x 4 pulgadas de ancho",
+          "10 pulgadas de profundidad x 4 pulgadas de ancho",
+          "4 pulgadas de profundidad x 6 pulgadas de ancho",
+          "12 pulgadas de profundidad x 6 pulgadas de ancho",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sf-es-03",
+        question: "En un trabajo con Parker Spec, ¿qué tan profunda debe ser la zanja y qué material extra se requiere?",
+        options: [
+          "6 pulgadas de profundidad, sin material extra",
+          "10 pulgadas de profundidad, con lath engrapado al lado de arriba (pendiente arriba) de la tela",
+          "8 pulgadas de profundidad, con malla de alambre",
+          "10 pulgadas de profundidad, con una segunda capa de tela",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-04",
+        question: "¿Cuál es el estándar de espaciado de estacas de DTEC, y cómo se compara con la mayoría de las especificaciones?",
+        options: [
+          "10 pies — igual que la mayoría de las especificaciones",
+          "8 pies — más cerrado que los 10 pies que permiten la mayoría de las especificaciones",
+          "12 pies — más abierto que la mayoría",
+          "6 pies — DTEC no sigue un espaciado fijo",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-05",
+        question: "¿Cuáles son los tres métodos que usa DTEC para instalar silt fence?",
+        options: [
+          "Zanja a mano, Máquina trinchera (skid / caminando), Aditamento Tommy",
+          "Zanja a mano, Excavadora, Silt sock",
+          "Máquina trinchera, Hidrosembradora, Presa de roca",
+          "Aditamento Tommy, Rodillo de wattle, Zanja a mano",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sf-es-06",
+        question: "¿Cuál es el patrón de grapado de DTEC, y por qué importa?",
+        options: [
+          "2 grapas en línea recta — es el método más rápido",
+          "4–5 grapas en diagonal cruzando los hilos de la tela — si la parte de arriba queda sujeta, toda la tela queda sujeta",
+          "1 grapa por estaca — suficiente para sujetar los postes, no la tela",
+          "No se usan grapas; los amarres de plástico son el estándar de DTEC",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-07",
+        question: "En el método del aditamento Tommy, ¿qué debes hacer si el suelo está muy duro, compactado o rocoso?",
+        options: [
+          "Cambiar de inmediato a zanja a mano",
+          "Pasar el Tommy sin tela primero para aflojar la línea, y luego hacer la pasada de instalación",
+          "Agregar estacas extra para compensar",
+          "Saltar esa sección y anotarlo en el SWPPP",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-08",
+        question: "¿Qué te indica la costura roja en la tela Talon TSF-GA-C?",
+        options: [
+          "Marca dónde se fabricó la tela",
+          "Es una costura de fábrica a 12\" y 24\" desde abajo que muestra la profundidad de enterrado — cerca del suelo significa bien enterrada, alta significa que la zanja quedó muy baja",
+          "Muestra dónde poner las grapas",
+          "Indica que la tela tiene un defecto de fabricación",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-09",
+        question: "¿De qué lado va la tela y de qué lado van las estacas?",
+        options: [
+          "Tela pendiente abajo, estacas pendiente arriba",
+          "Tela pendiente arriba, estacas pendiente abajo — la estaca carga el peso",
+          "No importa mientras se toquen",
+          "Ambas van del lado de abajo",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-10",
+        question: "¿Para qué sirve el J-hook al final de una línea de silt fence?",
+        options: [
+          "Marca el final de la línea para los inspectores",
+          "Gira los últimos 10–20 pies pendiente arriba para que el agua no se escape por el extremo abierto",
+          "Ancla el rollo de tela sobrante",
+          "Conecta dos rollos de tela entre sí",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-11",
+        question: "¿Cómo se deben terminar las uniones (joints) del silt fence?",
+        options: [
+          "Superpuestas sin apretar para poder ajustarlas después",
+          "Ambas estacas del extremo envueltas juntas, rotadas, y clavadas para que la tela se superponga sin espacios",
+          "Pegadas con cinta impermeable",
+          "Dejadas con un pequeño espacio para drenaje",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sf-es-12",
+        question: "Según la lista de \"La Caminata Final\", ¿qué debe pasar antes de cargar el equipo e irte del sitio?",
+        options: [
+          "Solo confirmar que las estacas siguen paradas",
+          "Fotos en la orden de trabajo, más una revisión completa de la zanja, tensión de la tela, uniones, J-hooks y la línea de costura roja",
+          "Nada — el líder de cuadrilla lo revisa la mañana siguiente",
+          "Solo revisar que no haya rasgaduras o agujeros",
+        ],
+        correctIndex: 1,
+      },
+    ],
+  },
+
   // ── FIELD OPS — READING BMP DRAWINGS — EN ────────────────────────────────
   {
     moduleId: "field-bmp-en",
