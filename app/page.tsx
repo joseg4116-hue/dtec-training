@@ -3,7 +3,7 @@ import { modules } from "@/data/modules";
 import { Category } from "@/types/module";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Globe, ClipboardList, CheckCircle, ChevronDown, FileText } from "lucide-react";
+import { BookOpen, Globe, ClipboardList, CheckCircle, ChevronDown, FileText, Signpost } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const EMAIL_KEY = "dtec_email";
@@ -149,7 +149,7 @@ export default function Home() {
       <div className="max-w-2xl mx-auto px-6 py-8 space-y-4">
         {CATEGORIES.map((cat, ci) => {
           const isOpen = !!expanded[cat.key];
-          const isEmpty = cat.visible.length === 0 && cat.comingSoon.length === 0;
+          const isEmpty = cat.visible.length === 0 && cat.comingSoon.length === 0 && cat.key !== "advanced";
 
           return (
             <div key={cat.key} className="fade-up-enter rounded-2xl overflow-hidden shadow-sm"
@@ -287,6 +287,34 @@ export default function Home() {
                           <Globe size={15} />
                           Abrir Español
                         </Link>
+                      </div>
+                    </div>
+                  )}
+                  {cat.key === "advanced" && (
+                    <div className="rounded-2xl overflow-hidden shadow-sm"
+                      style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
+
+                      <div className="px-6 py-4 flex items-center gap-3"
+                        style={{ borderBottom: `3px solid ${C.yellow}` }}>
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                          style={{ background: C.charcoal, color: C.yellow }}>
+                          <Signpost size={18} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h2 className="font-bold truncate" style={{ color: C.textDark, fontFamily: "Georgia, serif" }}>
+                            Driver Training
+                          </h2>
+                          <p className="text-xs" style={{ color: C.textMuted }}>CO Road Signs — flashcards & practice test (EN/ES)</p>
+                        </div>
+                      </div>
+
+                      <div className="px-6 pt-4 pb-5">
+                        <a href="/driver-training.html"
+                          className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-150 active:scale-[0.97]"
+                          style={{ background: C.charcoal, color: C.textLight }}>
+                          <BookOpen size={15} />
+                          Open Driver Training
+                        </a>
                       </div>
                     </div>
                   )}

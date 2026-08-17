@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>CO Road Signs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt-1:#15171b; --asphalt-2:#1f232a; --steel:#282d35; --steel-2:#343a44;
+    --line-yellow:#ffb81c; --off-white:#f4f2ec; --muted:#8a919c;
+    --reg-red:#b3122a; --warn-c:#8a7200; --work-c:#c85a10; --guide-c:#00543c; --pave-c:#2b4f8f;
+    --good:#1f6f43; --bad:#a13e2b; --ink:#111214;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{ height:100%; }
+  body{
+    margin:0; font-family:'Inter',sans-serif; color:var(--off-white);
+    background:linear-gradient(180deg, var(--asphalt-1) 0%, var(--asphalt-2) 100%);
+    display:flex; flex-direction:column; min-height:100vh;
+    padding-bottom:calc(72px + env(safe-area-inset-bottom));
+    overflow-x:hidden;
+  }
+  header{
+    padding:16px 18px 10px; text-align:center; position:sticky; top:0; z-index:5;
+    background:linear-gradient(180deg, var(--asphalt-1) 70%, transparent);
+  }
+  .eyebrow{ font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.24em; font-size:10px; color:var(--line-yellow); text-transform:uppercase; }
+  h1{ font-family:'Oswald',sans-serif; font-weight:700; font-size:22px; margin:4px 0 0; text-transform:uppercase; }
+
+  main{ flex:1; display:flex; flex-direction:column; align-items:center; padding:8px 16px 20px; }
+  .screen{ width:100%; max-width:420px; display:none; flex-direction:column; align-items:center; gap:14px; }
+  .screen.active{ display:flex; }
+
+  /* ---- shared chip / button styles ---- */
+  .chips{ display:flex; flex-wrap:wrap; gap:7px; justify-content:center; width:100%; }
+  .chip{
+    font-weight:600; font-size:12px; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--steel-2); background:var(--steel); color:var(--off-white); cursor:pointer;
+  }
+  .chip.active{ background:var(--line-yellow); color:var(--ink); border-color:var(--line-yellow); }
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:14px;
+    background:var(--steel); color:var(--off-white); border:1px solid var(--steel-2);
+    padding:13px 20px; border-radius:10px; cursor:pointer; min-width:64px;
+  }
+  .btn.primary{ background:var(--line-yellow); color:var(--ink); border-color:var(--line-yellow); }
+  .btn.ghost{ background:transparent; }
+  .btn.wide{ width:100%; }
+  .btn:disabled{ opacity:.35; }
+
+  /* ---- study screen ---- */
+  .progress-row{ display:flex; justify-content:space-between; width:100%; font-family:'Oswald',sans-serif; font-size:12.5px; color:var(--muted); }
+  .progress-track{ height:3px; width:100%; background:var(--steel); border-radius:2px; overflow:hidden; }
+  .progress-fill{ height:100%; background:var(--line-yellow); transition:width .25s ease; }
+  .card-wrap{ perspective:1400px; width:100%; max-width:280px; aspect-ratio:1/1.05; cursor:pointer; }
+  .card{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .5s cubic-bezier(.2,.9,.25,1); }
+  .card.flipped{ transform:rotateY(180deg); }
+  .face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:14px; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 30px -14px rgba(0,0,0,.6); }
+  .front{ background:#eceae3; padding:14%; }
+  .front img{ width:100%; height:100%; object-fit:contain; }
+  .back{ background:var(--steel); transform:rotateY(180deg); flex-direction:column; padding:20px; text-align:center; gap:8px; }
+  .cat-tag{ font-weight:700; font-size:9.5px; letter-spacing:.13em; text-transform:uppercase; padding:5px 10px; border-radius:999px; color:#fff; }
+  .es-name{ font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; text-transform:uppercase; margin:0; }
+  .en-name{ color:var(--muted); font-size:12.5px; margin:0; font-weight:600; }
+  .controls-row{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .mark-row{ display:flex; gap:8px; }
+  .mark-btn{ font-weight:600; font-size:12px; padding:8px 13px; border-radius:8px; border:1px solid var(--steel-2); background:var(--steel); color:var(--off-white); cursor:pointer; }
+  .mark-btn.know.active{ background:var(--good); border-color:var(--good); color:#fff; }
+  .mark-btn.review.active{ background:var(--bad); border-color:var(--bad); color:#fff; }
+
+  /* ---- test screen ---- */
+  .test-setup{ width:100%; display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .count-row{ display:flex; gap:8px; }
+  .test-q-num{ font-family:'Oswald',sans-serif; color:var(--muted); font-size:13px; letter-spacing:.05em; }
+  .test-img-wrap{ width:100%; max-width:240px; aspect-ratio:1/1; background:#eceae3; border-radius:14px; display:flex; align-items:center; justify-content:center; padding:12%; }
+  .test-img-wrap img{ width:100%; height:100%; object-fit:contain; }
+  .options{ width:100%; display:flex; flex-direction:column; gap:10px; }
+  .opt{
+    width:100%; text-align:left; padding:13px 16px; border-radius:10px; border:1.5px solid var(--steel-2);
+    background:var(--steel); color:var(--off-white); font-size:14px; font-weight:600; cursor:pointer;
+  }
+  .opt .es{ display:block; font-family:'Oswald',sans-serif; font-size:15px; text-transform:uppercase; }
+  .opt .en{ display:block; color:var(--muted); font-size:11.5px; font-weight:500; margin-top:1px; }
+  .opt.correct{ background:var(--good); border-color:var(--good); }
+  .opt.wrong{ background:var(--bad); border-color:var(--bad); }
+  .opt:disabled{ cursor:default; }
+
+  .score-ring{ width:150px; height:150px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+  .score-num{ font-family:'Oswald',sans-serif; font-size:38px; font-weight:700; }
+  .score-label{ font-size:11px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+  .pass-banner{ font-family:'Oswald',sans-serif; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:8px 18px; border-radius:999px; font-size:13px; }
+  .pass-banner.pass{ background:var(--good); color:#fff; }
+  .pass-banner.fail{ background:var(--bad); color:#fff; }
+  .review-list{ width:100%; display:flex; flex-direction:column; gap:8px; }
+  .review-item{ display:flex; align-items:center; gap:10px; background:var(--steel); border-radius:10px; padding:8px 12px; }
+  .review-item img{ width:38px; height:38px; object-fit:contain; background:#eceae3; border-radius:6px; padding:4px; }
+  .review-item .txt{ font-size:12.5px; line-height:1.4; }
+  .review-item .txt b{ font-family:'Oswald',sans-serif; font-size:13.5px; text-transform:uppercase; }
+
+  .empty{ text-align:center; color:var(--muted); font-size:14px; padding:30px 10px; }
+
+  /* ---- bottom nav ---- */
+  nav.tabbar{
+    position:fixed; bottom:0; left:0; right:0; z-index:20;
+    background:#1a1c20; border-top:1px solid var(--steel-2);
+    display:flex; padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+  }
+  nav.tabbar button{
+    flex:1; background:none; border:none; color:var(--muted); font-family:'Inter',sans-serif;
+    font-weight:700; font-size:12.5px; padding:8px 0; border-radius:10px; display:flex; flex-direction:column; align-items:center; gap:3px;
+  }
+  nav.tabbar button.active{ color:var(--line-yellow); background:rgba(255,184,28,.08); }
+  nav.tabbar .icon{ font-size:19px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Field Training</div>
+  <h1>CO Road Signs</h1>
+</header>
+
+<main>
+  <!-- ================= STUDY SCREEN ================= -->
+  <section class="screen active" id="studyScreen">
+    <div class="chips" id="studyChips"></div>
+    <div class="progress-row"><span id="studyCatLabel">All Signs</span><span id="studyPos">1 / 1</span></div>
+    <div class="progress-track"><div class="progress-fill" id="studyFill"></div></div>
+    <div class="card-wrap" id="studyCardWrap">
+      <div class="card" id="studyCard">
+        <div class="face front" id="studyFront"></div>
+        <div class="face back" id="studyBack"></div>
+      </div>
+    </div>
+    <div class="mark-row">
+      <button class="mark-btn review" id="markReview">Necesito repasar</button>
+      <button class="mark-btn know" id="markKnow">Ya lo sé</button>
+    </div>
+    <div class="controls-row">
+      <button class="btn ghost" id="studyPrev">‹ Prev</button>
+      <button class="btn" id="studyShuffle">Shuffle</button>
+      <button class="btn primary" id="studyFlip">Flip</button>
+      <button class="btn ghost" id="studyNext">Next ›</button>
+    </div>
+  </section>
+
+  <!-- ================= TEST SCREEN ================= -->
+  <section class="screen" id="testScreen">
+    <div class="test-setup" id="testSetup">
+      <div class="chips" id="testChips"></div>
+      <div class="test-q-num">How many questions?</div>
+      <div class="count-row" id="countRow"></div>
+      <button class="btn primary wide" id="startTestBtn">Start Test</button>
+    </div>
+
+    <div class="test-setup" id="testRun" style="display:none;">
+      <div class="progress-row"><span id="testQNum">Q 1 / 20</span><span id="testScoreLive">0 correct</span></div>
+      <div class="progress-track"><div class="progress-fill" id="testFill"></div></div>
+      <div class="test-img-wrap"><img id="testImg" src="" alt=""></div>
+      <div class="options" id="testOptions"></div>
+      <button class="btn primary wide" id="nextQBtn" style="display:none;">Next Question ›</button>
+    </div>
+
+    <div class="test-setup" id="testResults" style="display:none;">
+      <div class="score-ring" id="scoreRing">
+        <div class="score-num" id="scoreNum">0%</div>
+        <div class="score-label">Score</div>
+      </div>
+      <div class="pass-banner" id="passBanner">PASS</div>
+      <div id="reviewWrap" style="width:100%;">
+        <div class="test-q-num" style="margin-bottom:8px;">Review missed signs</div>
+        <div class="review-list" id="reviewList"></div>
+      </div>
+      <div class="controls-row">
+        <button class="btn" id="retakeBtn">Retake</button>
+        <button class="btn primary" id="newTestBtn">New Test</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="tabbar">
+  <button class="active" id="tabStudy" data-tab="studyScreen"><span class="icon">🗂️</span>Study</button>
+  <button id="tabTest" data-tab="testScreen"><span class="icon">📝</span>Test</button>
+</nav>
+
+<script>
+const CATS = {
+  warn:  { label:'Warning',      color:'var(--warn-c)' },
+  reg:   { label:'Regulatory',   color:'var(--reg-red)' },
+  guide: { label:'Guide',        color:'var(--guide-c)' },
+  work:  { label:'Construction', color:'var(--work-c)' },
+  pave:  { label:'Pavement Marking', color:'var(--pave-c)' },
+};
+const BASE = 'https://permittestpractice.com/road-signs-icons/';
+
+const raw = [
+['warn','advisory-speed-limit-sign','Advisory speed limit','Límite de velocidad recomendada'],
+['warn','angled-side-road-sign','Angled side road','Camino lateral en ángulo'],
+['warn','bike-crossing-sign','Bike crossing','Cruce de bicicletas'],
+['warn','curve-ahead-sign','Curve ahead','Curva adelante'],
+['warn','dead-end-sign','Dead end','Calle sin salida'],
+['warn','deer-crossing-sign','Deer crossing','Cruce de venados'],
+['warn','dip-sign','Dip','Bache / hundimiento en el camino'],
+['warn','divided-highway-begins-sign','Divided highway begins','Comienza autopista dividida'],
+['warn','divided-highway-ends-sign','Divided highway ends','Termina autopista dividida'],
+['warn','downgrade-sign','Downgrade','Pendiente pronunciada / bajada'],
+['warn','exit-only-lane-sign','Exit only lane','Carril de salida únicamente'],
+['warn','exit-ramp-speed-sign','Exit ramp speed','Velocidad en la rampa de salida'],
+['warn','farm-vehicle-sign','Farm vehicle','Vehículo agrícola'],
+['warn','fire-station-sign','Fire station','Estación de bomberos'],
+['warn','four-way-intersection-sign','Four way intersection','Intersección de cuatro vías'],
+['warn','gradual-curve-sign','Gradual curve','Curva gradual'],
+['warn','intersection-curve-sign','Intersection curve','Curva en la intersección'],
+['warn','lane-added-sign','Lane added','Se agrega un carril'],
+['warn','lane-divider-sign','Lane divider','Divisor de carril'],
+['warn','lane-ends-sign','Lane ends','Termina el carril'],
+['warn','left-or-right-double-arrow-sign','Left or right double arrow','Doble flecha izquierda o derecha'],
+['warn','livestock-sign','Livestock','Ganado en el camino'],
+['warn','loop-sign','Loop','Bucle / rizo de carretera'],
+['warn','low-ground-clearance-sign','Low ground clearance','Poca distancia al suelo'],
+['warn','maximum-clearance-sign','Maximum clearance','Altura máxima'],
+['warn','merging-traffic-sign','Merging traffic','Tráfico que se incorpora'],
+['warn','narrow-bridge-sign','Narrow bridge','Puente angosto'],
+['warn','no-passing-zone-sign','No passing zone','Zona de no rebase'],
+['warn','pedestrian-crossing-sign','Pedestrian crossing','Cruce de peatones'],
+['warn','railroad-crossing-sign','Railroad crossing','Cruce de ferrocarril'],
+['warn','road-narrows-sign','Road narrows','El camino se angosta'],
+['warn','roundabout-sign','Roundabout','Glorieta / rotonda'],
+['warn','school-bus-stop-sign','School bus stop','Parada de autobús escolar'],
+['warn','school-crossing-sign','School crossing','Cruce escolar'],
+['warn','sharp-corner-sign','Sharp corner','Curva cerrada'],
+['warn','sharp-curve-arrows-sign','Sharp curve arrows','Flechas de curva cerrada'],
+['warn','sharp-left-turn-sign','Sharp left turn','Vuelta cerrada a la izquierda'],
+['warn','sharp-right-turn-sign','Sharp right turn','Vuelta cerrada a la derecha'],
+['warn','slippery-road-sign','Slippery road','Camino resbaloso'],
+['warn','slow-vehicle-sign','Slow vehicle','Vehículo lento'],
+['warn','soft-shoulder-sign','Soft shoulder','Acotamiento blando'],
+['warn','stop-sign-ahead-sign','Stop sign ahead','Señal de alto adelante'],
+['warn','t-end-road-sign','T end road','Camino termina en T'],
+['warn','t-intersection-sign','T intersection','Intersección en T'],
+['warn','traffic-signal-ahead-sign','Traffic signal ahead','Semáforo adelante'],
+['warn','truck-escape-ramp','Truck escape ramp','Rampa de escape para camiones'],
+['warn','truck-rollover-sign','Truck rollover','Riesgo de volcadura de camiones'],
+['warn','two-way-traffic-sign','Two way traffic','Tráfico en dos direcciones'],
+['warn','u-turn-sign','U turn','Vuelta en U'],
+['warn','winding-road-sign','Winding road','Camino sinuoso'],
+['warn','y-intersection-sign','Y intersection','Intersección en Y'],
+['warn','yield-sign-ahead-sign','Yield sign ahead','Señal de ceda el paso adelante'],
+['reg','4-way-sign','4 way','Alto en las cuatro vías'],
+['reg','begin-right-turn-lane-sign','Begin right turn lane','Comienza carril de vuelta a la derecha'],
+['reg','bike-full-lane-sign','Bike full lane','Carril exclusivo para bicicletas'],
+['reg','bike-lane-ahead-sign','Bike lane ahead','Carril para bicicletas adelante'],
+['reg','bike-lane-no-parking-sign','Bike lane no parking','No estacionar en carril de bicicletas'],
+['reg','disabled-parking-sign','Disabled parking','Estacionamiento para discapacitados'],
+['reg','divided-highway-intersection-sign','Divided highway intersection','Intersección de autopista dividida'],
+['reg','divided-highway-median-sign','Divided highway median','Mediana de autopista dividida'],
+['reg','do-not-enter-sign','Do not enter','No entre'],
+['reg','do-not-pass-sign','Do not pass','No rebasar'],
+['reg','emergency-stopping-only-sign','Emergency stopping only','Solo para detenerse en emergencias'],
+['reg','hov-lane-sign','HOV lane','Carril de alta ocupación vehicular'],
+['reg','intersection-lane-control-sign','Intersection lane control','Control de carril en la intersección'],
+['reg','keep-right-sign','Keep right','Manténgase a la derecha'],
+['reg','left-or-straight-sign','Left or straight','Izquierda o de frente'],
+['reg','no-left-turn-sign','No left turn','No virar a la izquierda'],
+['reg','no-parking-sign','No parking','No estacionar'],
+['reg','no-right-turn-sign','No right turn','No virar a la derecha'],
+['reg','no-trucks-sign','No trucks','Prohibido el paso de camiones'],
+['reg','no-u-or-left-turn-sign','No U or left turn','No vuelta en U ni a la izquierda'],
+['reg','no-u-turn-sign','No U turn','No vuelta en U'],
+['reg','one-way-street-sign','One way street','Calle de sentido único'],
+['reg','railway-crossing-with-3-tracks-sign','Railway crossing (3 tracks)','Cruce de ferrocarril con 3 vías'],
+['reg','right-turn-only-sign','Right turn only','Solo vuelta a la derecha'],
+['reg','school-zone-speed-limit-sign','School zone speed limit','Límite de velocidad en zona escolar'],
+['reg','speed-limit-signs','Speed limit','Límite de velocidad'],
+['reg','stop-sign','Stop','Alto'],
+['reg','straight-only-sign','Straight only','Solo de frente'],
+['reg','two-way-left-only-sign','Two way left only','Solo vuelta a la izquierda en dos sentidos'],
+['reg','wrong-way-sign','Wrong way','Sentido contrario'],
+['reg','yield-sign','Yield','Ceda el paso'],
+['reg','yield-to-pedestrians-sign','Yield to pedestrians','Ceda el paso a los peatones'],
+['guide','direction-sign','Direction','Dirección'],
+['guide','ev-charging-sign','EV charging','Carga para vehículos eléctricos'],
+['guide','food-dining-sign','Food / dining','Comida / restaurantes'],
+['guide','gas-station-sign','Gas station','Gasolinera'],
+['guide','hospital-sign','Hospital','Hospital'],
+['guide','interstate-sign','Interstate','Autopista interestatal'],
+['guide','lodging-sign','Lodging','Hospedaje'],
+['guide','milepost-marker-sign','Milepost marker','Marcador de milla'],
+['guide','rest-area-sign','Rest area','Área de descanso'],
+['guide','us-route-sign','US route','Ruta de EE. UU.'],
+['work','detour-sign','Detour','Desvío'],
+['work','end-road-work-sign','End road work','Fin de zona de trabajo'],
+['work','flagger-sign','Flagger','Bandereo / persona con bandera'],
+['work','right-shoulder-closed-sign','Right shoulder closed','Acotamiento derecho cerrado'],
+['work','roadwork-ahead-sign','Roadwork ahead','Zona de trabajo adelante'],
+['work','slow-traffic-ahead-sign','Slow traffic ahead','Tráfico lento adelante'],
+['work','two-right-lanes-closed-sign','Two right lanes closed','Dos carriles derechos cerrados'],
+['work','workers-in-the-road-sign','Workers in the road','Trabajadores en el camino'],
+['pave','multilane-restricted-lane','Multilane restricted lane','Carril restringido de varios carriles'],
+['pave','multilane-two-way-left-turn','Multilane two way left turn','Carril central de vuelta izquierda de dos sentidos'],
+['pave','two-lane-passing-one-direction','Two lane passing (one direction)','Rebase permitido en una dirección'],
+['pave','two-lane-passing-prohibited','Two lane passing prohibited','Rebase prohibido en ambos sentidos'],
+['pave','two-lane-reversible-lanes','Two lane reversible lanes','Carriles reversibles'],
+['pave','two-lane-roadway-passing','Two lane roadway passing','Rebase en carretera de dos carriles'],
+];
+const cards = raw.map((r,i)=>({ idx:i, cat:r[0], url: BASE + r[1] + '.svg', en:r[2], es:r[3] }));
+
+/* ============== TAB NAV ============== */
+document.querySelectorAll('nav.tabbar button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('nav.tabbar button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============== STUDY MODE ============== */
+(function(){
+  let filtered = cards.slice();
+  let order = filtered.map((_,i)=>i);
+  let pos = 0, flipped = false, progress = {}, activeCat = 'all';
+
+  const chipsEl = document.getElementById('studyChips');
+  const allChip = document.createElement('button');
+  allChip.className='chip active'; allChip.textContent='All'; allChip.dataset.cat='all';
+  chipsEl.appendChild(allChip);
+  Object.entries(CATS).forEach(([key,val])=>{
+    const b=document.createElement('button'); b.className='chip'; b.dataset.cat=key; b.textContent=val.label;
+    chipsEl.appendChild(b);
+  });
+  chipsEl.addEventListener('click', e=>{
+    const btn = e.target.closest('.chip'); if(!btn) return;
+    [...chipsEl.children].forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    filtered = activeCat==='all' ? cards.slice() : cards.filter(c=>c.cat===activeCat);
+    order = filtered.map((_,i)=>i); pos=0; flipped=false;
+    document.getElementById('studyCatLabel').textContent = activeCat==='all' ? 'All Signs' : CATS[activeCat].label;
+    render();
+  });
+
+  function current(){ return filtered[order[pos]]; }
+  function render(){
+    const c = current(); if(!c) return;
+    document.getElementById('studyFront').innerHTML = `<img src="${c.url}" alt="${c.en}">`;
+    const cat = CATS[c.cat];
+    document.getElementById('studyBack').innerHTML = `<div class="cat-tag" style="background:${cat.color}">${cat.label}</div><p class="es-name">${c.es}</p><p class="en-name">${c.en}</p>`;
+    document.getElementById('studyCard').classList.toggle('flipped', flipped);
+    document.getElementById('studyPos').textContent = `${pos+1} / ${filtered.length}`;
+    document.getElementById('studyFill').style.width = `${((pos+1)/filtered.length)*100}%`;
+    const st = progress[c.idx];
+    document.getElementById('markKnow').classList.toggle('active', st==='know');
+    document.getElementById('markReview').classList.toggle('active', st==='review');
+  }
+  function flip(){ flipped=!flipped; document.getElementById('studyCard').classList.toggle('flipped', flipped); }
+  function next(){ pos=(pos+1)%filtered.length; flipped=false; render(); }
+  function prev(){ pos=(pos-1+filtered.length)%filtered.length; flipped=false; render(); }
+  function shuffle(){ for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]];} pos=0; flipped=false; render(); }
+
+  document.getElementById('studyCardWrap').addEventListener('click', flip);
+  document.getElementById('studyFlip').addEventListener('click', flip);
+  document.getElementById('studyNext').addEventListener('click', next);
+  document.getElementById('studyPrev').addEventListener('click', prev);
+  document.getElementById('studyShuffle').addEventListener('click', shuffle);
+  document.getElementById('markKnow').addEventListener('click', ()=>{ const c=current(); progress[c.idx]=progress[c.idx]==='know'?undefined:'know'; render(); });
+  document.getElementById('markReview').addEventListener('click', ()=>{ const c=current(); progress[c.idx]=progress[c.idx]==='review'?undefined:'review'; render(); });
+
+  render();
+})();
+
+/* ============== TEST MODE ============== */
+(function(){
+  const chipsEl = document.getElementById('testChips');
+  const allChip = document.createElement('button');
+  allChip.className='chip active'; allChip.textContent='All'; allChip.dataset.cat='all';
+  chipsEl.appendChild(allChip);
+  Object.entries(CATS).forEach(([key,val])=>{
+    const b=document.createElement('button'); b.className='chip'; b.dataset.cat=key; b.textContent=val.label;
+    chipsEl.appendChild(b);
+  });
+  let testCat = 'all';
+  chipsEl.addEventListener('click', e=>{
+    const btn = e.target.closest('.chip'); if(!btn) return;
+    [...chipsEl.children].forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    testCat = btn.dataset.cat;
+  });
+
+  const countRow = document.getElementById('countRow');
+  let qCount = 20;
+  [10,20,30].forEach(n=>{
+    const b=document.createElement('button'); b.className='btn'+(n===20?' primary':''); b.textContent=n; b.dataset.n=n;
+    b.addEventListener('click', ()=>{ qCount=n; [...countRow.children].forEach(x=>x.classList.remove('primary')); b.classList.add('primary'); });
+    countRow.appendChild(b);
+  });
+
+  let pool=[], qIndex=0, score=0, missed=[], answered=false;
+
+  function shuffleArr(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+
+  function buildPool(){
+    const base = testCat==='all' ? cards : cards.filter(c=>c.cat===testCat);
+    return shuffleArr(base).slice(0, Math.min(qCount, base.length));
+  }
+
+  function startTest(){
+    pool = buildPool();
+    if(pool.length < 4){
+      document.getElementById('testSetup').innerHTML = '<div class="empty">Need at least 4 signs in this category to build a test. Pick a bigger category.</div>';
+      return;
+    }
+    qIndex=0; score=0; missed=[];
+    document.getElementById('testSetup').style.display='none';
+    document.getElementById('testResults').style.display='none';
+    document.getElementById('testRun').style.display='flex';
+    showQuestion();
+  }
+
+  function showQuestion(){
+    answered=false;
+    const q = pool[qIndex];
+    document.getElementById('testQNum').textContent = `Q ${qIndex+1} / ${pool.length}`;
+    document.getElementById('testScoreLive').textContent = `${score} correct`;
+    document.getElementById('testFill').style.width = `${(qIndex/pool.length)*100}%`;
+    document.getElementById('testImg').src = q.url;
+    document.getElementById('testImg').alt = q.en;
+
+    const distractors = shuffleArr(cards.filter(c=>c.idx!==q.idx)).slice(0,3);
+    const options = shuffleArr([q, ...distractors]);
+    const optWrap = document.getElementById('testOptions');
+    optWrap.innerHTML='';
+    options.forEach(opt=>{
+      const b = document.createElement('button');
+      b.className='opt';
+      b.innerHTML = `<span class="es">${opt.es}</span><span class="en">${opt.en}</span>`;
+      b.addEventListener('click', ()=>selectAnswer(b, opt, q));
+      optWrap.appendChild(b);
+    });
+    document.getElementById('nextQBtn').style.display='none';
+  }
+
+  function selectAnswer(btn, opt, correctCard){
+    if(answered) return;
+    answered = true;
+    const allOpts = document.querySelectorAll('#testOptions .opt');
+    allOpts.forEach(o=>o.disabled=true);
+    if(opt.idx === correctCard.idx){
+      btn.classList.add('correct');
+      score++;
+    } else {
+      btn.classList.add('wrong');
+      allOpts.forEach(o=>{ if(o.querySelector('.es').textContent===correctCard.es) o.classList.add('correct'); });
+      missed.push(correctCard);
+    }
+    document.getElementById('testScoreLive').textContent = `${score} correct`;
+    document.getElementById('nextQBtn').style.display='block';
+  }
+
+  function nextQuestion(){
+    qIndex++;
+    if(qIndex >= pool.length){ showResults(); } else { showQuestion(); }
+  }
+
+  function showResults(){
+    document.getElementById('testRun').style.display='none';
+    document.getElementById('testResults').style.display='flex';
+    const pct = Math.round((score/pool.length)*100);
+    const pass = pct >= 80;
+    document.getElementById('scoreNum').textContent = `${pct}%`;
+    document.getElementById('scoreRing').style.background = `conic-gradient(${pass?'var(--good)':'var(--bad)'} ${pct*3.6}deg, var(--steel) 0deg)`;
+    const banner = document.getElementById('passBanner');
+    banner.textContent = pass ? `PASS · ${score}/${pool.length}` : `NOT YET · ${score}/${pool.length}`;
+    banner.className = 'pass-banner ' + (pass?'pass':'fail');
+
+    const reviewList = document.getElementById('reviewList');
+    reviewList.innerHTML='';
+    const reviewWrap = document.getElementById('reviewWrap');
+    if(missed.length===0){
+      reviewWrap.style.display='none';
+    } else {
+      reviewWrap.style.display='block';
+      missed.forEach(c=>{
+        const item = document.createElement('div'); item.className='review-item';
+        item.innerHTML = `<img src="${c.url}" alt="${c.en}"><div class="txt"><b>${c.es}</b><br>${c.en}</div>`;
+        reviewList.appendChild(item);
+      });
+    }
+  }
+
+  document.getElementById('startTestBtn').addEventListener('click', startTest);
+  document.getElementById('nextQBtn').addEventListener('click', nextQuestion);
+  document.getElementById('retakeBtn').addEventListener('click', ()=>{
+    document.getElementById('testResults').style.display='none';
+    document.getElementById('testSetup').style.display='flex';
+  });
+  document.getElementById('newTestBtn').addEventListener('click', ()=>{
+    document.getElementById('testResults').style.display='none';
+    document.getElementById('testSetup').style.display='flex';
+  });
+})();
+</script>
+</body>
+</html>
