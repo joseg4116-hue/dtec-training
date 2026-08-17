@@ -197,7 +197,9 @@ export default function AdminPage() {
                         <tr key={r.id}
                           style={{ background: i % 2 === 0 ? C.white : "#F9F8F7", borderBottom: "1px solid #ECEAE8" }}>
                           <td className="px-4 py-3 font-medium" style={{ color: C.textDark }}>{r.name}</td>
-                          <td className="px-4 py-3" style={{ color: C.textMuted }}>Module {r.module_id.replace("-en","").replace("-es","")}</td>
+                          <td className="px-4 py-3" style={{ color: C.textMuted }}>
+                            {r.module_id === "driver-training" ? "Driver Training" : `Module ${r.module_id.replace("-en","").replace("-es","")}`}
+                          </td>
                           <td className="px-4 py-3">
                             <span className="px-2 py-0.5 rounded text-xs font-bold"
                               style={{ background: r.lang === "en" ? "#EEF2FF" : "#FEF9EC", color: r.lang === "en" ? "#4338CA" : "#92400E" }}>

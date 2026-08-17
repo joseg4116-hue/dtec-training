@@ -4,19 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>CO Road Signs</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --asphalt-1:#15171b; --asphalt-2:#1f232a; --steel:#282d35; --steel-2:#343a44;
-    --line-yellow:#ffb81c; --off-white:#f4f2ec; --muted:#8a919c;
+    --asphalt-1:#2D2926; --asphalt-2:#3A3530; --steel:#4A443E; --steel-2:#5A5550;
+    --line-yellow:#C9B10A; --off-white:#FFFFFF; --muted:#B8B0A8;
     --reg-red:#b3122a; --warn-c:#8a7200; --work-c:#c85a10; --guide-c:#00543c; --pave-c:#2b4f8f;
-    --good:#1f6f43; --bad:#a13e2b; --ink:#111214;
+    --good:#1f6f43; --bad:#a13e2b; --ink:#2D2926;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{ height:100%; }
   body{
-    margin:0; font-family:'Inter',sans-serif; color:var(--off-white);
+    margin:0; font-family:Calibri,'Trebuchet MS',Arial,sans-serif; color:var(--off-white);
     background:linear-gradient(180deg, var(--asphalt-1) 0%, var(--asphalt-2) 100%);
     display:flex; flex-direction:column; min-height:100vh;
     padding-bottom:calc(72px + env(safe-area-inset-bottom));
@@ -26,8 +24,8 @@
     padding:16px 18px 10px; text-align:center; position:sticky; top:0; z-index:5;
     background:linear-gradient(180deg, var(--asphalt-1) 70%, transparent);
   }
-  .eyebrow{ font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:.24em; font-size:10px; color:var(--line-yellow); text-transform:uppercase; }
-  h1{ font-family:'Oswald',sans-serif; font-weight:700; font-size:22px; margin:4px 0 0; text-transform:uppercase; }
+  .eyebrow{ font-family:Georgia,'Times New Roman',serif; font-weight:500; letter-spacing:.24em; font-size:10px; color:var(--line-yellow); text-transform:uppercase; }
+  h1{ font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:22px; margin:4px 0 0; text-transform:uppercase; }
 
   main{ flex:1; display:flex; flex-direction:column; align-items:center; padding:8px 16px 20px; }
   .screen{ width:100%; max-width:420px; display:none; flex-direction:column; align-items:center; gap:14px; }
@@ -41,7 +39,7 @@
   }
   .chip.active{ background:var(--line-yellow); color:var(--ink); border-color:var(--line-yellow); }
   .btn{
-    font-family:'Inter',sans-serif; font-weight:700; font-size:14px;
+    font-family:Calibri,'Trebuchet MS',Arial,sans-serif; font-weight:700; font-size:14px;
     background:var(--steel); color:var(--off-white); border:1px solid var(--steel-2);
     padding:13px 20px; border-radius:10px; cursor:pointer; min-width:64px;
   }
@@ -51,7 +49,7 @@
   .btn:disabled{ opacity:.35; }
 
   /* ---- study screen ---- */
-  .progress-row{ display:flex; justify-content:space-between; width:100%; font-family:'Oswald',sans-serif; font-size:12.5px; color:var(--muted); }
+  .progress-row{ display:flex; justify-content:space-between; width:100%; font-family:Georgia,'Times New Roman',serif; font-size:12.5px; color:var(--muted); }
   .progress-track{ height:3px; width:100%; background:var(--steel); border-radius:2px; overflow:hidden; }
   .progress-fill{ height:100%; background:var(--line-yellow); transition:width .25s ease; }
   .card-wrap{ perspective:1400px; width:100%; max-width:280px; aspect-ratio:1/1.05; cursor:pointer; }
@@ -62,7 +60,7 @@
   .front img{ width:100%; height:100%; object-fit:contain; }
   .back{ background:var(--steel); transform:rotateY(180deg); flex-direction:column; padding:20px; text-align:center; gap:8px; }
   .cat-tag{ font-weight:700; font-size:9.5px; letter-spacing:.13em; text-transform:uppercase; padding:5px 10px; border-radius:999px; color:#fff; }
-  .es-name{ font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; text-transform:uppercase; margin:0; }
+  .es-name{ font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:20px; text-transform:uppercase; margin:0; }
   .en-name{ color:var(--muted); font-size:12.5px; margin:0; font-weight:600; }
   .controls-row{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
   .mark-row{ display:flex; gap:8px; }
@@ -73,7 +71,16 @@
   /* ---- test screen ---- */
   .test-setup{ width:100%; display:flex; flex-direction:column; align-items:center; gap:16px; }
   .count-row{ display:flex; gap:8px; }
-  .test-q-num{ font-family:'Oswald',sans-serif; color:var(--muted); font-size:13px; letter-spacing:.05em; }
+  .email-row{ width:100%; display:flex; flex-direction:column; gap:6px; }
+  .email-row input{
+    width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--steel-2);
+    background:var(--steel); color:var(--off-white); font-family:Calibri,'Trebuchet MS',Arial,sans-serif; font-size:14px; text-align:center;
+    outline:none;
+  }
+  .email-row input:focus{ border-color:var(--line-yellow); }
+  .email-status{ font-size:12px; color:var(--muted); text-align:center; }
+  .email-status a{ color:var(--line-yellow); cursor:pointer; text-decoration:underline; }
+  .test-q-num{ font-family:Georgia,'Times New Roman',serif; color:var(--muted); font-size:13px; letter-spacing:.05em; }
   .test-img-wrap{ width:100%; max-width:240px; aspect-ratio:1/1; background:#eceae3; border-radius:14px; display:flex; align-items:center; justify-content:center; padding:12%; }
   .test-img-wrap img{ width:100%; height:100%; object-fit:contain; }
   .options{ width:100%; display:flex; flex-direction:column; gap:10px; }
@@ -81,41 +88,60 @@
     width:100%; text-align:left; padding:13px 16px; border-radius:10px; border:1.5px solid var(--steel-2);
     background:var(--steel); color:var(--off-white); font-size:14px; font-weight:600; cursor:pointer;
   }
-  .opt .es{ display:block; font-family:'Oswald',sans-serif; font-size:15px; text-transform:uppercase; }
+  .opt .es{ display:block; font-family:Georgia,'Times New Roman',serif; font-size:15px; text-transform:uppercase; }
   .opt .en{ display:block; color:var(--muted); font-size:11.5px; font-weight:500; margin-top:1px; }
   .opt.correct{ background:var(--good); border-color:var(--good); }
   .opt.wrong{ background:var(--bad); border-color:var(--bad); }
   .opt:disabled{ cursor:default; }
 
   .score-ring{ width:150px; height:150px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-direction:column; }
-  .score-num{ font-family:'Oswald',sans-serif; font-size:38px; font-weight:700; }
+  .score-num{ font-family:Georgia,'Times New Roman',serif; font-size:38px; font-weight:700; }
   .score-label{ font-size:11px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
-  .pass-banner{ font-family:'Oswald',sans-serif; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:8px 18px; border-radius:999px; font-size:13px; }
+  .pass-banner{ font-family:Georgia,'Times New Roman',serif; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:8px 18px; border-radius:999px; font-size:13px; }
   .pass-banner.pass{ background:var(--good); color:#fff; }
   .pass-banner.fail{ background:var(--bad); color:#fff; }
   .review-list{ width:100%; display:flex; flex-direction:column; gap:8px; }
   .review-item{ display:flex; align-items:center; gap:10px; background:var(--steel); border-radius:10px; padding:8px 12px; }
   .review-item img{ width:38px; height:38px; object-fit:contain; background:#eceae3; border-radius:6px; padding:4px; }
   .review-item .txt{ font-size:12.5px; line-height:1.4; }
-  .review-item .txt b{ font-family:'Oswald',sans-serif; font-size:13.5px; text-transform:uppercase; }
+  .review-item .txt b{ font-family:Georgia,'Times New Roman',serif; font-size:13.5px; text-transform:uppercase; }
 
   .empty{ text-align:center; color:var(--muted); font-size:14px; padding:30px 10px; }
 
   /* ---- bottom nav ---- */
   nav.tabbar{
     position:fixed; bottom:0; left:0; right:0; z-index:20;
-    background:#1a1c20; border-top:1px solid var(--steel-2);
+    background:var(--asphalt-1); border-top:1px solid var(--steel-2);
     display:flex; padding:8px 10px calc(8px + env(safe-area-inset-bottom));
   }
   nav.tabbar button{
-    flex:1; background:none; border:none; color:var(--muted); font-family:'Inter',sans-serif;
+    flex:1; background:none; border:none; color:var(--muted); font-family:Calibri,'Trebuchet MS',Arial,sans-serif;
     font-weight:700; font-size:12.5px; padding:8px 0; border-radius:10px; display:flex; flex-direction:column; align-items:center; gap:3px;
   }
-  nav.tabbar button.active{ color:var(--line-yellow); background:rgba(255,184,28,.08); }
+  nav.tabbar button.active{ color:var(--line-yellow); background:rgba(201,177,10,.12); }
   nav.tabbar .icon{ font-size:19px; }
+
+  /* ---- app top bar (matches rest of the DTEC app) ---- */
+  .app-topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px; background:var(--asphalt-1);
+  }
+  .app-topbar a{ text-decoration:none; }
+  .home-link{ display:flex; align-items:center; gap:5px; font-size:13px; color:var(--muted); }
+  .home-link svg{ display:block; }
 </style>
 </head>
 <body>
+
+<div class="app-topbar">
+  <a href="/" class="home-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+    Home
+  </a>
+  <a href="https://trustdtec.com" target="_blank" rel="noopener noreferrer" style="mix-blend-mode:screen;">
+    <img src="/images/dtec_30_years.png" alt="DTEC" width="80" height="32" style="object-fit:contain; filter:invert(1) opacity(0.85);">
+  </a>
+</div>
 
 <header>
   <div class="eyebrow">Field Training</div>
@@ -152,6 +178,13 @@
       <div class="chips" id="testChips"></div>
       <div class="test-q-num">How many questions?</div>
       <div class="count-row" id="countRow"></div>
+      <div class="email-row" id="emailRow">
+        <div class="test-q-num">Email (to save your result)</div>
+        <input type="email" id="emailInput" placeholder="your@email.com">
+      </div>
+      <div class="email-status" id="emailStatus" style="display:none;">
+        Saving results for <span id="emailStatusAddr" style="color:var(--off-white);"></span> — <a id="emailChange">change</a>
+      </div>
       <button class="btn primary wide" id="startTestBtn">Start Test</button>
     </div>
 
@@ -372,6 +405,40 @@ document.querySelectorAll('nav.tabbar button').forEach(btn=>{
   render();
 })();
 
+/* ============== EMAIL (shared with rest of the app) ============== */
+const EMAIL_KEY = 'dtec_email';
+let userEmail = localStorage.getItem(EMAIL_KEY) || '';
+
+function renderEmailState(){
+  const row = document.getElementById('emailRow');
+  const status = document.getElementById('emailStatus');
+  if(userEmail){
+    row.style.display = 'none';
+    status.style.display = 'block';
+    document.getElementById('emailStatusAddr').textContent = userEmail;
+  } else {
+    row.style.display = 'flex';
+    status.style.display = 'none';
+  }
+}
+document.getElementById('emailChange').addEventListener('click', ()=>{
+  userEmail = '';
+  localStorage.removeItem(EMAIL_KEY);
+  document.getElementById('emailInput').value = '';
+  renderEmailState();
+  document.getElementById('emailInput').focus();
+});
+renderEmailState();
+
+function saveResult(score, total, passed){
+  if(!userEmail) return;
+  fetch('/api/results', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: userEmail, module_id: 'driver-training', lang: 'en', score, total, passed }),
+  }).catch(()=>{});
+}
+
 /* ============== TEST MODE ============== */
 (function(){
   const chipsEl = document.getElementById('testChips');
@@ -408,6 +475,13 @@ document.querySelectorAll('nav.tabbar button').forEach(btn=>{
   }
 
   function startTest(){
+    if(!userEmail){
+      const typed = document.getElementById('emailInput').value.trim().toLowerCase();
+      if(!typed){ document.getElementById('emailInput').focus(); return; }
+      userEmail = typed;
+      localStorage.setItem(EMAIL_KEY, userEmail);
+      renderEmailState();
+    }
     pool = buildPool();
     if(pool.length < 4){
       document.getElementById('testSetup').innerHTML = '<div class="empty">Need at least 4 signs in this category to build a test. Pick a bigger category.</div>';
@@ -475,6 +549,7 @@ document.querySelectorAll('nav.tabbar button').forEach(btn=>{
     const banner = document.getElementById('passBanner');
     banner.textContent = pass ? `PASS · ${score}/${pool.length}` : `NOT YET · ${score}/${pool.length}`;
     banner.className = 'pass-banner ' + (pass?'pass':'fail');
+    saveResult(score, pool.length, pass);
 
     const reviewList = document.getElementById('reviewList');
     reviewList.innerHTML='';

@@ -52,6 +52,7 @@ export default function Home() {
       const ids  = new Set<string>(json.passed ?? []);
       const result: Record<string, boolean> = {};
       modules.forEach((m) => { result[m.id] = ids.has(m.id); });
+      result["driver-training"] = ids.has("driver-training");
       setPassed(result);
     } catch {
       setPassed({});
@@ -290,7 +291,9 @@ export default function Home() {
                       </div>
                     </div>
                   )}
-                  {cat.key === "advanced" && (
+                  {cat.key === "advanced" && (() => {
+                    const driverTrainingPassed = !!passed["driver-training"];
+                    return (
                     <div className="rounded-2xl overflow-hidden shadow-sm"
                       style={{ background: C.textLight, border: `1px solid #D0CECA` }}>
 
@@ -306,6 +309,12 @@ export default function Home() {
                           </h2>
                           <p className="text-xs" style={{ color: C.textMuted }}>CO Road Signs — flashcards & practice test (EN/ES)</p>
                         </div>
+                        {driverTrainingPassed && (
+                          <span className="pop-in-enter flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full shrink-0"
+                            style={{ background: "#f0f7ee", color: "#2d6a2d" }}>
+                            <CheckCircle size={12} /> Passed
+                          </span>
+                        )}
                       </div>
 
                       <div className="px-6 pt-4 pb-5">
@@ -313,11 +322,12 @@ export default function Home() {
                           className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-150 active:scale-[0.97]"
                           style={{ background: C.charcoal, color: C.textLight }}>
                           <BookOpen size={15} />
-                          Open Driver Training
+                          {driverTrainingPassed ? "Review Driver Training" : "Open Driver Training"}
                         </a>
                       </div>
                     </div>
-                  )}
+                    );
+                  })()}
                   {cat.comingSoon.map((num) => {
                     const versions = modules.filter((m) => m.moduleNum === num && m.category === cat.key);
                     const en = versions.find((m) => m.lang === "en");
