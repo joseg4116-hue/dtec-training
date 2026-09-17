@@ -1022,6 +1022,214 @@ export const quizBanks: QuizBank[] = [
       },
     ],
   },
+
+  // ── MODULE 03 — STRAW WATTLE — EN ────────────────────────────────────────
+  {
+    moduleId: "03-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "sw-en-01",
+        question: "What does straw wattle actually do?",
+        options: [
+          "Stops soil from moving in the first place",
+          "Catches sediment that's already moving and lets water filter through slowly while sediment drops out",
+          "Chemically treats polluted runoff before it leaves the site",
+          "Replaces the need for a SWPPP",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-en-02",
+        question: "What is the minimum log diameter for straw wattle?",
+        options: ["6\" min.", "9\" min.", "12\" min.", "4\" min."],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-en-03",
+        question: "What size is the center stake?",
+        options: [
+          "1\"×1\"×12\" wood",
+          "1½\"×1½\"×18\" wood",
+          "2\"×2\"×24\" wood",
+          "1\"×2\"×18\" wood",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-en-04",
+        question: "What's the maximum stake spacing?",
+        options: ["2' max", "4' max", "6' max", "8' max"],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-en-05",
+        question: "How deep does the stake need to go into the ground, and how far should it stick up above the log?",
+        options: [
+          "6\" min. into the ground, 3\" sticking up",
+          "3\" into the ground, 6\" sticking up",
+          "12\" into the ground, no stick-up required",
+          "4\" into the ground, 4\" sticking up",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sw-en-06",
+        question: "Where two straw wattle logs meet, how much must they overlap?",
+        options: ["6\" min.", "9\" min.", "12\" min.", "18\" min."],
+        correctIndex: 2,
+      },
+      {
+        id: "sw-en-07",
+        question: "Which of these is NOT one of DTEC's four straw wattle placement types?",
+        options: [
+          "On Slope / Perimeter",
+          "At Back of Curb",
+          "Around Inlets / Structures",
+          "Down the middle of a parking lot",
+        ],
+        correctIndex: 3,
+      },
+      {
+        id: "sw-en-08",
+        question: "What's the single most common reason straw wattle fails inspection?",
+        options: [
+          "The material is the wrong color",
+          "The log is left sitting on top of the grass instead of trenched in",
+          "It's installed on a slope",
+          "Too many stakes are used",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-en-09",
+        question: "Besides slopes, curbs, sidewalks, and inlets, where else is straw wattle used?",
+        options: [
+          "Only on flat pavement",
+          "As check dams in ditches/swales and ringed around stockpiles",
+          "Inside storm drains",
+          "On roofs",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-en-10",
+        question: "According to the closing message, who judges DTEC by the wattle line left behind?",
+        options: [
+          "Only the client",
+          "Only the inspector",
+          "The inspector, the client, and the next storm",
+          "Only DTEC's own crew",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
+
+  // ── MODULE 03 — STRAW WATTLE — ES ────────────────────────────────────────
+  {
+    moduleId: "03-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "sw-es-01",
+        question: "¿Qué hace realmente el straw wattle?",
+        options: [
+          "Evita que la tierra se mueva desde el principio",
+          "Atrapa el sedimento que ya se está moviendo y deja que el agua se filtre lentamente mientras el sedimento se asienta",
+          "Trata químicamente el agua contaminada antes de que salga del sitio",
+          "Reemplaza la necesidad de un SWPPP",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-es-02",
+        question: "¿Cuál es el diámetro mínimo del tronco de straw wattle?",
+        options: ["6\" mín.", "9\" mín.", "12\" mín.", "4\" mín."],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-es-03",
+        question: "¿De qué tamaño es la estaca central?",
+        options: [
+          "Madera de 1\"×1\"×12\"",
+          "Madera de 1½\"×1½\"×18\"",
+          "Madera de 2\"×2\"×24\"",
+          "Madera de 1\"×2\"×18\"",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-es-04",
+        question: "¿Cuál es el espaciado máximo entre estacas?",
+        options: ["2' máx.", "4' máx.", "6' máx.", "8' máx."],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-es-05",
+        question: "¿Qué tan profundo debe entrar la estaca en el suelo, y cuánto debe sobresalir sobre el tronco?",
+        options: [
+          "6\" mín. en el suelo, 3\" sobresaliendo",
+          "3\" en el suelo, 6\" sobresaliendo",
+          "12\" en el suelo, sin sobresalir",
+          "4\" en el suelo, 4\" sobresaliendo",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "sw-es-06",
+        question: "Donde se juntan dos troncos de straw wattle, ¿cuánto deben traslaparse?",
+        options: ["6\" mín.", "9\" mín.", "12\" mín.", "18\" mín."],
+        correctIndex: 2,
+      },
+      {
+        id: "sw-es-07",
+        question: "¿Cuál de estos NO es uno de los cuatro lugares donde DTEC coloca straw wattle?",
+        options: [
+          "En Pendiente / Perímetro",
+          "Detrás de la Guarnición",
+          "Alrededor de Coladeras / Estructuras",
+          "En medio de un estacionamiento",
+        ],
+        correctIndex: 3,
+      },
+      {
+        id: "sw-es-08",
+        question: "¿Cuál es la razón más común por la que el straw wattle falla la inspección?",
+        options: [
+          "El material es del color equivocado",
+          "El tronco se deja encima del pasto en lugar de enterrado",
+          "Está instalado en una pendiente",
+          "Se usan demasiadas estacas",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-es-09",
+        question: "Además de pendientes, guarniciones, banquetas y coladeras, ¿dónde más se usa el straw wattle?",
+        options: [
+          "Solo en pavimento plano",
+          "Como presa de contención en zanjas/cunetas y rodeando montones de tierra",
+          "Dentro de las coladeras pluviales",
+          "En techos",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "sw-es-10",
+        question: "Según el mensaje de cierre, ¿quién juzga a DTEC por la línea de wattle que deja atrás?",
+        options: [
+          "Solo el cliente",
+          "Solo el inspector",
+          "El inspector, el cliente, y la próxima tormenta",
+          "Solo la propia cuadrilla de DTEC",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
 ];
 
 export function getQuizBank(moduleId: string): QuizBank | undefined {

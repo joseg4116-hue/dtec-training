@@ -671,6 +671,48 @@ export const modules: Module[] = [
     ],
   },
 
+  // ── MODULE 03 — EN ──────────────────────────────────────────────────────
+  {
+    id: "03-en",
+    moduleNum: 3,
+    lang: "en",
+    category: "stormwater",
+    title: "Straw Wattle",
+    subtitle: "Materials, methods & the DTEC standard",
+    slides: [
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-01.png", alt: "Straw Wattle Installation — title slide" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-02.png", alt: "What Is Straw Wattle?" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-03.png", alt: "Why It Matters" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-04.png", alt: "Materials & Key Numbers" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-05.png", alt: "Where We Install Straw Wattle" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-06.png", alt: "Step by Step: Installing Straw Wattle" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-07.png", alt: "Numbers to Build To" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-08.png", alt: "Why Straw Wattle Fails Inspection" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/en-09.png", alt: "Follow the spec. Finish to the DTEC standard." },
+    ],
+  },
+
+  // ── MODULE 03 — ES ──────────────────────────────────────────────────────
+  {
+    id: "03-es",
+    moduleNum: 3,
+    lang: "es",
+    category: "stormwater",
+    title: "Straw Wattle",
+    subtitle: "Materiales, metodos y el estandar DTEC",
+    slides: [
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-01.png", alt: "Instalacion de Straw Wattle — portada" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-02.png", alt: "Que Es el Straw Wattle?" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-03.png", alt: "Por Que Importa" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-04.png", alt: "Materiales y Numeros Clave" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-05.png", alt: "Donde Instalamos el Straw Wattle" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-06.png", alt: "Paso a Paso: Instalando el Straw Wattle" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-07.png", alt: "Numeros Para Cumplir" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-08.png", alt: "Por Que el Straw Wattle Falla la Inspeccion" },
+      { type: "slide-image", image: "/images/straw-wattle-slides/es-09.png", alt: "Sigue la especificacion. Termina al estandar DTEC." },
+    ],
+  },
+
   // ── MODULE 01 — EN ──────────────────────────────────────────────────────
   {
     id: "01-en",
