@@ -72,6 +72,8 @@ export default function QuizPage() {
   const [selected, setSelected]   = useState<number | null>(null);
   const [answers, setAnswers]     = useState<boolean[]>([]);
   const emailInputRef = useRef<HTMLInputElement>(null);
+  const startedAtRef  = useRef<number>(0);
+  const missedRef     = useRef<string[]>([]);
 
   const isES = id.endsWith("-es");
   const t = {
@@ -117,6 +119,8 @@ export default function QuizPage() {
     setCurrent(0);
     setSelected(null);
     setAnswers([]);
+    startedAtRef.current = Date.now();
+    missedRef.current = [];
     setPhase("quiz");
   };
 
@@ -142,6 +146,7 @@ export default function QuizPage() {
     const q = session[current];
     const correct     = selected === q.correctShuffledIndex;
     const newAnswers  = [...answers, correct];
+    if (!correct) missedRef.current.push(q.original.question);
     setAnswers(newAnswers);
 
     if (current + 1 >= total) {
@@ -157,6 +162,9 @@ export default function QuizPage() {
           score: finalScore,
           total,
           passed: finalPassed,
+          started_at: new Date(startedAtRef.current).toISOString(),
+          duration_seconds: Math.round((Date.now() - startedAtRef.current) / 1000),
+          missed_questions: missedRef.current,
         }),
       }).catch(() => {});
       setPhase("result");

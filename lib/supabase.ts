@@ -9,6 +9,22 @@ export type QuizResult = {
   total: number;
   passed: boolean;
   taken_at: string;
+  started_at?: string | null;
+  duration_seconds?: number | null;
+  missed_questions?: string[] | null;
+};
+
+export type TrainingEvent = {
+  session_id: string;
+  email: string;
+  event_type: "login" | "lesson";
+  module_id: string | null;
+  lang: string | null;
+  started_at: string;
+  last_seen_at: string;
+  duration_seconds: number;
+  slides_viewed: number | null;
+  total_slides: number | null;
 };
 
 let _adminClient: SupabaseClient | null = null;

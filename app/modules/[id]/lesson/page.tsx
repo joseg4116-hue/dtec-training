@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   ChevronLeft, ChevronRight, Home, ClipboardList,
   Volume2, VolumeX, Repeat,
@@ -11,6 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSpeech } from "@/hooks/useSpeech";
 import { getSlideSegments } from "@/lib/getSlideSegments";
+import { useActivityTracker } from "@/hooks/useActivityTracker";
 
 export default function LessonPage() {
   const { id } = useParams<{ id: string }>();
@@ -21,6 +22,19 @@ export default function LessonPage() {
   const [autoPlay, setAutoPlay]   = useState(false);
 
   const { speak, stop, isPlaying, activeIndex, rate, cycleRate } = useSpeech();
+
+  // Time-on-lesson tracking: one session per visit to this page
+  const viewedSlides = useRef<Set<number>>(new Set());
+  useEffect(() => { viewedSlides.current = new Set(); }, [id]);
+  useEffect(() => { viewedSlides.current.add(current); }, [current]);
+
+  useActivityTracker({
+    eventType: "lesson",
+    moduleId: id,
+    lang: module?.lang,
+    keepActive: isPlaying || autoPlay,
+    getExtra: () => ({ slides_viewed: viewedSlides.current.size, total_slides: module?.slides.length ?? 0 }),
+  });
 
   useEffect(() => {
     const saved = localStorage.getItem(`dtec_lesson_${id}`);
