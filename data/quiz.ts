@@ -1230,6 +1230,244 @@ export const quizBanks: QuizBank[] = [
       },
     ],
   },
+
+  // ── ADVANCED — TALKING TO DOT — EN ───────────────────────────────────────
+  {
+    moduleId: "dot-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "dot-en-01",
+        question: "According to this training, what is the real risk during a traffic stop?",
+        options: [
+          "The language barrier itself",
+          "Staying quiet or guessing when you don't understand",
+          "Getting a ticket",
+          "Being late to the job site",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "dot-en-02",
+        question: "Where is the USDOT number on DTEC trucks?",
+        options: [
+          "On the front bumper",
+          "On the front doors, upper area",
+          "On the back doors — both sides, lower area",
+          "On the tailgate only",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-en-03",
+        question: "Once you've pulled over to a safe spot, what should you do?",
+        options: [
+          "Get out and walk to the officer's car",
+          "Turn off the engine, turn on hazard lights, and keep your hands on the wheel",
+          "Start looking for your documents right away",
+          "Keep the engine running in case you need to move",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "dot-en-04",
+        question: "How should you answer the officer's questions?",
+        options: [
+          "Explain as much as possible so they understand everything",
+          "Stay silent until a supervisor arrives",
+          "Keep answers short and factual — don't explain more than what's asked",
+          "Answer only in Spanish",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-en-05",
+        question: "Which of these requires a CDL?",
+        options: [
+          "An install truck with a standard load",
+          "A maintenance truck with a standard load",
+          "Any vehicle under 26,001 lbs GVWR",
+          "Gooseneck trailer, dump trailer, Big Brown, or towing a loaded track skid",
+        ],
+        correctIndex: 3,
+      },
+      {
+        id: "dot-en-06",
+        question: "The officer says something you don't understand. What should you do?",
+        options: [
+          "Nod and say \"yes\" so the stop goes faster",
+          "Say you don't understand — ask them to slow down, repeat, or write it down",
+          "Guess at the answer",
+          "Stay quiet and wait",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "dot-en-07",
+        question: "Before reaching for your documents in the glovebox, what should you do?",
+        options: [
+          "Nothing — just grab them quickly",
+          "Get out of the truck first",
+          "Tell the officer and ask, \"May I reach for it?\"",
+          "Wait for the officer to get them",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-en-08",
+        question: "What does the trailer breakaway brake / cable do?",
+        options: [
+          "Locks the trailer's brakes if it disconnects from the truck",
+          "Connects the trailer lights",
+          "Secures the load so it doesn't shift",
+          "Marks the trailer's size and position",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "dot-en-09",
+        question: "When is the Chain Law in effect on the I-70 mountain corridor?",
+        options: [
+          "Only when it is snowing",
+          "December 1 – March 31",
+          "September 1 – May 31",
+          "All year",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-en-10",
+        question: "The officer hands you something to sign that you don't understand. What should you do?",
+        options: [
+          "Sign it so you can leave",
+          "Refuse and argue",
+          "Don't sign it until you understand — ask for help, like calling your supervisor",
+          "Throw it away after the stop",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
+
+  // ── ADVANCED — TALKING TO DOT — ES ───────────────────────────────────────
+  {
+    moduleId: "dot-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "dot-es-01",
+        question: "Según este entrenamiento, ¿cuál es el verdadero riesgo durante una parada de tráfico?",
+        options: [
+          "La barrera del idioma en sí",
+          "Quedarte callado o adivinar cuando no entiendes",
+          "Recibir una multa",
+          "Llegar tarde al sitio de trabajo",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "dot-es-02",
+        question: "¿Dónde está el número USDOT en los camiones de DTEC?",
+        options: [
+          "En la defensa delantera",
+          "En las puertas delanteras, parte de arriba",
+          "En las puertas traseras — de ambos lados, parte de abajo",
+          "Solo en la compuerta trasera",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-es-03",
+        question: "Una vez que te detuviste en un lugar seguro, ¿qué debes hacer?",
+        options: [
+          "Bajarte y caminar hacia el carro del oficial",
+          "Apagar el motor, encender las luces de emergencia y mantener las manos en el volante",
+          "Empezar a buscar tus documentos de inmediato",
+          "Dejar el motor encendido por si necesitas moverte",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "dot-es-04",
+        question: "¿Cómo debes responder las preguntas del oficial?",
+        options: [
+          "Explicar lo más posible para que entienda todo",
+          "Quedarte callado hasta que llegue un supervisor",
+          "Dar respuestas cortas y directas — no explicar más de lo que te preguntan",
+          "Contestar solo en español",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-es-05",
+        question: "¿Cuál de estos requiere CDL?",
+        options: [
+          "Un camión de instalación con carga estándar",
+          "Un camión de mantenimiento con carga estándar",
+          "Cualquier vehículo de menos de 26,001 lbs GVWR",
+          "Remolque cuello de ganso, remolque de volteo, Big Brown, o remolcando un minicargador con más carga",
+        ],
+        correctIndex: 3,
+      },
+      {
+        id: "dot-es-06",
+        question: "El oficial dice algo que no entiendes. ¿Qué debes hacer?",
+        options: [
+          "Asentir y decir \"sí\" para que la parada sea más rápida",
+          "Decir que no entiendes — pedir que hable más despacio, que repita, o que lo escriba",
+          "Adivinar la respuesta",
+          "Quedarte callado y esperar",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "dot-es-07",
+        question: "Antes de alcanzar tus documentos en la guantera, ¿qué debes hacer?",
+        options: [
+          "Nada — solo agarrarlos rápido",
+          "Bajarte del camión primero",
+          "Avisarle al oficial y preguntar: \"May I reach for it?\" (¿Puedo alcanzarlo?)",
+          "Esperar a que el oficial los saque",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-es-08",
+        question: "¿Qué hace el cable de freno de emergencia del remolque?",
+        options: [
+          "Bloquea los frenos del remolque si se desconecta del camión",
+          "Conecta las luces del remolque",
+          "Asegura la carga para que no se mueva",
+          "Marca el tamaño y la posición del remolque",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "dot-es-09",
+        question: "¿Cuándo está en vigor la Ley de cadenas en el corredor de montaña de I-70?",
+        options: [
+          "Solo cuando está nevando",
+          "Del 1 de diciembre al 31 de marzo",
+          "Del 1 de septiembre al 31 de mayo",
+          "Todo el año",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "dot-es-10",
+        question: "El oficial te da algo para firmar que no entiendes. ¿Qué debes hacer?",
+        options: [
+          "Firmarlo para poder irte",
+          "Negarte y discutir",
+          "No firmarlo hasta que lo entiendas — pide ayuda, como llamar a tu supervisor",
+          "Tirarlo después de la parada",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
 ];
 
 export function getQuizBank(moduleId: string): QuizBank | undefined {

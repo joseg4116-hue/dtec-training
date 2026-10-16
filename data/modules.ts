@@ -1114,6 +1114,61 @@ export const modules: Module[] = [
       },
     ],
   },
+
+  // ── ADVANCED — TALKING TO DOT — EN ───────────────────────────────────────
+  // Deck is bilingual on every slide, so EN and ES share the same images.
+  {
+    id: "dot-en",
+    moduleNum: 0,
+    lang: "en",
+    category: "advanced",
+    title: "Talking to DOT",
+    subtitle: "A driver's guide to traffic stops",
+    slides: [
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-01.png", alt: "Talking to DOT — title slide" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-02.png", alt: "Why This Matters" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-03.png", alt: "What to Carry" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-04.png", alt: "Where's the DOT Number" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-05.png", alt: "The Pull-Over Sequence" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-06.png", alt: "What the Officer Will Usually Ask" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-07.png", alt: "If the Officer Asks About Weight" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-08.png", alt: "If You Don't Understand, Say So" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-09.png", alt: "Key Phrases — Getting Started" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-10.png", alt: "Key Phrases — Answering Questions" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-11.png", alt: "Truck Parts You Might Get Asked About" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-12.png", alt: "Signs You Need to Know" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-13.png", alt: "What NOT to Do" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-14.png", alt: "If You Get Stuck" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-15.png", alt: "Remember: If you don't understand, say so." },
+    ],
+  },
+
+  // ── ADVANCED — TALKING TO DOT — ES ───────────────────────────────────────
+  {
+    id: "dot-es",
+    moduleNum: 0,
+    lang: "es",
+    category: "advanced",
+    title: "Hablando con el DOT",
+    subtitle: "Guía del conductor para paradas de tráfico",
+    slides: [
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-01.png", alt: "Hablando con el DOT — portada" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-02.png", alt: "Por qué es importante" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-03.png", alt: "Qué debes llevar" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-04.png", alt: "Dónde está el número DOT" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-05.png", alt: "La secuencia al ser detenido" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-06.png", alt: "Qué preguntará normalmente el oficial" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-07.png", alt: "Si el oficial pregunta sobre el peso" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-08.png", alt: "Si no entiendes, dilo" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-09.png", alt: "Frases clave — Para comenzar" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-10.png", alt: "Frases clave — Al responder preguntas" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-11.png", alt: "Partes del camión que te pueden preguntar" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-12.png", alt: "Señales que debes conocer" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-13.png", alt: "Qué NO hacer" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-14.png", alt: "Si te quedas atascado" },
+      { type: "slide-image", image: "/images/talking-to-dot-slides/slide-15.png", alt: "Recuerda: si no entiendes, dilo." },
+    ],
+  },
 ];
 
 export function getModule(id: string): Module | undefined {
