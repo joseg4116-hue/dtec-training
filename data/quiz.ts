@@ -1407,7 +1407,7 @@ export const quizBanks: QuizBank[] = [
           "Un camión de instalación con carga estándar",
           "Un camión de mantenimiento con carga estándar",
           "Cualquier vehículo de menos de 26,001 lbs GVWR",
-          "Remolque cuello de ganso, remolque de volteo, Big Brown, o remolcando un minicargador con más carga",
+          "Remolque cuello de ganso, remolque de volteo, Big Brown, o remolcando un minicargador de orugas cargado",
         ],
         correctIndex: 3,
       },
