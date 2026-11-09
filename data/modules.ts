@@ -713,6 +713,60 @@ export const modules: Module[] = [
     ],
   },
 
+  // ── MODULE 04 — EN ──────────────────────────────────────────────────────
+  {
+    id: "04-en",
+    moduleNum: 4,
+    lang: "en",
+    category: "stormwater",
+    title: "Inlet Protection",
+    subtitle: "Materials, methods & the DTEC standard",
+    slides: [
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-01.png", alt: "Inlet Protection — title slide" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-02.png", alt: "What Is Inlet Protection?" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-03.png", alt: "Why It Matters" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-04.png", alt: "Materials & Key Numbers" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-05.png", alt: "Specs Change at the County Line" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-06.png", alt: "What's Not Allowed" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-07.png", alt: "Where Inlet Protection Goes" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-08.png", alt: "The Four Layouts" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-09.png", alt: "Why a Sump Is Different" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-10.png", alt: "Grate Inlets: Bags and Curbs" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-11.png", alt: "Step by Step: Installing Inlet Protection" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-12.png", alt: "Numbers to Build To" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-13.png", alt: "Keeping It Working" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-14.png", alt: "Why Inlet Protection Fails Inspection" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/en-15.png", alt: "Follow the spec. Finish to the DTEC standard." },
+    ],
+  },
+
+  // ── MODULE 04 — ES ──────────────────────────────────────────────────────
+  {
+    id: "04-es",
+    moduleNum: 4,
+    lang: "es",
+    category: "stormwater",
+    title: "Proteccion de Inlets",
+    subtitle: "Materiales, metodos y el estandar DTEC",
+    slides: [
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-01.png", alt: "Proteccion de Inlets — portada" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-02.png", alt: "Que Es la Proteccion de Inlets?" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-03.png", alt: "Por Que Importa" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-04.png", alt: "Materiales y Numeros Clave" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-05.png", alt: "La Especificacion Cambia por Condado" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-06.png", alt: "Lo Que No Se Permite" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-07.png", alt: "Donde Va la Proteccion de Inlets" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-08.png", alt: "Los Cuatro Acomodos" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-09.png", alt: "Por Que un Sump Es Diferente" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-10.png", alt: "Inlets de Rejilla: Bolsas y Bordillos" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-11.png", alt: "Paso a Paso: Instalar la Proteccion" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-12.png", alt: "Numeros a los Que Construir" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-13.png", alt: "Mantenerlo Funcionando" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-14.png", alt: "Por Que Falla la Inspeccion" },
+      { type: "slide-image", image: "/images/inlet-protection-slides/es-15.png", alt: "Sigue la especificacion. Termina al estandar DTEC." },
+    ],
+  },
+
   // ── MODULE 01 — EN ──────────────────────────────────────────────────────
   {
     id: "01-en",

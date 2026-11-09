@@ -1231,6 +1231,288 @@ export const quizBanks: QuizBank[] = [
     ],
   },
 
+  // ── MODULE 04 — INLET PROTECTION — EN ───────────────────────────────
+  {
+    moduleId: "04-en",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "ip-en-01",
+        question: "What is inlet protection?",
+        options: [
+          "Erosion control that keeps soil from moving in the first place",
+          "Sediment control that catches soil already moving before it enters the storm drain",
+          "A cover that seals the inlet so no water gets in",
+          "A chemical treatment for runoff",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-en-02",
+        question: "What rock does the spec call for?",
+        options: [
+          "Round river rock, 3\" minus",
+          "Crushed 1½\" minus, fractured face on all sides",
+          "Pea gravel",
+          "Any rock that is on site",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-en-03",
+        question: "Why do the concrete blocks and the 2x4 go at each end of the inlet?",
+        options: [
+          "To weigh down the bags",
+          "To hold the overflow path open",
+          "To mark the inlet for traffic",
+          "To keep the rock from being stolen",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-en-04",
+        question: "What is the minimum depth of rock?",
+        options: [
+          "2\"",
+          "4\"",
+          "6\"",
+          "12\"",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "ip-en-05",
+        question: "How high should the top of the inlet protection be?",
+        options: [
+          "Below the top of curb",
+          "Level with the top of curb",
+          "6\" above the top of curb",
+          "As high as the bags allow",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "ip-en-06",
+        question: "Is recycled concrete accepted as rock in Arapahoe County (SEMSWA)?",
+        options: [
+          "Yes, always",
+          "Yes, if it meets gradation",
+          "No, it is not accepted",
+          "Only on grate inlets",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "ip-en-07",
+        question: "The specs differ between counties. Where does the right answer come from?",
+        options: [
+          "Whatever the crew used last time",
+          "The plan sheet for the job you are standing on",
+          "The Arapahoe column, every time",
+          "The GC's foreman",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-en-08",
+        question: "How do you clean sediment out of the gutter or inlet?",
+        options: [
+          "Hose it down the drain",
+          "Leave it for the street sweeper",
+          "Dry recovery only: shovel it and sweep it",
+          "Push it into the inlet throat",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "ip-en-09",
+        question: "Ahead of an on-grade curb inlet, how are the curb socks set?",
+        options: [
+          "One sock, right at the opening",
+          "At least two, 5 ft apart, angled back against the flow",
+          "Three socks stacked on top of each other",
+          "Straight across the street",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-en-10",
+        question: "When does inlet protection need to be cleaned out?",
+        options: [
+          "When sediment upstream reaches half the height of the sock",
+          "Only when it is completely buried",
+          "Once a month no matter what",
+          "Only when the GC asks",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "ip-en-11",
+        question: "You arrive at an inlet that is packed solid with mud but looks intact. What is it?",
+        options: [
+          "Fine, it is still in place",
+          "Failed: if water cannot get through it, water goes around it",
+          "Better, it is catching more",
+          "Only a problem if it is raining",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-en-12",
+        question: "The plan calls for a BMP DTEC is not carrying. What do you do?",
+        options: [
+          "Install something similar and explain it later",
+          "Skip that inlet",
+          "Make a phone call; an alternative needs inspector approval before it goes in",
+          "Use wattles on the pavement instead",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
+
+  // ── MODULE 04 — INLET PROTECTION — ES ───────────────────────────────
+  {
+    moduleId: "04-es",
+    passingScore: 0.8,
+    questionsPerSession: 6,
+    questions: [
+      {
+        id: "ip-es-01",
+        question: "¿Que es la proteccion de inlets?",
+        options: [
+          "Control de erosion que evita que la tierra se empiece a mover",
+          "Control de sedimento que atrapa la tierra que ya se esta moviendo antes de entrar al drenaje",
+          "Una tapa que sella el inlet para que no entre agua",
+          "Un tratamiento quimico para el agua",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-es-02",
+        question: "¿Que roca pide la especificacion?",
+        options: [
+          "Piedra de rio redonda, 3\" minus",
+          "Triturada 1½\" minus, cara fracturada por todos los lados",
+          "Grava chica (pea gravel)",
+          "Cualquier roca que haya en la obra",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-es-03",
+        question: "¿Para que van los blocks de concreto y el 2x4 en cada extremo del inlet?",
+        options: [
+          "Para darle peso a las bolsas",
+          "Para mantener abierto el paso de desborde",
+          "Para marcar el inlet para el trafico",
+          "Para que no se roben la roca",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-es-04",
+        question: "¿Cual es la profundidad minima de roca?",
+        options: [
+          "2\"",
+          "4\"",
+          "6\"",
+          "12\"",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "ip-es-05",
+        question: "¿Que tan alta debe quedar la proteccion del inlet?",
+        options: [
+          "Abajo del nivel del bordillo",
+          "Al mismo nivel del bordillo",
+          "6\" arriba del bordillo",
+          "Lo mas alto que den las bolsas",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "ip-es-06",
+        question: "¿Se acepta concreto reciclado como roca en el condado de Arapahoe (SEMSWA)?",
+        options: [
+          "Si, siempre",
+          "Si, si cumple la gradacion",
+          "No, no se acepta",
+          "Solo en inlets de rejilla",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "ip-es-07",
+        question: "La especificacion cambia por condado. ¿De donde sale la respuesta correcta?",
+        options: [
+          "De lo que uso la cuadrilla la ultima vez",
+          "Del plano de la obra donde estas parado",
+          "De la columna de Arapahoe, siempre",
+          "Del foreman del GC",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-es-08",
+        question: "¿Como se limpia el sedimento de la cuneta o del inlet?",
+        options: [
+          "Con manguera hacia el drenaje",
+          "Se deja para la barredora",
+          "Solo recoleccion en seco: pala y escoba",
+          "Se empuja a la garganta del inlet",
+        ],
+        correctIndex: 2,
+      },
+      {
+        id: "ip-es-09",
+        question: "Antes de un inlet de bordillo en pendiente, ¿como se ponen los socks de bordillo?",
+        options: [
+          "Un sock, pegado a la abertura",
+          "Minimo dos, a 5 pies, en angulo contra la corriente",
+          "Tres socks uno encima del otro",
+          "Derecho de lado a lado de la calle",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-es-10",
+        question: "¿Cuando se tiene que limpiar la proteccion del inlet?",
+        options: [
+          "Cuando el sedimento de arriba llega a la mitad de la altura del sock",
+          "Solo cuando esta completamente enterrada",
+          "Una vez al mes pase lo que pase",
+          "Solo cuando el GC lo pide",
+        ],
+        correctIndex: 0,
+      },
+      {
+        id: "ip-es-11",
+        question: "Llegas a un inlet tapado de lodo pero que se ve entero. ¿Como esta?",
+        options: [
+          "Bien, sigue en su lugar",
+          "Fallado: si el agua no puede pasar, le da la vuelta",
+          "Mejor, esta atrapando mas",
+          "Solo es problema si esta lloviendo",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "ip-es-12",
+        question: "El plano pide un BMP que DTEC no trae. ¿Que haces?",
+        options: [
+          "Pones algo parecido y lo explicas despues",
+          "Te saltas ese inlet",
+          "Haces una llamada; una alternativa necesita aprobacion del inspector antes de ponerla",
+          "Pones wattles sobre el pavimento",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
+
   // ── ADVANCED — TALKING TO DOT — EN ───────────────────────────────────────
   {
     moduleId: "dot-en",
